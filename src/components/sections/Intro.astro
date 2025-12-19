@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import fotoColmenares from "../../assets/fotos/COLMENARES.png";
+---
+
+<section class="flex flex-col w-dvw">
+    <!-- Presentacion -->
+    <div
+        class="w-full text-center text-4xl mb-3 mt-16 font-bold text-[#234874]"
+    >
+        <h1>Estefania Colmenares</h1>
+    </div>
+    <!-- foto -->
+    <div class="flex flex-col items-center">
+        <div class="relative w-80 -z-10">
+            <div class="bg-[#54B5E6] w-64 h-11 absolute -z-10 top-8 -rotate-2">
+            </div>
+            <div
+                class="bg-[#EE4023] w-40 h-11 absolute -z-10 left-10 top-20 -rotate-2"
+            >
+            </div>
+            <div
+                class="bg-[#FDCD16] w-24 h-11 absolute -z-10 left-50 top-19 -rotate-2"
+            >
+            </div>
+        </div>
+        <Image
+            fetchpriority="high"
+            src={fotoColmenares}
+            class:list={["foto-colmenares object-cover w-52 h-60 z-50"]}
+            alt="Foto de Estefania Colmenares"
+        />
+    </div>
+</section>
+
+<style>
+    .foto-colmenares {
+        animation: fadeIn 0.4s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>
