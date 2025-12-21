@@ -4,13 +4,22 @@ import Intro from "./sections/Intro.astro";
 
 <div>
     <Intro />
-    <section class="w-dvw h-dvh bg-[#234874]"></section>
+    <section
+        class="relative flex max-w-7xl mx-auto h-dvh bg-(--cd-oscuro) rounded-2xl z-50 p-5"
+    >
+        <div>
+            <h1 class="text-4xl md:text-7xl font-extrabold text-(--cd-azul)">
+                Recuperemos la seguridad
+            </h1>
+        </div>
+    </section>
 </div>
 
-<style>
+<style is:global>
     :root {
-        --cd-amarillo: #fdcd16;
-        --cd-azul: #54b5e6;
-        --cd-rojo: #ee4023;
+        --cd-amarillo: #fec900;
+        --cd-azul: #63b9e9;
+        --cd-rojo: #d81a10;
+        --cd-oscuro: #253e6b;
     }
 </style>
