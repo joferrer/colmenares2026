@@ -7,37 +7,46 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.png";
     <!-- Presentacion -->
     <div
         class:list={[
-            "self-start w-full text-center text-4xl md:text-7xl lg:text-[7rem] mb-3 md:mt-16 font-extrabold text-(--cd-oscuro) -rotate-2  z-10",
-            "md:relative md:w-xl md:h-xl md:text-start",
+            "self-start w-full text-center text-4xl md:text-7xl lg:text-[6.8rem] mb-3 md:mt-16 font-extrabold text-(--cd-oscuro) ",
+            "md:relative md:h-xl md:text-start md:px-20 lg:px-0",
         ]}
     >
-        <div class:list={["md:absolute md:w-full md:top-20"]}>
-            <div class:list={["md:grid md:grid-cols-4 md:gap-y-4 md:gap-x-2"]}>
-                <span class="md:col-span-4 md:col-start-1">Estefania</span>
-                <span class="md:col-span-2 md:col-start-3">Colmenares</span>
+        <div class:list={["md:absolute lg:w-full md:top-23 lg:top-27"]}>
+            <div
+                class:list={[
+                    "md:grid md:grid-cols-6 md:gap-y-2 md:gap-x-2 lg:gap-y-12",
+                ]}
+            >
+                <span class="md:col-span-3 md:col-start-1 -z-10 -rotate-2"
+                    >Estefania
+                </span>
+
+                <span class="md:col-span-3 md:col-start-3 -rotate-2"
+                    >Colmenares</span
+                >
             </div>
         </div>
     </div>
     <!-- foto -->
-    <div class:list={["relative w-80 -z-10", "md:top-10 md:w-xl md:h-xl"]}>
+    <div class:list={["relative w-80 -z-20", "md:top-10 md:w-xl md:h-xl"]}>
         <div
             class:list={[
                 "bg-(--cd-azul) w-64 h-11 absolute -z-10 top-8 -rotate-2 left-2 rounded-sm",
-                "md:w-xl md:h-20",
+                "md:w-xl md:h-20 lg:w-4xl lg:h-40 lg:-left-65",
             ]}
         >
         </div>
         <div
             class:list={[
                 "bg-(--cd-rojo) w-40 h-11 absolute -z-10 left-10 top-20 -rotate-2 rounded-sm",
-                "md:w-80 md:h-20 md:top-30",
+                "md:w-80 md:h-20 md:top-30 lg:w-lg lg:h-40 lg:-left-30 lg:top-49",
             ]}
         >
         </div>
         <div
             class:list={[
                 "bg-(--cd-amarillo) w-24 h-11 absolute -z-10 left-50 top-19 -rotate-2 rounded-sm",
-                "md:w-44 md:h-20 md:top-28 md:left-85",
+                "md:w-44 md:h-20 md:top-28 md:left-85 lg:w-96 lg:h-40 lg:top-46",
             ]}
         >
         </div>
@@ -47,13 +56,13 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.png";
         fetchpriority="high"
         src={fotoColmenares}
         class:list={[
-            "foto-colmenares object-cover w-52 h-60 z-0",
+            "foto-colmenares object-cover w-52 h-60 -z-10",
             "md:w-96 md:h-10/12",
             "cursor-pointer",
         ]}
         alt="Foto de Estefania Colmenares"
     />
-    <div class="relative z-50 flex items-center justify-center">
+    <div class="relative z-20 flex items-center justify-center">
         <button
             class="absolute bottom-5 bg-(--cd-oscuro) text-white p-3 rounded-sm"
             >BOTON</button

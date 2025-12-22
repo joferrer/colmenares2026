@@ -1,0 +1,67 @@
+---
+
+---
+
+<div class:list={["", "segmento bg-(--cd-oscuro) md:rounded-md p-4"]}>
+    <button
+        class:list={[
+            "navbar-button block z-50 w-7 h-7 text-center",
+            "md:hidden",
+        ]}
+    >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    <nav class="navbar-nav text-white text-center text-2xl hidden md:block">
+        <ul
+            class="flex items-center flex-col md:flex-row gap-2 justify-between"
+        >
+            <li><a href="#">¿En que creemos?</a></li>
+            <li><a href="#">¿Quién soy?</a></li>
+            <li><a href="#">Ultimas noticias</a></li>
+            <li><a href="#">¿Como votar?</a></li>
+            <li><a href="#">¿Como puedes ayudar?</a></li>
+        </ul>
+    </nav>
+</div>
+
+<style>
+    .bar {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #fff;
+        margin: 5px 0;
+    }
+
+    .navbar-button {
+        cursor: pointer;
+    }
+
+    .navbar-button.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar-button.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .navbar-button.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .navbar-nav.active {
+        display: block;
+        width: 100dvw;
+    }
+</style>
+
+<script>
+    const button = document.querySelector(".navbar-button");
+    const nav = document.querySelector("nav");
+    button?.addEventListener("click", () => {
+        button.classList.toggle("active");
+        nav?.classList.toggle("active");
+    });
+</script>
