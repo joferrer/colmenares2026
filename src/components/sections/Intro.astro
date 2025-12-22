@@ -3,15 +3,23 @@ import { Image } from "astro:assets";
 import fotoColmenares from "../../assets/fotos/COLMENARES.png";
 ---
 
-<section class="flex flex-col w-full items-center">
+<section class="flex flex-col w-full items-center segmento">
     <!-- Presentacion -->
     <div
-        class="w-full text-center text-4xl md:text-7xl mb-3 md:mt-16 font-extrabold text-(--cd-oscuro) md:w-xl"
+        class:list={[
+            "self-start w-full text-center text-4xl md:text-7xl lg:text-[7rem] mb-3 md:mt-16 font-extrabold text-(--cd-oscuro) -rotate-2  z-10",
+            "md:relative md:w-xl md:h-xl md:text-start",
+        ]}
     >
-        <h1>Estefania Colmenares</h1>
+        <div class:list={["md:absolute md:w-full md:top-20"]}>
+            <div class:list={["md:grid md:grid-cols-4 md:gap-y-4 md:gap-x-2"]}>
+                <span class="md:col-span-4 md:col-start-1">Estefania</span>
+                <span class="md:col-span-2 md:col-start-3">Colmenares</span>
+            </div>
+        </div>
     </div>
     <!-- foto -->
-    <div class:list={["relative w-80 -z-10", "md:top-10 md:w-xl"]}>
+    <div class:list={["relative w-80 -z-10", "md:top-10 md:w-xl md:h-xl"]}>
         <div
             class:list={[
                 "bg-(--cd-azul) w-64 h-11 absolute -z-10 top-8 -rotate-2 left-2 rounded-sm",
