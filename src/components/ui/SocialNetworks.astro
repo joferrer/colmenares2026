@@ -1,13 +1,58 @@
 ---
+const socials = [
+  { name: "Facebook", href: "https://www.facebook.com", icon: "facebook" },
+  { name: "Instagram", href: "https://www.instagram.com", icon: "instagram" },
+  { name: "X (Twitter)", href: "https://www.twitter.com", icon: "twitter" },
+];
 
+const iconMap: Record<string, string> = {
+  facebook: `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M22 12.06C22 6.48 17.52 2 11.94 2 6.36 2 2 6.48 2 12.06 2 17.08 5.66 21.21 10.44 22v-7.02H7.9v-2.92h2.54v-2.2c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.27c-1.26 0-1.65.79-1.65 1.6v1.93h2.8l-.45 2.92h-2.35V22C18.34 21.2 22 17.08 22 12.06Z" /></svg>`,
+  instagram: `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2ZM4.5 7.75v8.5A3.26 3.26 0 0 0 7.75 19.5h8.5A3.26 3.26 0 0 0 19.5 16.25v-8.5A3.26 3.26 0 0 0 16.25 4.5h-8.5A3.26 3.26 0 0 0 4.5 7.75Zm13.25-1.42a1.09 1.09 0 1 1-2.18 0 1.09 1.09 0 0 1 2.18 0ZM12 8.25A3.75 3.75 0 1 1 8.25 12 3.75 3.75 0 0 1 12 8.25Zm0 2.5A1.25 1.25 0 1 0 13.25 12 1.25 1.25 0 0 0 12 10.75Z" /></svg>`,
+  twitter: `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M21.88 4.05a.75.75 0 0 0-.8-.17L2.9 11.14a.75.75 0 0 0 .05 1.4l4.9 1.7 2.03 4.93a.75.75 0 0 0 1.35.03l2.42-4.45 5 1.74a.75.75 0 0 0 .98-.63l1.37-10.45a.75.75 0 0 0-.12-.56Zm-3 2.3-7.7 6.7-5.2-1.8 12.9-4.9Z" /></svg>`,
+};
 ---
 
-<div
-    class="fixed right-1 backdrop-blur-2xl md:bg-(--cd-oscuro) md:text-white z-50 rounded-md p-2"
->
-    <ul>
-        <li>Facebook</li>
-        <li>Instagram</li>
-        <li>Twitter</li>
-    </ul>
-</div>
+<aside class="fixed right-3 bottom-4 md:top-1/3 md:bottom-auto z-50">
+  <ul class="flex flex-col items-end gap-3 md:gap-4">
+    {socials.map((social) => (
+      <li>
+        <a
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class:list={[
+            "group relative flex items-center gap-2 rounded-full transition",
+            "md:hover:-translate-y-0.5",
+          ]}
+        >
+          <span
+            class="flex h-12 w-12 items-center justify-center rounded-full bg-(--cd-oscuro) text-white shadow-xl ring-2 ring-white/40 transition-transform duration-300 md:hover:scale-110 md:hover:rotate-3 animate-float"
+            set:html={iconMap[social.icon] ?? ""}
+          />
+          <span
+            class="pointer-events-none absolute right-full mr-2 origin-right scale-0 rounded-full bg-(--cd-oscuro) px-3 py-1 text-xs font-semibold text-white opacity-0 shadow-lg transition duration-200 group-hover:scale-100 group-hover:opacity-100 md:bg-white md:text-(--cd-oscuro)"
+          >
+            {social.name}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</aside>
+
+<style>
+  @reference "tailwindcss";
+  /* En movil las chips flotantes se mantienen pequenas y sin etiqueta */
+  .animate-float {
+    animation: floaty 3.5s ease-in-out infinite;
+  }
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+</style>
