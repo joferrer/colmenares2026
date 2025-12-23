@@ -11,17 +11,20 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.png";
       "md:relative md:h-xl md:text-start md:px-20 lg:px-0 md:mx-auto",
     ]}
   >
-    <div class:list={["md:absolute lg:w-full md:top-23 lg:top-27"]}>
+    <div class:list={["md:absolute lg:w-full md:top-16 lg:top-27"]}>
       <div
         class:list={[
-          "md:grid md:grid-cols-6 md:gap-y-2 md:gap-x-2 lg:gap-y-1 homey-title",
+          "flex w-full justify-center text-center md:grid md:grid-cols-6 md:gap-y-2 md:gap-x-2 lg:gap-y-1 homey-title",
         ]}
       >
-        <span class="md:col-span-3 md:col-start-1 -z-10 estefania-shift"
-          >Estefania
-        </span>
-
-        <span class="md:col-span-3 md:col-start-4 -rotate-2">Colmenares</span>
+        <div
+          class="xl:ml-50 lg:ml-20 md:col-span-1 md:col-start-1 -z-10 estefania-shift"
+        >
+          Estefania&nbsp;
+        </div>
+        <div class="lg:ml-50 md:mt-30 md:col-span-1 md:col-start-3 -rotate-2">
+          Colmenares
+        </div>
       </div>
     </div>
   </div>
@@ -65,50 +68,49 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.png";
       >BOTON</button
     >
   </div>
-</section>
 
-<style>
-  .foto-colmenares {
-    animation: fadeIn 0.4s ease-in-out;
-    animation: clickme 5s infinite;
-    cursor: pointer;
-  }
-  .estefania-shift {
-    display: inline-block;
-    transform: rotate(-2deg);
-  }
-  @media screen and (min-width: 768px) and (max-width: 840px) {
+  <style>
+    .foto-colmenares {
+      animation: fadeIn 0.4s ease-in-out;
+      animation: clickme 5s infinite;
+      cursor: pointer;
+    }
     .estefania-shift {
-      transform: rotate(-2deg) translateX(-4.5rem);
+      display: inline-block;
+      transform: rotate(-2deg);
     }
-  }
-  @media screen and (min-width: 841px) and (max-width: 900px) {
-    .estefania-shift {
-      transform: rotate(-2deg) translateX(-3.5rem);
+    @media screen and (min-width: 768px) and (max-width: 840px) {
+      .estefania-shift {
+        transform: rotate(-2deg) translateX(-5.5rem);
+      }
     }
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
+    @media screen and (min-width: 841px) and (max-width: 900px) {
+      .estefania-shift {
+        transform: rotate(-2deg) translateX(-3.5rem);
+      }
     }
-    to {
-      opacity: 1;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
-  }
-  @keyframes clickme {
-    0% {
-      transform: scale(1);
+    @keyframes clickme {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
-    50% {
-      transform: scale(1.05);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-</style>
+  </style>
 
-<!-- 
+  <!-- 
 
             
        <div class="relative">
@@ -124,3 +126,4 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.png";
         </div>
     </div>         
 -->
+</section>
