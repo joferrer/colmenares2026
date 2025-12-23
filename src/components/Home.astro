@@ -29,6 +29,11 @@ import Ideales from "./sections/Ideales.astro";
         position: relative;
         max-width: 80rem;
         margin: 0 auto;
+
+        animation: reveal linear both;
+        animation-timeline: view();
+        animation-range: entry 20% cover 30%;
+        z-index: 1;
     }
 
     @keyframes reveal {
