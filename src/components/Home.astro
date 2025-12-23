@@ -5,7 +5,6 @@ import SocialNetworks from "./ui/SocialNetworks.astro";
 import Voluntariado from "./sections/Voluntariado.astro";
 import Footer from "./ui/Footer.astro";
 import Ideales from "./sections/Ideales.astro";
-import NavbarHome from "./ui/NavbarHome.astro";
 ---
 
 <div>
@@ -30,5 +29,14 @@ import NavbarHome from "./ui/NavbarHome.astro";
         position: relative;
         max-width: 80rem;
         margin: 0 auto;
+    }
+
+    @font-face {
+        font-family: "Homey Feeling";
+        src: url("/font/HomeyFeeling.otf") format("opentype");
+        font-display: swap;
+    }
+    .homey-title {
+        font-family: "Homey Feeling";
     }
 </style>

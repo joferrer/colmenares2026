@@ -1,16 +1,104 @@
 ---
-
+const noticias = [
+    {
+        fecha: "2025-12-23",
+        titulo: "Participando de ponencia sobre la seguridad en la Región",
+        descripcion: "Descripcion de la noticia 1",
+        imagen: "https://i.ytimg.com/vi/4jPm1abBziI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAFF-FiqwQPyhaEYkPof64YTGdcLg",
+    },
+    {
+        fecha: "2025-12-23",
+        titulo: "Noticia 2",
+        descripcion: "Descripcion de la noticia 2",
+        imagen: "https://pbs.twimg.com/profile_images/1512556072556449802/mkQswIxg_400x400.jpg",
+    },
+];
 ---
 
-<section class="segmento mt-10 p-5">
-    <div>
-        <h1 class="text-4xl md:text-7xl font-extrabold text-(--cd-azul)">
-            Enterate de lo que hacemos!
-        </h1>
+<section class:list={["segmento mt-10 p-5 rounded-lg", "md:flex md:flex-row"]}>
+    <!-- DESTACADA -->
+    <div
+        class:list={[
+            "destacada w-70 cursor-pointer",
+            "md:order-last md:w-full",
+        ]}
+    >
+        <div class="flex flex-col items-center w-full">
+            <div class="relative w-full h-70 overflow-hidden">
+                <img
+                    id="destacada-img"
+                    src={noticias[0].imagen}
+                    class="absolute w-full h-70 object-cover rounded-lg md:object-top transition-opacity duration-500"
+                    alt="Noticia destacada"
+                />
+                <div
+                    class="absolute z-20 text-white bottom-0 bg-black/90 p-2 rounded-b-lg w-full mask-t-from-70% mask-t-to-100% pt-5"
+                >
+                    <h2 id="destacada-title">{noticias[0].titulo}</h2>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <p class="text-xl md:text-2xl">
-            En teoria aquí va lo de noticias de la campaña
-        </p>
+
+    <!-- LISTA -->
+    <div class="restantes flex flex-col items-center mt-2 gap-2">
+        {
+            noticias.map((noticia, index) => (
+                <div
+                    data-index={index}
+                    class="noticia-item relative w-full flex bg-white rounded-lg shadow-lg items-center h-24 cursor-pointer md:w-full md:h-30 transition ring-2 ring-transparent"
+                >
+                    <img
+                        src={noticia.imagen}
+                        class="w-24 h-24 object-cover rounded-lg md:w-28 md:h-28"
+                        alt={noticia.titulo}
+                    />
+                    <div class="p-2 text-sm md:text-xl">
+                        <h2 class="font-semibold">{noticia.titulo}</h2>
+                        <p>{noticia.fecha}</p>
+                    </div>
+                </div>
+            ))
+        }
+        <a href="">
+            <p class="cursor-pointer text-center mt-2 text-(--cd-azul)">
+                Ver todas las noticias
+            </p>
+        </a>
     </div>
 </section>
+
+<style>
+    .noticia-activa {
+        background-color: #f0f7ff;
+        ring-color: var(--cd-azul);
+        border-left: 4px solid var(--cd-azul);
+    }
+</style>
+
+<script define:vars={{ noticias }}>
+    let i = 0;
+
+    const img = document.getElementById("destacada-img");
+    const title = document.getElementById("destacada-title");
+    const items = document.querySelectorAll(".noticia-item");
+
+    function marcarActiva(index) {
+        items.forEach((el) => el.classList.remove("noticia-activa"));
+        items[index]?.classList.add("noticia-activa");
+    }
+
+    marcarActiva(0);
+
+    setInterval(() => {
+        img.style.opacity = 0;
+
+        setTimeout(() => {
+            i = (i + 1) % noticias.length;
+            img.src = noticias[i].imagen;
+            title.textContent = noticias[i].titulo;
+            marcarActiva(i);
+            img.style.opacity = 1;
+        }, 250);
+    }, 10000);
+</script>
