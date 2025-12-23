@@ -1,45 +1,13 @@
 ---
-const noticias = [
-    {
-        fecha: "2025-12-23",
-        titulo: "Participando de ponencia sobre la seguridad en la Región",
-        descripcion: "Descripcion de la noticia 1",
-        imagen: "https://i.ytimg.com/vi/4jPm1abBziI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAFF-FiqwQPyhaEYkPof64YTGdcLg",
-    },
-    {
-        fecha: "2025-12-23",
-        titulo: "Noticia 2",
-        descripcion: "Descripcion de la noticia 2",
-        imagen: "https://pbs.twimg.com/profile_images/1512556072556449802/mkQswIxg_400x400.jpg",
-    },
-    {
-        fecha: "2025-12-23",
-        titulo: "Noticia 3",
-        descripcion: "Descripcion de la noticia 3",
-        imagen: "https://pbs.twimg.com/profile_images/1512556072556449802/mkQswIxg_400x400.jpg",
-    },
-    {
-        fecha: "2025-12-23",
-        titulo: "Noticia 4",
-        descripcion: "Descripcion de la noticia 4",
-        imagen: "https://pbs.twimg.com/profile_images/1512556072556449802/mkQswIxg_400x400.jpg",
-    },
-    {
-        fecha: "2025-12-23",
-        titulo: "Noticia 5",
-        descripcion: "Descripcion de la noticia 5",
-        imagen: "https://pbs.twimg.com/profile_images/1512556072556449802/mkQswIxg_400x400.jpg",
-    },
-    {
-        fecha: "2025-12-23",
-        titulo: "Noticia 6",
-        descripcion: "Descripcion de la noticia 6",
-        imagen: "https://pbs.twimg.com/profile_images/1512556072556449802/mkQswIxg_400x400.jpg",
-    },
-];
+import { noticias } from "../../helpers/noticias";
 ---
 
-<section class:list={["segmento mt-10 p-5 rounded-lg", "md:flex md:flex-row"]}>
+<section
+    class:list={[
+        "segmento mt-10 p-5 rounded-lg",
+        "md:flex md:flex-row md:gap-2",
+    ]}
+>
     <!-- DESTACADA -->
     <div
         class:list={[
@@ -48,11 +16,11 @@ const noticias = [
         ]}
     >
         <div class="flex flex-col items-center w-full">
-            <div class="relative w-full h-70 overflow-hidden">
+            <div class="relative w-full h-70 overflow-hidden md:h-96">
                 <img
                     id="destacada-img"
                     src={noticias[0].imagen}
-                    class="absolute w-full h-70 object-cover rounded-lg object-top transition-opacity duration-500"
+                    class="absolute w-full h-full object-cover rounded-lg object-top transition-opacity duration-500"
                     alt="Noticia destacada"
                 />
                 <div
@@ -67,7 +35,7 @@ const noticias = [
     <!-- LISTA -->
     <div class="restantes flex flex-col items-center mt-2 gap-2">
         {
-            noticias.slice(0, 4).map((noticia, index) => (
+            noticias.slice(0, 3).map((noticia, index) => (
                 <div
                     data-index={index}
                     class="noticia-item relative w-full flex bg-white rounded-lg shadow-lg items-center h-24 cursor-pointer md:w-full md:h-30 transition ring-2 ring-transparent"
