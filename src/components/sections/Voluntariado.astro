@@ -1,12 +1,554 @@
 ---
+import logoAzul from "../../assets/logos/LOGO_BASE_ESTAFANIA-02.png";
+import iconos from "../../assets/iconos/ICONOS_INDIVIDUALES-02.png";
 
+const fields = [
+  {
+    id: "nombre",
+    label: "Nombre completo",
+    type: "text",
+    placeholder: "Ej: Maria Gomez",
+  },
+  {
+    id: "cedula",
+    label: "Cedula",
+    type: "text",
+    placeholder: "Ej: 1.234.567.890",
+  },
+  {
+    id: "telefono",
+    label: "Telefono",
+    type: "tel",
+    placeholder: "Ej: 3001234567",
+  },
+  {
+    id: "correo",
+    label: "Correo",
+    type: "email",
+    placeholder: "Ej: correo@mail.com",
+  },
+  {
+    id: "barrio",
+    label: "Barrio y municipio",
+    type: "text",
+    placeholder: "Ej: Barrio Las Palmas, Municipio",
+  },
+];
 ---
 
-<section class="segmento">
-    <div>
-        <h1 class="text-4xl md:text-7xl font-extrabold text-(--cd-azul)">
-            Te necesitamos!!
-        </h1>
-        <p class="text-2xl">Y es este es el formulario de voluntariado</p>
+<section class="segmento px-4 md:px-10 lg:px-0 mt-16">
+  <div
+    class="relative overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-(--cd-azul)/20"
+  >
+    <span
+      class="pointer-events-none absolute -left-10 top-10 h-32 w-32 -rotate-6 bg-(--cd-amarillo)/80 blur-3xl opacity-60"
+    ></span>
+    <span
+      class="pointer-events-none absolute -right-16 -bottom-10 h-40 w-40 rotate-12 bg-(--cd-rojo)/70 blur-3xl opacity-70"
+    ></span>
+    <img
+      src={iconos.src}
+      alt=""
+      class="pointer-events-none absolute -top-8 -left-10 w-56 opacity-10 rotate-6 select-none"
+      loading="lazy"
+    />
+
+    <div class="relative grid gap-10 px-6 py-10 md:px-12 lg:px-16">
+      <div class="relative z-10 space-y-4 text-left">
+        <p
+          class="inline-flex items-center gap-2 rounded-full bg-(--cd-azul)/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-(--cd-oscuro)"
+        >
+          Participa
+        </p>
+        <h2
+          class="text-4xl md:text-6xl font-extrabold leading-tight text-(--cd-oscuro)"
+        >
+          Sumate como voluntario o donante
+        </h2>
+        <p class="max-w-2xl text-lg text-(--cd-oscuro)/80">
+          Llena tus datos y cambia el selector para elegir tu rol. Al enviar,
+          nos pondremos en contacto para coordinar como puedes aportar.
+        </p>
+
+        <div class="mode-switch" data-mode-switch data-mode="voluntariado">
+          <span class="mode-pill" aria-hidden="true"></span>
+          <button
+            type="button"
+            class="mode-btn is-active cursor-pointer"
+            data-mode-btn
+            data-mode="voluntariado"
+          >
+            <span class="badge">V</span>
+            Voluntariado
+          </button>
+          <button
+            type="button"
+            class="mode-btn cursor-pointer"
+            data-mode-btn
+            data-mode="donante"
+          >
+            <span class="badge">D</span>
+            Donante
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="relative z-10 min-h-[720px] md:min-h-[700px] lg:min-h-[620px] max-w-5xl"
+        data-forms-panel
+        data-mode="voluntariado"
+      >
+        <img
+          src={logoAzul.src}
+          alt="Logo Estefania Colmenares"
+          class="pointer-events-none absolute -top-10 right-2 w-[260px] md:w-[340px] lg:w-[400px] h-auto drop-shadow-lg opacity-20 select-none z-0"
+          loading="lazy"
+        />
+        <div class="toast-stack" data-toast-stack></div>
+
+        <form
+          class="form-card form-vol space-y-6 rounded-2xl bg-(--cd-azul)/6 p-6 ring-1 ring-(--cd-azul)/25 backdrop-blur relative overflow-hidden"
+          data-form="voluntariado"
+        >
+          <div class="flex items-center gap-3">
+            <span
+              class="flex h-11 w-11 items-center justify-center rounded-full bg-(--cd-azul) text-white text-lg font-bold shadow-lg"
+            >
+              V
+            </span>
+            <div>
+              <p
+                class="text-sm uppercase tracking-[0.24em] text-(--cd-oscuro)/70"
+              >
+                Quieres ser
+              </p>
+              <h3 class="text-2xl font-extrabold text-(--cd-oscuro)">
+                Voluntariado
+              </h3>
+            </div>
+          </div>
+
+          <div class="grid gap-4">
+            {
+              fields.map((field) => (
+                <label
+                  class="space-y-2 text-sm font-semibold text-(--cd-oscuro)"
+                  for={`${field.id}-vol`}
+                >
+                  {field.label}
+                  <input
+                    id={`${field.id}-vol`}
+                    name={field.id}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    class="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-(--cd-oscuro) shadow-inner outline-none transition focus:-translate-y-0.5 focus:border-(--cd-azul) focus:ring-2 focus:ring-(--cd-azul)"
+                    required
+                  />
+                </label>
+              ))
+            }
+          </div>
+
+          <button
+            type="submit"
+            class="w-full rounded-xl bg-(--cd-oscuro) px-5 py-3 text-center text-white font-bold shadow-lg transition hover:-translate-y-0.5 hover:bg-(--cd-azul) cursor-pointer"
+          >
+            Quiero ser voluntario/a
+          </button>
+        </form>
+
+        <form
+          class="form-card form-don space-y-6 rounded-2xl bg-(--cd-amarillo)/10 p-6 ring-1 ring-(--cd-amarillo)/30 backdrop-blur relative overflow-hidden"
+          data-form="donante"
+        >
+          <div class="flex items-center gap-3">
+            <span
+              class="flex h-11 w-11 items-center justify-center rounded-full bg-(--cd-amarillo) text-(--cd-oscuro) text-lg font-bold shadow-lg"
+            >
+              D
+            </span>
+            <div>
+              <p
+                class="text-sm uppercase tracking-[0.24em] text-(--cd-oscuro)/70"
+              >
+                Quieres ser
+              </p>
+              <h3 class="text-2xl font-extrabold text-(--cd-oscuro)">
+                Donante
+              </h3>
+            </div>
+          </div>
+
+          <div class="grid gap-4">
+            {
+              fields.map((field) => (
+                <label
+                  class="space-y-2 text-sm font-semibold text-(--cd-oscuro)"
+                  for={`${field.id}-don`}
+                >
+                  {field.label}
+                  <input
+                    id={`${field.id}-don`}
+                    name={field.id}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    class="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-(--cd-oscuro) shadow-inner outline-none transition focus:-translate-y-0.5 focus:border-(--cd-amarillo) focus:ring-2 focus:ring-(--cd-amarillo)"
+                    required
+                  />
+                </label>
+              ))
+            }
+          </div>
+
+          <button
+            type="submit"
+            class="w-full rounded-xl bg-(--cd-oscuro) px-5 py-3 text-center text-white font-bold shadow-lg transition hover:-translate-y-0.5 hover:bg-(--cd-amarillo) hover:text-(--cd-oscuro) cursor-pointer"
+          >
+            Quiero aportar como donante
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
 </section>
+
+<style>
+  @reference "tailwindcss";
+
+  .toast-stack {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    max-width: min(320px, 70vw);
+    z-index: 10;
+  }
+
+  .toast {
+    display: grid;
+    gap: 4px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    color: var(--cd-oscuro);
+    background: white;
+    border: 1px solid rgba(99, 185, 233, 0.35);
+    box-shadow: 0 25px 50px -30px rgba(0, 0, 0, 0.35);
+    animation: toast-in 0.35s ease;
+  }
+
+  .toast.toast-out {
+    animation: toast-out 0.28s ease forwards;
+  }
+
+  .toast strong {
+    font-weight: 800;
+    letter-spacing: 0.03em;
+  }
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+    }
+  }
+
+  @keyframes toast-out {
+    to {
+      opacity: 0;
+      transform: translateY(-6px) scale(0.96);
+    }
+  }
+
+  .form-card {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateX(40px) scale(0.98);
+    filter: blur(4px);
+    pointer-events: none;
+    transition:
+      opacity 0.4s ease,
+      transform 0.45s ease,
+      filter 0.45s ease;
+  }
+
+  .input-error {
+    border-color: rgba(216, 26, 16, 0.5) !important;
+    box-shadow: 0 0 0 2px rgba(216, 26, 16, 0.15) !important;
+  }
+
+  [data-mode="voluntariado"] .form-vol {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0px);
+    pointer-events: auto;
+  }
+
+  [data-mode="voluntariado"] .form-don {
+    transform: translateX(40px) scale(0.98);
+  }
+
+  [data-mode="donante"] .form-don {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0px);
+    pointer-events: auto;
+  }
+
+  [data-mode="donante"] .form-vol {
+    transform: translateX(-40px) scale(0.98);
+  }
+
+  .mode-switch {
+    position: relative;
+    display: inline-grid;
+    grid-auto-flow: column;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 999px;
+    background: linear-gradient(
+      120deg,
+      rgba(99, 185, 233, 0.16),
+      rgba(254, 201, 0, 0.14)
+    );
+    border: 1px solid rgba(99, 185, 233, 0.4);
+    box-shadow: 0 20px 50px -30px rgba(0, 0, 0, 0.45);
+    isolation: isolate;
+  }
+
+  .mode-pill {
+    position: absolute;
+    inset: 6px;
+    width: calc(50% - 6px);
+    background: white;
+    border-radius: 999px;
+    box-shadow: 0 18px 35px -20px rgba(0, 0, 0, 0.4);
+    transform: translateX(0);
+    transition:
+      transform 0.32s ease,
+      background 0.32s ease;
+    z-index: 0;
+  }
+
+  [data-mode="donante"] .mode-pill {
+    transform: translateX(100%);
+    background: linear-gradient(120deg, #fec900, #63b9e9);
+  }
+
+  .mode-btn {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(37, 62, 107, 0.7);
+    transition: color 0.2s ease;
+    background: transparent;
+    border: none;
+  }
+
+  .mode-btn .badge {
+    display: inline-flex;
+    height: 28px;
+    width: 28px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(37, 62, 107, 0.12);
+    color: var(--cd-oscuro);
+    font-weight: 800;
+    font-size: 13px;
+  }
+
+  .mode-btn.is-active {
+    color: var(--cd-oscuro);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    [data-forms-panel] {
+      min-height: auto;
+    }
+
+    .form-card {
+      position: relative;
+      inset: auto;
+      display: none;
+      opacity: 1;
+      transform: none;
+      filter: none;
+      pointer-events: none;
+    }
+
+    [data-mode="voluntariado"] .form-vol {
+      display: block;
+      pointer-events: auto;
+    }
+
+    [data-mode="donante"] .form-don {
+      display: block;
+      pointer-events: auto;
+    }
+
+    .mode-switch {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+      padding: 4px;
+      background: rgba(99, 185, 233, 0.12);
+    }
+
+    .mode-pill {
+      display: block;
+      inset: 4px;
+      width: calc(50% - 4px);
+    }
+
+    .mode-btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 12px;
+      padding: 10px 12px;
+    }
+
+    .mode-btn .badge {
+      height: 24px;
+      width: 24px;
+      font-size: 12px;
+    }
+
+    .toast-stack {
+      max-width: 90vw;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .mode-btn {
+      font-size: 11px;
+      padding: 9px 10px;
+      gap: 8px;
+    }
+
+    .mode-btn .badge {
+      height: 22px;
+      width: 22px;
+      font-size: 11px;
+    }
+
+    .form-card {
+      padding: 1rem;
+    }
+
+    .form-card h3 {
+      font-size: 1.25rem;
+    }
+
+    .form-card input,
+    .form-card button {
+      padding: 0.75rem 0.9rem;
+      font-size: 0.95rem;
+    }
+
+    [data-forms-panel] img {
+      width: 200px;
+      top: -8px;
+      right: -10px;
+      opacity: 0.18;
+    }
+
+    [data-mode="voluntariado"] .form-vol,
+    [data-mode="donante"] .form-don {
+      pointer-events: auto;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const panel = document.querySelector("[data-forms-panel]");
+    const buttons = document.querySelectorAll("[data-mode-btn]");
+    const switcher = document.querySelector("[data-mode-switch]");
+    const toastStack = document.querySelector("[data-toast-stack]");
+    const forms = document.querySelectorAll("form[data-form]");
+
+    if (!panel || !buttons.length) return;
+
+    const showToast = (title, detail, tone = "info") => {
+      if (!toastStack) return;
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      if (tone === "success") {
+        toast.style.borderColor = "rgba(99, 185, 233, 0.8)";
+      }
+      toast.innerHTML = `<strong>${title}</strong><span>${detail}</span>`;
+      toastStack.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add("toast-out");
+        toast.addEventListener("animationend", () => toast.remove());
+      }, 2500);
+    };
+
+    const setMode = (mode) => {
+      panel.setAttribute("data-mode", mode);
+      if (switcher) switcher.setAttribute("data-mode", mode);
+      forms.forEach((form) => {
+        const isActive = form.dataset.form === mode;
+        form.hidden = !isActive;
+        form.setAttribute("aria-hidden", isActive ? "false" : "true");
+      });
+      buttons.forEach((btn) => {
+        const active = btn.dataset.mode === mode;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setMode(btn.dataset.mode || "voluntariado");
+      });
+    });
+
+    forms.forEach((form) => {
+      form.addEventListener("submit", (ev) => {
+        ev.preventDefault();
+        const inputs = form.querySelectorAll("input");
+        let hasEmpty = false;
+
+        inputs.forEach((input) => {
+          if (!input.value.trim()) {
+            input.classList.add("input-error");
+            hasEmpty = true;
+          } else {
+            input.classList.remove("input-error");
+          }
+        });
+
+        if (hasEmpty) {
+          showToast(
+            "Faltan datos",
+            "Completa todos los campos para continuar",
+            "info"
+          );
+          return;
+        }
+
+        showToast(
+          "Enviado",
+          "Gracias por inscribirte, te contactaremos pronto",
+          "success"
+        );
+        form.reset();
+      });
+    });
+
+    setMode("voluntariado");
+  });
+</script>

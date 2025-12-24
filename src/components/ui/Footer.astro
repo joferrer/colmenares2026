@@ -1,61 +1,88 @@
 ---
+const socials = [
+  { name: "Facebook", href: "https://www.facebook.com", icon: "facebook" },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/estefanianortecd?igsh=ZW9meThjMXRmcW02",
+    icon: "instagram",
+  },
+  { name: "X", href: "https://www.x.com/estcol", icon: "twitter" },
+  {
+    name: "TikTok",
+    href: "https://www.tiktok.com/@estefanianortecd?_r=1&_t=ZS-92TSiuXL1NN",
+    icon: "tiktok",
+  },
+];
 
+const iconMap: Record<string, string> = {
+  facebook: `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M22 12.06C22 6.48 17.52 2 11.94 2 6.36 2 2 6.48 2 12.06 2 17.08 5.66 21.21 10.44 22v-7.02H7.9v-2.92h2.54v-2.2c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.27c-1.26 0-1.65.79-1.65 1.6v1.93h2.8l-.45 2.92h-2.35V22C18.34 21.2 22 17.08 22 12.06Z" /></svg>`,
+  instagram: `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2ZM4.5 7.75v8.5A3.26 3.26 0 0 0 7.75 19.5h8.5A3.26 3.26 0 0 0 19.5 16.25v-8.5A3.26 3.26 0 0 0 16.25 4.5h-8.5A3.26 3.26 0 0 0 4.5 7.75Zm13.25-1.42a1.09 1.09 0 1 1-2.18 0 1.09 1.09 0 0 1 2.18 0ZM12 8.25A3.75 3.75 0 1 1 8.25 12 3.75 3.75 0 0 1 12 8.25Zm0 2.5A1.25 1.25 0 1 0 13.25 12 1.25 1.25 0 0 0 12 10.75Z" /></svg>`,
+  twitter: `<svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" class="h-5 w-5"><path d="M12.6 0.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867 -5.07 -4.425 5.07H0.316l5.733 -6.57L0 0.75h5.063l3.495 4.633L12.601 0.75Zm-0.86 13.028h1.36L4.323 2.145H2.865z" /></svg>`,
+  tiktok: `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M15.58 2a5.7 5.7 0 0 0 .12 1.2c.26 1.22 1.04 2.28 2.4 2.91.51.24 1.07.4 1.66.47v2.85c-.96-.06-1.88-.3-2.74-.71-.43-.2-.85-.44-1.24-.7l-.02 7.15c0 2.72-2.2 5.08-5.09 5.35-3.01.28-5.55-2.13-5.55-5.06 0-2.84 2.31-5.1 5.15-5.1.27 0 .54.03.8.08v2.92c-.26-.08-.54-.12-.83-.12-1.24 0-2.23 1-2.23 2.23 0 1.28 1.06 2.32 2.36 2.23 1.12-.07 1.99-.99 1.99-2.12l.02-12h2.7Zm0 0" /></svg>`,
+};
 ---
 
-<footer class="bg-(--cd-oscuro) text-white mt-16">
-  <div class="max-w-6xl mx-auto px-6 py-12 space-y-10">
-    <div
-      class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-5 md:items-start"
-    >
-      <div class="space-y-4 text-left md:col-span-2">
-        <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">
+<footer class="mt-16 bg-(--cd-oscuro) text-white">
+  <div class="mx-auto max-w-6xl px-6 py-14 space-y-12">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:items-start">
+      <div class="space-y-4 text-left lg:col-span-2">
+        <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]">
           Estefania Colmenares
-        </h2>
-        <p class="max-w-xl text-sm text-white/80 md:text-base mx-auto sm:mx-0">
-          Algún mensaje breve invitando a conocer la candidatura y mantener el
-          contacto con la comunidad.
         </p>
-        <div class="flex gap-4 pt-2 justify-center sm:justify-start flex-wrap">
-          <span class="h-10 w-10 rounded-full bg-white/60"></span>
-          <span class="h-10 w-10 rounded-full bg-white/60"></span>
-          <span class="h-10 w-10 rounded-full bg-white/60"></span>
-          <span class="h-10 w-10 rounded-full bg-white/60"></span>
+        <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">
+          Sigamos conectados
+        </h2>
+        <p class="max-w-xl text-sm text-white/80 md:text-base">
+          Informate de eventos, propuestas y formas de participar en la campana. Tus ideas suman.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          {socials.map((social) => (
+            <a
+              class="group relative flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/30 transition hover:-translate-y-1 hover:ring-(--cd-amarillo)"
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="h-5 w-5" set:html={iconMap[social.icon] ?? ""} />
+              <span class="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-2 py-1 text-[11px] font-semibold text-(--cd-oscuro) opacity-0 shadow-lg transition group-hover:opacity-100">
+                {social.name}
+              </span>
+            </a>
+          ))}
         </div>
       </div>
 
       <div class="space-y-3 text-left">
-        <h3 class="text-xl font-bold">Navegación</h3>
+        <h3 class="text-xl font-bold">Navegacion</h3>
         <ul class="space-y-2 text-sm text-white/80">
-          <li><a href="#" class="hover:text-white">Inicio</a></li>
-          <li><a href="#" class="hover:text-white">En Qué Creemos</a></li>
-          <li><a href="#" class="hover:text-white">Propuestas</a></li>
-          <li><a href="#" class="hover:text-white">Sobre Mí</a></li>
-          <li><a href="#" class="hover:text-white">Cómo Votar</a></li>
+          <li><a href="/#introduccion" class="hover:text-(--cd-amarillo)">Inicio</a></li>
+          <li><a href="/#experiencia" class="hover:text-(--cd-amarillo)">Quienes somos</a></li>
+          <li><a href="/#aboutme" class="hover:text-(--cd-amarillo)">Propuestas</a></li>
+          <li><a href="/#educacion" class="hover:text-(--cd-amarillo)">Como ayudar</a></li>
         </ul>
       </div>
 
       <div class="space-y-3 text-left">
-        <h3 class="text-xl font-bold">Participación</h3>
+        <h3 class="text-xl font-bold">Participacion</h3>
         <ul class="space-y-2 text-sm text-white/80">
-          <li><a href="#" class="hover:text-white">Voluntariado</a></li>
-          <li><a href="#" class="hover:text-white">Donaciones</a></li>
-          <li><a href="#" class="hover:text-white">Noticias</a></li>
+          <li><a href="/#educacion" class="hover:text-(--cd-amarillo)">Voluntariado</a></li>
+          <li><a href="/#news" class="hover:text-(--cd-amarillo)">Noticias</a></li>
+          <li><a href="/#contacto" class="hover:text-(--cd-amarillo)">Donaciones</a></li>
         </ul>
       </div>
 
       <div class="space-y-3 text-left">
         <h3 class="text-xl font-bold">Contacto</h3>
         <ul class="space-y-2 text-sm text-white/80">
-          <li><a href="#" class="hover:text-white">Contacto</a></li>
-          <li><a href="#" class="hover:text-white">Redes Sociales</a></li>
+          <li><a href="mailto:hola@colmenares2026.com" class="hover:text-(--cd-amarillo)">hola@colmenares2026.com</a></li>
+          <li><a href="tel:+000000000" class="hover:text-(--cd-amarillo)">+00 000 0000</a></li>
+          <li><a href="/#contacto" class="hover:text-(--cd-amarillo)">Formulario</a></li>
         </ul>
       </div>
     </div>
 
-    <div
-      class="border-t border-white/30 pt-6 text-center text-sm text-white/80"
-    >
-      No se si se va a colocar como derechos reservados o alguna webonadas aqui
+    <div class="border-t border-white/20 pt-6 text-center text-xs md:text-sm text-white/70">
+      © 2026 Equipo Colmenares. Construyendo futuro con tu voz.
     </div>
   </div>
 </footer>
