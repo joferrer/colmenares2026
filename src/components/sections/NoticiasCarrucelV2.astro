@@ -1,0 +1,60 @@
+---
+import { noticias } from "../../helpers/noticias";
+// Opcional: ordenar por fecha (más reciente primero)
+const noticiasOrdenadas = [...noticias].sort(
+    (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
+);
+
+const noticia = [...noticias].sort(
+    (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
+)[0];
+---
+
+<section class="w-full py-10">
+    <article
+        class="group relative grid overflow-hidden rounded-3xl bg-black shadow-lg md:grid-cols-2"
+    >
+        {/* Imagen */}
+        <div class="relative h-64 md:h-full">
+            <img
+                src={noticia.imagen}
+                alt={noticia.titulo}
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div
+                class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent md:hidden"
+            >
+            </div>
+        </div>
+
+        {/* Contenido */}
+        <div
+            class="relative z-10 flex flex-col justify-center gap-4 p-6 text-white md:bg-black/80"
+        >
+            <time class="text-sm text-white/70">
+                {
+                    new Date(noticia.fecha).toLocaleDateString("es-CO", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                    })
+                }
+            </time>
+
+            <h2 class="text-2xl font-bold leading-tight md:text-3xl">
+                {noticia.titulo}
+            </h2>
+
+            <p class="max-w-prose text-white/80">
+                {noticia.descripcion}
+            </p>
+
+            <button
+                class="mt-2 w-fit rounded-full bg-white px-5 py-2 text-sm font-semibold text-black transition hover:bg-white/90"
+            >
+                Leer más
+            </button>
+        </div>
+    </article>
+</section>

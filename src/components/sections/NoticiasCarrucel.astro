@@ -1,0 +1,88 @@
+---
+import { noticias as noticiasRaw } from "../../helpers/noticias";
+
+const noticias = [...noticiasRaw].sort(
+    (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
+);
+---
+
+<section class="segmento">
+    <h1 class="text-4xl font-bold text-center text-(--cd-azul) mt-10">
+        Enterate de lo que hacemos
+    </h1>
+    <div
+        class="w-full py-5 px-1 md:px-20 flex gap-2 overflow-y-visible items-center"
+    >
+        <button
+            id="scroll-left"
+            class="hidden md:block cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl"
+            ><span>{"<"} </span></button
+        >
+        <div
+            class="noticias grid grid-flow-col w-full h-full gap-5 overflow-x-auto scroll-smooth overflow-y-visible pb-2"
+        >
+            {
+                noticias.map((noticia) => (
+                    <article class="flex flex-col min-w-80 max-w-80 cursor-pointer shadow-md rounded-lg ">
+                        <img
+                            src={noticia.imagen}
+                            alt={noticia.titulo}
+                            class="w-full h-60 object-cover object-top rounded-t-lg"
+                        />
+                        <div class="flex flex-col p-3">
+                            <h2 class="font-semibold text-lg">
+                                {noticia.titulo}
+                            </h2>
+                            <p class="text-sm text-gray-500">
+                                {new Date(noticia.fecha).toLocaleDateString(
+                                    "es-CO",
+                                    {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                    },
+                                )}
+                            </p>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+        <button
+            id="scroll-right"
+            class="hidden md:block cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl"
+            ><span>{">"} </span></button
+        >
+    </div>
+</section>
+
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<script>
+    const scrollLeftBtn = document.getElementById("scroll-left");
+    const scrollRightBtn = document.getElementById("scroll-right");
+    const noticias = document.querySelector(".noticias");
+
+    const SCROLL_AMOUNT = 200;
+
+    scrollLeftBtn?.addEventListener("click", () => {
+        if (!noticias) return;
+
+        noticias.scrollLeft = Math.max(0, noticias.scrollLeft - SCROLL_AMOUNT);
+    });
+
+    scrollRightBtn?.addEventListener("click", () => {
+        if (!noticias) return;
+
+        const maxScroll = noticias.scrollWidth - noticias.clientWidth;
+
+        noticias.scrollLeft = Math.min(
+            maxScroll,
+            noticias.scrollLeft + SCROLL_AMOUNT,
+        );
+    });
+</script>
