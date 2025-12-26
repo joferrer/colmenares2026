@@ -36,14 +36,14 @@ const navItems = [
         <Image src={CD_LOGO_H} alt="Logo" height={100} />
     </li>
     <header
-        class="fixed top-0 flex w-full justify-center mt-5 lg:mt-20 mx-auto max-sm:mt-0 z-50"
+        class="fixed top-0 flex w-full justify-center lg:mt-20 mx-auto max-sm:mt-0 z-50"
     >
         <button
             aria-label="Open Menu"
             aria-expanded="false"
             aria-controls="menu-items"
             class:list={[
-                "hamburger-menu focus-outline bg-(--cd-oscuro)",
+                "hamburger-menu focus-outline bg-(--cd-oscuro) mt-2",
                 "fixed right-0 w-14 h-14 mx-2 p-1 flex flex-col justify-center lg:hidden  rounded-md z-50",
             ]}
         >
@@ -51,7 +51,10 @@ const navItems = [
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
-        <nav id="nav-bar" class="visible max-lg:invisible flex">
+        <nav
+            id="nav-bar"
+            class="flex flex-col lg:flex-row max-lg:hidden lg:flex"
+        >
             {
                 navItems.map((item) => (
                     <a
@@ -115,7 +118,7 @@ const navItems = [
     }
     @media (max-width: 1023px) {
         #nav-bar {
-            @apply flex flex-col w-full py-16 h-screen bg-(--cd-oscuro) text-center text-white;
+            @apply w-full py-16 bg-(--cd-oscuro) h-screen text-center text-white;
             z-index: 998;
         }
     }
@@ -127,7 +130,7 @@ const navItems = [
 
     const clickEvent = () => {
         console.log("clickEvent");
-        navBar?.classList.toggle("max-lg:invisible");
+        navBar?.classList.toggle("max-lg:hidden");
         menuBtn?.classList.toggle("active");
     };
 
