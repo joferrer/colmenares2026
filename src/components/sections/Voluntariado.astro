@@ -2,6 +2,35 @@
 import logoAzul from "../../assets/logos/LOGO_BASE_ESTAFANIA-02.png";
 import iconos from "../../assets/iconos/ICONOS_INDIVIDUALES-02.png";
 
+const defaultMode = "voluntariado";
+
+const modes = [
+  {
+    id: "voluntariado",
+    label: "Voluntariado",
+    badge: "V",
+    title: "Voluntario/a",
+    subtitle: "Quiero ser",
+    formClass: "form-vol",
+    iconClass: "form-icon-vol",
+    inputClass: "field-input-vol",
+    submitClass: "submit-vol",
+    submitText: "Quiero ser voluntario/a",
+  },
+  {
+    id: "donante",
+    label: "Donante",
+    badge: "D",
+    title: "Donante",
+    subtitle: "Quiero ser",
+    formClass: "form-don",
+    iconClass: "form-icon-don",
+    inputClass: "field-input-don",
+    submitClass: "submit-don",
+    submitText: "Quiero aportar como donante",
+  },
+];
+
 const fields = [
   {
     id: "nombre",
@@ -23,7 +52,7 @@ const fields = [
   },
   {
     id: "correo",
-    label: "Correo",
+    label: "Correo electronico",
     type: "email",
     placeholder: "Ej: correo@mail.com",
   },
@@ -31,441 +60,531 @@ const fields = [
     id: "barrio",
     label: "Barrio y municipio",
     type: "text",
-    placeholder: "Ej: Barrio Las Palmas, Municipio",
+    placeholder: "Ej: Barrio Las Palmas, Cucuta",
   },
 ];
 ---
 
-<section class="segmento px-4 md:px-10 lg:px-0 mt-16">
+<section class="vol-section container mx-auto max-w-7xl px-4 py-16 md:py-24">
   <div
-    class="relative overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-(--cd-azul)/20"
+    class="relative overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-[color:var(--azul)/18]"
   >
-    <span
-      class="pointer-events-none absolute -left-10 top-10 h-32 w-32 -rotate-6 bg-(--cd-amarillo)/80 blur-3xl opacity-60"
-    ></span>
-    <span
-      class="pointer-events-none absolute -right-16 -bottom-10 h-40 w-40 rotate-12 bg-(--cd-rojo)/70 blur-3xl opacity-70"
-    ></span>
+    <span class="blur-blob blob-1"></span>
+    <span class="blur-blob blob-2"></span>
     <img
       src={iconos.src}
       alt=""
-      class="pointer-events-none absolute -top-8 -left-10 w-56 opacity-10 rotate-6 select-none"
+      class="pointer-events-none absolute -top-10 -left-14 w-48 rotate-6 opacity-25 md:w-60 lg:w-72"
+      loading="lazy"
+    />
+    <img
+      src={logoAzul.src}
+      alt="Logo Estefania Colmenares"
+      class="pointer-events-none absolute -top-10 right-0 w-56 md:w-72 lg:w-80 opacity-20"
       loading="lazy"
     />
 
-    <div class="relative grid gap-10 px-6 py-10 md:px-12 lg:px-16">
-      <div class="relative z-10 space-y-4 text-left">
-        <p
-          class="inline-flex items-center gap-2 rounded-full bg-(--cd-azul)/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-(--cd-oscuro)"
-        >
-          Participa
-        </p>
-        <h2
-          class="text-4xl md:text-6xl font-extrabold leading-tight text-(--cd-oscuro)"
-        >
-          Sumate como voluntario o donante
-        </h2>
-        <p class="max-w-2xl text-lg text-(--cd-oscuro)/80">
+    <div class="relative px-6 py-10 md:px-12 md:py-16 lg:px-20">
+      <div class="mb-10 space-y-6">
+        <span class="pill">Participa</span>
+
+        <h2 class="heading">Sumate como voluntario o donante</h2>
+
+        <p class="lede">
           Llena tus datos y cambia el selector para elegir tu rol. Al enviar,
           nos pondremos en contacto para coordinar como puedes aportar.
         </p>
 
-        <div class="mode-switch" data-mode-switch data-mode="voluntariado">
+        <div class="mode-switch" data-mode-switch data-mode={defaultMode}>
           <span class="mode-pill" aria-hidden="true"></span>
-          <button
-            type="button"
-            class="mode-btn is-active cursor-pointer"
-            data-mode-btn
-            data-mode="voluntariado"
-          >
-            <span class="badge">V</span>
-            Voluntariado
-          </button>
-          <button
-            type="button"
-            class="mode-btn cursor-pointer"
-            data-mode-btn
-            data-mode="donante"
-          >
-            <span class="badge">D</span>
-            Donante
-          </button>
+          {
+            modes.map((mode, index) => (
+              <button
+                type="button"
+                class={`mode-btn ${index === 0 ? "is-active" : ""}`}
+                data-mode-btn
+                data-mode={mode.id}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                <span class="badge">{mode.badge}</span>
+                <span class="mode-text">{mode.label}</span>
+              </button>
+            ))
+          }
         </div>
       </div>
 
-      <div
-        class="relative z-10 min-h-[720px] md:min-h-[700px] lg:min-h-[620px] max-w-5xl"
-        data-forms-panel
-        data-mode="voluntariado"
-      >
-        <img
-          src={logoAzul.src}
-          alt="Logo Estefania Colmenares"
-          class="pointer-events-none absolute -top-10 right-2 w-[260px] md:w-[340px] lg:w-[400px] h-auto drop-shadow-lg opacity-20 select-none z-0"
-          loading="lazy"
-        />
-        <div class="toast-stack" data-toast-stack></div>
-
-        <form
-          class="form-card form-vol space-y-6 rounded-2xl bg-(--cd-azul)/6 p-6 ring-1 ring-(--cd-azul)/25 backdrop-blur relative overflow-hidden"
-          data-form="voluntariado"
+      <div class="relative" data-forms-panel data-mode={defaultMode}>
+        <div
+          class="toast-stack"
+          data-toast-stack
+          role="status"
+          aria-live="polite"
         >
-          <div class="flex items-center gap-3">
-            <span
-              class="flex h-11 w-11 items-center justify-center rounded-full bg-(--cd-azul) text-white text-lg font-bold shadow-lg"
-            >
-              V
-            </span>
-            <div>
-              <p
-                class="text-sm uppercase tracking-[0.24em] text-(--cd-oscuro)/70"
+        </div>
+
+        <div class="forms-wrapper">
+          {
+            modes.map((mode, index) => (
+              <form
+                class={`form-card ${mode.formClass} ${index === 0 ? "is-active" : ""}`}
+                data-form={mode.id}
+                aria-hidden={index === 0 ? "false" : "true"}
+                hidden={index === 0 ? undefined : true}
               >
-                Quieres ser
-              </p>
-              <h3 class="text-2xl font-extrabold text-(--cd-oscuro)">
-                Voluntariado
-              </h3>
-            </div>
-          </div>
+                <div class="form-header">
+                  <span class={`form-icon ${mode.iconClass}`}>{mode.badge}</span>
+                  <div>
+                    <p class="form-subtitle">{mode.subtitle}</p>
+                    <h3 class="form-title">{mode.title}</h3>
+                  </div>
+                </div>
 
-          <div class="grid gap-4">
-            {
-              fields.map((field) => (
-                <label
-                  class="space-y-2 text-sm font-semibold text-(--cd-oscuro)"
-                  for={`${field.id}-vol`}
-                >
-                  {field.label}
-                  <input
-                    id={`${field.id}-vol`}
-                    name={field.id}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    class="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-(--cd-oscuro) shadow-inner outline-none transition focus:-translate-y-0.5 focus:border-(--cd-azul) focus:ring-2 focus:ring-(--cd-azul)"
-                    required
-                  />
-                </label>
-              ))
-            }
-          </div>
+                <div class="form-fields">
+                  {
+                    fields.map((field) => (
+                      <label class="field-label" for={`${field.id}-${mode.id}`}>
+                        {field.label}
+                        <input
+                          id={`${field.id}-${mode.id}`}
+                          name={field.id}
+                          type={field.type}
+                          placeholder={field.placeholder}
+                          class={`field-input ${mode.inputClass}`}
+                          required
+                          aria-required="true"
+                        />
+                      </label>
+                    ))
+                  }
+                </div>
 
-          <button
-            type="submit"
-            class="w-full rounded-xl bg-(--cd-oscuro) px-5 py-3 text-center text-white font-bold shadow-lg transition hover:-translate-y-0.5 hover:bg-(--cd-azul) cursor-pointer"
-          >
-            Quiero ser voluntario/a
-          </button>
-        </form>
-
-        <form
-          class="form-card form-don space-y-6 rounded-2xl bg-(--cd-amarillo)/10 p-6 ring-1 ring-(--cd-amarillo)/30 backdrop-blur relative overflow-hidden"
-          data-form="donante"
-        >
-          <div class="flex items-center gap-3">
-            <span
-              class="flex h-11 w-11 items-center justify-center rounded-full bg-(--cd-amarillo) text-(--cd-oscuro) text-lg font-bold shadow-lg"
-            >
-              D
-            </span>
-            <div>
-              <p
-                class="text-sm uppercase tracking-[0.24em] text-(--cd-oscuro)/70"
-              >
-                Quieres ser
-              </p>
-              <h3 class="text-2xl font-extrabold text-(--cd-oscuro)">
-                Donante
-              </h3>
-            </div>
-          </div>
-
-          <div class="grid gap-4">
-            {
-              fields.map((field) => (
-                <label
-                  class="space-y-2 text-sm font-semibold text-(--cd-oscuro)"
-                  for={`${field.id}-don`}
-                >
-                  {field.label}
-                  <input
-                    id={`${field.id}-don`}
-                    name={field.id}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    class="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-(--cd-oscuro) shadow-inner outline-none transition focus:-translate-y-0.5 focus:border-(--cd-amarillo) focus:ring-2 focus:ring-(--cd-amarillo)"
-                    required
-                  />
-                </label>
-              ))
-            }
-          </div>
-
-          <button
-            type="submit"
-            class="w-full rounded-xl bg-(--cd-oscuro) px-5 py-3 text-center text-white font-bold shadow-lg transition hover:-translate-y-0.5 hover:bg-(--cd-amarillo) hover:text-(--cd-oscuro) cursor-pointer"
-          >
-            Quiero aportar como donante
-          </button>
-        </form>
+                <button type="submit" class={`submit-btn ${mode.submitClass}`}>
+                  {mode.submitText}
+                </button>
+              </form>
+            ))
+          }
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  @reference "tailwindcss";
+  .vol-section {
+    --azul: var(--cd-azul, #1f6fb7);
+    --amarillo: var(--cd-amarillo, #fec900);
+    --oscuro: var(--cd-oscuro, #1f2d4a);
+    --claro: #f3f6fb;
+  }
+
+  .blur-blob {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(40px);
+    opacity: 0.6;
+  }
+
+  .blob-1 {
+    top: 2.5rem;
+    left: -2.5rem;
+    width: 8rem;
+    height: 8rem;
+    background: color-mix(in srgb, var(--azul) 70%, transparent);
+  }
+
+  .blob-2 {
+    right: -3rem;
+    bottom: -2.5rem;
+    width: 10rem;
+    height: 10rem;
+    background: color-mix(in srgb, var(--amarillo) 75%, transparent);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.95rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--azul) 12%, white);
+    color: var(--oscuro);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .heading {
+    font-weight: 900;
+    color: var(--oscuro);
+    line-height: 1.05;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+  }
+
+  .lede {
+    max-width: 38rem;
+    color: color-mix(in srgb, var(--oscuro) 75%, white);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+
+  .mode-switch {
+    position: relative;
+    display: inline-flex;
+    gap: 0.35rem;
+    padding: 0.4rem;
+    border-radius: 999px;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--azul) 14%, white),
+      color-mix(in srgb, var(--amarillo) 12%, white)
+    );
+    border: 1px solid color-mix(in srgb, var(--azul) 40%, transparent);
+    box-shadow: 0 14px 30px -18px rgb(0 0 0 / 0.45);
+    isolation: isolate;
+  }
+
+  .mode-pill {
+    position: absolute;
+    inset: 0.4rem;
+    width: calc(50% - 0.4rem);
+    background: white;
+    border-radius: 999px;
+    box-shadow: 0 14px 24px -14px rgb(0 0 0 / 0.35);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 0;
+  }
+
+  [data-mode="donante"] .mode-pill {
+    transform: translateX(100%);
+    background: linear-gradient(
+      135deg,
+      var(--amarillo),
+      color-mix(in srgb, var(--azul) 35%, white)
+    );
+  }
+
+  .mode-btn {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: color-mix(in srgb, var(--oscuro) 65%, white);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.25s ease;
+  }
+
+  .mode-btn.is-active {
+    color: var(--oscuro);
+  }
+
+  .mode-btn:focus-visible {
+    outline: 2px solid var(--azul);
+    outline-offset: 2px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--oscuro) 10%, white);
+    color: var(--oscuro);
+    font-weight: 800;
+    font-size: 0.82rem;
+  }
+
+  .forms-wrapper {
+    position: relative;
+    display: grid;
+    gap: 12px;
+  }
+
+  .form-card {
+    display: grid;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid color-mix(in srgb, var(--azul) 22%, white);
+    box-shadow: 0 25px 50px -30px rgb(0 0 0 / 0.35);
+    opacity: 0;
+    transform: translateY(22px);
+    pointer-events: none;
+    transition:
+      opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .form-card.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .form-vol {
+    background: color-mix(in srgb, var(--azul) 5%, white);
+  }
+
+  .form-don {
+    background: color-mix(in srgb, var(--amarillo) 12%, white);
+  }
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .form-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    width: 2.75rem;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: white;
+    box-shadow: 0 8px 18px rgb(0 0 0 / 0.15);
+  }
+
+  .form-icon-vol {
+    background: var(--azul);
+  }
+
+  .form-icon-don {
+    background: var(--amarillo);
+    color: var(--oscuro);
+  }
+
+  .form-subtitle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: color-mix(in srgb, var(--oscuro) 70%, white);
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--oscuro);
+  }
+
+  .form-fields {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .field-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--oscuro);
+  }
+
+  .field-input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--oscuro) 10%, white);
+    background: white;
+    color: var(--oscuro);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.22s ease;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+  }
+
+  .field-input::placeholder {
+    color: color-mix(in srgb, var(--oscuro) 55%, white);
+  }
+
+  .field-input-vol:focus {
+    border-color: color-mix(in srgb, var(--azul) 65%, white);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--azul) 25%, transparent);
+    transform: translateY(-1px);
+  }
+
+  .field-input-don:focus {
+    border-color: color-mix(in srgb, var(--amarillo) 65%, white);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--amarillo) 25%, transparent);
+    transform: translateY(-1px);
+  }
+
+  .field-input.input-error {
+    border-color: rgb(239 68 68);
+    box-shadow: 0 0 0 3px rgb(239 68 68 / 0.1);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: 0.9rem;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.18);
+    transition: all 0.25s ease;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-vol {
+    background: var(--oscuro);
+  }
+
+  .submit-vol:hover {
+    background: var(--azul);
+  }
+
+  .submit-don {
+    background: var(--oscuro);
+  }
+
+  .submit-don:hover {
+    background: var(--amarillo);
+    color: var(--oscuro);
+  }
 
   .toast-stack {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: grid;
-    gap: 10px;
-    padding: 10px;
-    max-width: min(320px, 70vw);
-    z-index: 10;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: min(360px, calc(100vw - 2rem));
+    z-index: 50;
   }
 
   .toast {
-    display: grid;
-    gap: 4px;
-    padding: 12px 14px;
-    border-radius: 14px;
-    color: var(--cd-oscuro);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
     background: white;
-    border: 1px solid rgba(99, 185, 233, 0.35);
-    box-shadow: 0 25px 50px -30px rgba(0, 0, 0, 0.35);
-    animation: toast-in 0.35s ease;
+    border: 1px solid color-mix(in srgb, var(--azul) 35%, transparent);
+    box-shadow: 0 20px 40px -15px rgb(0 0 0 / 0.25);
+    animation: toast-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .toast.toast-out {
-    animation: toast-out 0.28s ease forwards;
+    animation: toast-out 0.3s ease forwards;
   }
 
-  .toast strong {
+  .toast-title {
     font-weight: 800;
-    letter-spacing: 0.03em;
+    font-size: 0.95rem;
+    color: var(--oscuro);
+    letter-spacing: 0.01em;
+  }
+
+  .toast-message {
+    font-size: 0.88rem;
+    color: color-mix(in srgb, var(--oscuro) 75%, white);
   }
 
   @keyframes toast-in {
     from {
       opacity: 0;
-      transform: translateY(-8px) scale(0.98);
+      transform: translateX(100%) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
     }
   }
 
   @keyframes toast-out {
     to {
       opacity: 0;
-      transform: translateY(-6px) scale(0.96);
+      transform: translateX(100%) scale(0.95);
     }
   }
 
-  .form-card {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transform: translateX(40px) scale(0.98);
-    filter: blur(4px);
-    pointer-events: none;
-    transition:
-      opacity 0.4s ease,
-      transform 0.45s ease,
-      filter 0.45s ease;
-  }
-
-  .input-error {
-    border-color: rgba(216, 26, 16, 0.5) !important;
-    box-shadow: 0 0 0 2px rgba(216, 26, 16, 0.15) !important;
-  }
-
-  [data-mode="voluntariado"] .form-vol {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    filter: blur(0px);
-    pointer-events: auto;
-  }
-
-  [data-mode="voluntariado"] .form-don {
-    transform: translateX(40px) scale(0.98);
-  }
-
-  [data-mode="donante"] .form-don {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    filter: blur(0px);
-    pointer-events: auto;
-  }
-
-  [data-mode="donante"] .form-vol {
-    transform: translateX(-40px) scale(0.98);
-  }
-
-  .mode-switch {
-    position: relative;
-    display: inline-grid;
-    grid-auto-flow: column;
-    gap: 6px;
-    padding: 6px;
-    border-radius: 999px;
-    background: linear-gradient(
-      120deg,
-      rgba(99, 185, 233, 0.16),
-      rgba(254, 201, 0, 0.14)
-    );
-    border: 1px solid rgba(99, 185, 233, 0.4);
-    box-shadow: 0 20px 50px -30px rgba(0, 0, 0, 0.45);
-    isolation: isolate;
-  }
-
-  .mode-pill {
-    position: absolute;
-    inset: 6px;
-    width: calc(50% - 6px);
-    background: white;
-    border-radius: 999px;
-    box-shadow: 0 18px 35px -20px rgba(0, 0, 0, 0.4);
-    transform: translateX(0);
-    transition:
-      transform 0.32s ease,
-      background 0.32s ease;
-    z-index: 0;
-  }
-
-  [data-mode="donante"] .mode-pill {
-    transform: translateX(100%);
-    background: linear-gradient(120deg, #fec900, #63b9e9);
-  }
-
-  .mode-btn {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 18px;
-    border-radius: 999px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(37, 62, 107, 0.7);
-    transition: color 0.2s ease;
-    background: transparent;
-    border: none;
-  }
-
-  .mode-btn .badge {
-    display: inline-flex;
-    height: 28px;
-    width: 28px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(37, 62, 107, 0.12);
-    color: var(--cd-oscuro);
-    font-weight: 800;
-    font-size: 13px;
-  }
-
-  .mode-btn.is-active {
-    color: var(--cd-oscuro);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 640px) {
-    [data-forms-panel] {
-      min-height: auto;
-    }
-
-    .form-card {
-      position: relative;
-      inset: auto;
-      display: none;
-      opacity: 1;
-      transform: none;
-      filter: none;
-      pointer-events: none;
-    }
-
-    [data-mode="voluntariado"] .form-vol {
-      display: block;
-      pointer-events: auto;
-    }
-
-    [data-mode="donante"] .form-don {
-      display: block;
-      pointer-events: auto;
-    }
-
+  @media (max-width: 768px) {
     .mode-switch {
       width: 100%;
-      display: flex;
-      gap: 8px;
-      padding: 4px;
-      background: rgba(99, 185, 233, 0.12);
-    }
-
-    .mode-pill {
-      display: block;
-      inset: 4px;
-      width: calc(50% - 4px);
+      justify-content: space-between;
     }
 
     .mode-btn {
       flex: 1;
       justify-content: center;
-      font-size: 12px;
-      padding: 10px 12px;
+      padding: 0.65rem 1rem;
+      font-size: 0.78rem;
     }
 
-    .mode-btn .badge {
-      height: 24px;
-      width: 24px;
-      font-size: 12px;
-    }
-
-    .toast-stack {
-      max-width: 90vw;
-    }
-  }
-
-  @media (max-width: 450px) {
-    .mode-btn {
-      font-size: 11px;
-      padding: 9px 10px;
-      gap: 8px;
-    }
-
-    .mode-btn .badge {
-      height: 22px;
-      width: 22px;
-      font-size: 11px;
+    .badge {
+      height: 1.5rem;
+      width: 1.5rem;
+      font-size: 0.78rem;
     }
 
     .form-card {
-      padding: 1rem;
+      padding: 1.6rem;
     }
 
-    .form-card h3 {
+    .form-title {
       font-size: 1.25rem;
     }
 
-    .form-card input,
-    .form-card button {
-      padding: 0.75rem 0.9rem;
-      font-size: 0.95rem;
+    .field-input,
+    .submit-btn {
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
     }
 
-    [data-forms-panel] img {
-      width: 200px;
-      top: -8px;
-      right: -10px;
-      opacity: 0.18;
+    .toast-stack {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .mode-btn {
+      padding: 0.6rem 0.75rem;
+      gap: 0.35rem;
+      font-size: 0.75rem;
     }
 
-    [data-mode="voluntariado"] .form-vol,
-    [data-mode="donante"] .form-don {
-      pointer-events: auto;
+    .mode-text {
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .badge {
+      display: none;
+    }
+
+    .form-card {
+      padding: 1.25rem;
     }
   }
 </style>
@@ -480,33 +599,46 @@ const fields = [
 
     if (!panel || !buttons.length) return;
 
-    const showToast = (title, detail, tone = "info") => {
+    const showToast = (title, message, type = "info") => {
       if (!toastStack) return;
+
       const toast = document.createElement("div");
       toast.className = "toast";
-      if (tone === "success") {
-        toast.style.borderColor = "rgba(99, 185, 233, 0.8)";
+      toast.innerHTML = `
+        <div class="toast-title">${title}</div>
+        <div class="toast-message">${message}</div>
+      `;
+
+      if (type === "success") {
+        toast.style.borderColor =
+          "color-mix(in srgb, var(--cd-azul, #1f6fb7) 65%, transparent)";
+      } else if (type === "error") {
+        toast.style.borderColor = "rgb(239 68 68 / 0.5)";
       }
-      toast.innerHTML = `<strong>${title}</strong><span>${detail}</span>`;
+
       toastStack.appendChild(toast);
+
       setTimeout(() => {
         toast.classList.add("toast-out");
         toast.addEventListener("animationend", () => toast.remove());
-      }, 2500);
+      }, 3000);
     };
 
     const setMode = (mode) => {
       panel.setAttribute("data-mode", mode);
       if (switcher) switcher.setAttribute("data-mode", mode);
+
       forms.forEach((form) => {
         const isActive = form.dataset.form === mode;
-        form.hidden = !isActive;
+        form.classList.toggle("is-active", isActive);
+        form.toggleAttribute("hidden", !isActive);
         form.setAttribute("aria-hidden", isActive ? "false" : "true");
       });
+
       buttons.forEach((btn) => {
-        const active = btn.dataset.mode === mode;
-        btn.classList.toggle("is-active", active);
-        btn.setAttribute("aria-pressed", active ? "true" : "false");
+        const isActive = btn.dataset.mode === mode;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
     };
 
@@ -517,38 +649,45 @@ const fields = [
     });
 
     forms.forEach((form) => {
-      form.addEventListener("submit", (ev) => {
-        ev.preventDefault();
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
         const inputs = form.querySelectorAll("input");
-        let hasEmpty = false;
+        let hasErrors = false;
 
         inputs.forEach((input) => {
           if (!input.value.trim()) {
             input.classList.add("input-error");
-            hasEmpty = true;
+            hasErrors = true;
           } else {
             input.classList.remove("input-error");
           }
         });
 
-        if (hasEmpty) {
+        if (hasErrors) {
           showToast(
             "Faltan datos",
-            "Completa todos los campos para continuar",
-            "info"
+            "Por favor completa todos los campos requeridos",
+            "error"
           );
           return;
         }
 
         showToast(
-          "Enviado",
-          "Gracias por inscribirte, te contactaremos pronto",
+          "Enviado con exito",
+          "Gracias por inscribirte. Te contactaremos pronto",
           "success"
         );
         form.reset();
       });
+
+      form.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", () => {
+          input.classList.remove("input-error");
+        });
+      });
     });
 
-    setMode("voluntariado");
+    setMode(panel.getAttribute("data-mode") || "voluntariado");
   });
 </script>
