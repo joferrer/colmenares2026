@@ -36,8 +36,23 @@ const noticias = [...noticiasRaw].sort(
     >
         <button
             id="scroll-left"
-            class="hidden md:block cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl"
-            ><span>{"<"} </span></button
+            class:list={[
+                "hidden invisible md:block cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl",
+                "hover:bg-gray-100 hover:scale-110 transition-all duration-300 ease-in-out",
+            ]}
+            ><span
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </span></button
         >
         <div
             class="noticias grid grid-flow-col w-full h-full gap-5 overflow-x-auto scroll-smooth overflow-y-visible pb-2 px-1 z-20"
@@ -71,8 +86,23 @@ const noticias = [...noticiasRaw].sort(
         </div>
         <button
             id="scroll-right"
-            class="hidden md:block cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl"
-            ><span>{">"} </span></button
+            class:list={[
+                "hidden md:block visible cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl",
+                "hover:bg-gray-100 hover:scale-110 transition-all duration-300 ease-in-out",
+            ]}
+            ><span
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </span></button
         >
     </div>
 </section>
@@ -89,6 +119,19 @@ const noticias = [...noticiasRaw].sort(
     const noticias = document.querySelector(".noticias");
 
     const SCROLL_AMOUNT = 200;
+
+    noticias?.addEventListener("scroll", () => {
+        if (!noticias) return;
+
+        scrollLeftBtn?.classList.remove("visible");
+        scrollRightBtn?.classList.remove("visible");
+
+        scrollLeftBtn?.classList.toggle("invisible", noticias.scrollLeft === 0);
+        scrollRightBtn?.classList.toggle(
+            "invisible",
+            noticias.scrollLeft === noticias.scrollWidth - noticias.clientWidth,
+        );
+    });
 
     scrollLeftBtn?.addEventListener("click", () => {
         if (!noticias) return;
