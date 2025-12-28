@@ -6,16 +6,18 @@ import CD_VOTO_MARCADO from "../../assets/logos/CD_VOTO_MARCADO.png";
 <section
     class:list={[
         "relative flex flex-col max-w-7xl mx-auto rounded-2xl z-20 p-5 bg-(--cd-oscuro) text-white",
-        " lg:items-center ",
+        " lg:items-center max-sm:mx-1!",
     ]}
 >
     <div class="flex flex-col lg:flex-row items-center">
         <h1
-            class="text-4xl md:text-7xl font-extrabold text-(--cd-amarillo) text-center"
+            class="text-3xl md:text-5xl lg:text-7xl font-extrabold text-(--cd-amarillo) text-center"
         >
             Vote así al senado y presidencia
         </h1>
-        <div class="mt-5 bg-white rounded-md max-w-sm lg:mt-0">
+        <div
+            class="mt-5 bg-white rounded-md max-sm:w-56 max-md:w-60 max-w-sm lg:mt-0"
+        >
             <Image src={CD_VOTO_MARCADO} alt="Vota al centro democrático" />
         </div>
     </div>
