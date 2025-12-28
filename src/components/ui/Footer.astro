@@ -1,6 +1,10 @@
 ---
 const socials = [
-  { name: "Facebook", href: "https://www.facebook.com", icon: "facebook" },
+  {
+    name: "Facebook",
+    href: "https://web.facebook.com/estefanianortecd",
+    icon: "facebook",
+  },
   {
     name: "Instagram",
     href: "https://www.instagram.com/estefanianortecd?igsh=ZW9meThjMXRmcW02",
@@ -24,64 +28,98 @@ const iconMap: Record<string, string> = {
 
 <footer class="mt-16 bg-(--cd-oscuro) text-white">
   <div class="mx-auto max-w-6xl px-6 py-14 space-y-12">
-    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:items-start">
+    <div
+      class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:items-start"
+    >
       <div class="space-y-4 text-left lg:col-span-2">
-        <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]">
+        <p
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]"
+        >
           Estefania Colmenares
         </p>
         <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">
           Sigamos conectados
         </h2>
         <p class="max-w-xl text-sm text-white/80 md:text-base">
-          Informate de eventos, propuestas y formas de participar en la campana. Tus ideas suman.
+          Informate de eventos, propuestas y formas de participar en la campana.
+          Tus ideas suman.
         </p>
         <div class="flex flex-wrap gap-3 pt-2">
-          {socials.map((social) => (
-            <a
-              class="group relative flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/30 transition hover:-translate-y-1 hover:ring-(--cd-amarillo)"
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="h-5 w-5" set:html={iconMap[social.icon] ?? ""} />
-              <span class="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-2 py-1 text-[11px] font-semibold text-(--cd-oscuro) opacity-0 shadow-lg transition group-hover:opacity-100">
-                {social.name}
-              </span>
-            </a>
-          ))}
+          {
+            socials.map((social) => (
+              <a
+                class="group relative flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/30 transition hover:-translate-y-1 hover:ring-(--cd-amarillo)"
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="h-5 w-5" set:html={iconMap[social.icon] ?? ""} />
+                <span class="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-2 py-1 text-[11px] font-semibold text-(--cd-oscuro) opacity-0 shadow-lg transition group-hover:opacity-100">
+                  {social.name}
+                </span>
+              </a>
+            ))
+          }
         </div>
       </div>
 
       <div class="space-y-3 text-left">
         <h3 class="text-xl font-bold">Navegacion</h3>
         <ul class="space-y-2 text-sm text-white/80">
-          <li><a href="/#introduccion" class="hover:text-(--cd-amarillo)">Inicio</a></li>
-          <li><a href="/#experiencia" class="hover:text-(--cd-amarillo)">Quienes somos</a></li>
-          <li><a href="/#aboutme" class="hover:text-(--cd-amarillo)">Propuestas</a></li>
-          <li><a href="/#educacion" class="hover:text-(--cd-amarillo)">Como ayudar</a></li>
+          <li>
+            <a href="/#introduccion" class="hover:text-(--cd-amarillo)"
+              >Inicio</a>
+          </li>
+          <li>
+            <a href="/#experiencia" class="hover:text-(--cd-amarillo)"
+              >Quienes somos</a>
+          </li>
+          <li>
+            <a href="/#aboutme" class="hover:text-(--cd-amarillo)"
+              >Propuestas</a>
+          </li>
+          <li>
+            <a href="/#educacion" class="hover:text-(--cd-amarillo)"
+              >Como ayudar</a>
+          </li>
         </ul>
       </div>
 
       <div class="space-y-3 text-left">
         <h3 class="text-xl font-bold">Participacion</h3>
         <ul class="space-y-2 text-sm text-white/80">
-          <li><a href="/#educacion" class="hover:text-(--cd-amarillo)">Voluntariado</a></li>
-          <li><a href="/#news" class="hover:text-(--cd-amarillo)">Noticias</a></li>
-          <li><a href="/#contacto" class="hover:text-(--cd-amarillo)">Donaciones</a></li>
+          <li>
+            <a href="/#educacion" class="hover:text-(--cd-amarillo)"
+              >Voluntariado</a>
+          </li>
+          <li>
+            <a href="/#news" class="hover:text-(--cd-amarillo)">Noticias</a>
+          </li>
+          <li>
+            <a href="/#contacto" class="hover:text-(--cd-amarillo)"
+              >Donaciones</a>
+          </li>
         </ul>
       </div>
 
       <div class="space-y-3 text-left">
         <h3 class="text-xl font-bold">Contacto</h3>
         <ul class="space-y-2 text-sm text-white/80">
-          <li><a href="mailto:hola@colmenares2026.com" class="hover:text-(--cd-amarillo)">hola@colmenares2026.com</a></li>
-          <li><a href="tel:+000000000" class="hover:text-(--cd-amarillo)">+00 000 0000</a></li>
-          <li><a href="/#contacto" class="hover:text-(--cd-amarillo)">Formulario</a></li>
+          <li>
+            <a href="tel:+000000000" class="hover:text-(--cd-amarillo)"
+              >+00 000 0000</a>
+          </li>
+          <li>
+            <a href="/#contacto" class="hover:text-(--cd-amarillo)"
+              >Formulario</a>
+          </li>
         </ul>
       </div>
     </div>
 
-    <div class="border-t border-white/20 pt-6 text-center text-xs md:text-sm text-white/70">
+    <div
+      class="border-t border-white/20 pt-6 text-center text-xs md:text-sm text-white/70"
+    >
       © 2026 Equipo Colmenares. Construyendo futuro con tu voz.
     </div>
   </div>
