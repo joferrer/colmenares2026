@@ -1,5 +1,6 @@
 ---
 import NavbarSuperior from "../components/ui/NavbarSuperior.astro";
+import LoadingView from "../components/ui/LoadingView.astro";
 import "../styles/global.css";
 ---
 
@@ -17,6 +18,7 @@ import "../styles/global.css";
 		<title>Estefania Colmenares</title>
 	</head>
 	<body class="max-w-[3000px] mx-auto">
+		<LoadingView />
 		<NavbarSuperior />
 		<slot />
 	</body>

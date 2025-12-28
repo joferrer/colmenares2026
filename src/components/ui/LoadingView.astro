@@ -1,0 +1,248 @@
+---
+// Loader de página con animación y ocultado al completar la carga.
+---
+
+<div id="page-preloader" class="preloader active">
+  <div class="preloader-content">
+    <div class="name-container">
+      <div class="name-animation">
+        <span class="letter">E</span>
+        <span class="letter">S</span>
+        <span class="letter">T</span>
+        <span class="letter">E</span>
+        <span class="letter">F</span>
+        <span class="letter">A</span>
+        <span class="letter">N</span>
+        <span class="letter">Í</span>
+        <span class="letter">A</span>
+      </div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @reference "tailwindcss";
+
+  .preloader {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: white;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .preloader.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .preloader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .name-animation {
+    display: flex;
+    gap: 0.25rem;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+  }
+
+  .surname-animation {
+    display: flex;
+    gap: 0.2rem;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px) rotateX(-90deg);
+    animation: revealLetter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    color: var(--cd-oscuro, #253e6b);
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .letter:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .letter:nth-child(2) {
+    animation-delay: 0.15s;
+    color: var(--cd-azul, #63b9e9);
+  }
+  .letter:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .letter:nth-child(4) {
+    animation-delay: 0.25s;
+  }
+  .letter:nth-child(5) {
+    animation-delay: 0.3s;
+    color: var(--cd-amarillo, #fec900);
+  }
+  .letter:nth-child(6) {
+    animation-delay: 0.35s;
+  }
+  .letter:nth-child(7) {
+    animation-delay: 0.4s;
+  }
+  .letter:nth-child(8) {
+    animation-delay: 0.45s;
+    color: var(--cd-rojo, #d81a10);
+  }
+  .letter:nth-child(9) {
+    animation-delay: 0.5s;
+  }
+
+  .letter-s {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealLetter 0.5s ease-out forwards;
+    color: var(--cd-oscuro, #253e6b);
+  }
+
+  .letter-s:nth-child(1) {
+    animation-delay: 0.6s;
+  }
+  .letter-s:nth-child(2) {
+    animation-delay: 0.65s;
+  }
+  .letter-s:nth-child(3) {
+    animation-delay: 0.7s;
+    color: var(--cd-azul, #63b9e9);
+  }
+  .letter-s:nth-child(4) {
+    animation-delay: 0.75s;
+  }
+  .letter-s:nth-child(5) {
+    animation-delay: 0.8s;
+    color: var(--cd-amarillo, #fec900);
+  }
+  .letter-s:nth-child(6) {
+    animation-delay: 0.85s;
+  }
+  .letter-s:nth-child(7) {
+    animation-delay: 0.9s;
+  }
+  .letter-s:nth-child(8) {
+    animation-delay: 0.95s;
+  }
+  .letter-s:nth-child(9) {
+    animation-delay: 1s;
+  }
+  .letter-s:nth-child(10) {
+    animation-delay: 1.05s;
+  }
+
+  .progress-container {
+    width: 280px;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(37, 62, 107, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(
+      90deg,
+      var(--cd-amarillo, #fec900) 0%,
+      var(--cd-azul, #63b9e9) 50%,
+      var(--cd-rojo, #d81a10) 100%
+    );
+    border-radius: 2px;
+    animation: loading 2s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(254, 201, 0, 0.5);
+  }
+
+  @keyframes revealLetter {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) rotateX(-90deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg);
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 70%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .name-animation {
+      font-size: 2.25rem;
+    }
+
+    .surname-animation {
+      font-size: 1.5rem;
+    }
+
+    .progress-container {
+      width: 220px;
+    }
+  }
+</style>
+
+<script>
+  const preloader = document.getElementById("page-preloader");
+
+  const hidePreloader = () => {
+    if (!preloader) return;
+    preloader.classList.remove("active");
+    preloader.style.opacity = "0";
+    setTimeout(() => preloader.remove(), 500);
+  };
+
+  const startTransition = () => {
+    if ("startViewTransition" in document) {
+      document
+        .startViewTransition(() => Promise.resolve())
+        .finished.then(hidePreloader);
+    } else {
+      hidePreloader();
+    }
+  };
+
+  if (document.readyState === "complete") {
+    startTransition();
+  } else {
+    window.addEventListener("load", startTransition);
+  }
+</script>
