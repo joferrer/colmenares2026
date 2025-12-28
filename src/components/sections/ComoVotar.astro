@@ -1,0 +1,439 @@
+---
+import { Image } from "astro:assets";
+import tarjetonImage from "../../assets/fotos/PLANTILLAS_ESTEFANIA_VOTA_1.webp";
+import icono21 from "../../assets/iconos/ICONOS_INDIVIDUALES-21.png";
+import icono10 from "../../assets/iconos/ICONOS_INDIVIDUALES-10.png";
+import icono02 from "../../assets/iconos/ICONOS_INDIVIDUALES-02.png";
+import icono06 from "../../assets/iconos/ICONOS_INDIVIDUALES-06.png";
+import icono20 from "../../assets/iconos/ICONOS_INDIVIDUALES-20.png";
+import icono25 from "../../assets/iconos/ICONOS_INDIVIDUALES-25.png";
+import icono30 from "../../assets/iconos/ICONOS_INDIVIDUALES-30.png";
+
+const steps = [
+  {
+    number: 1,
+    title: "Verifica tu puesto",
+    description: "Consulta tu lugar de votacion en la Registraduria",
+    link: "https://wapp.registraduria.gov.co/electoral/consultar-lugar-de-votacion",
+    icon: icono02,
+  },
+  {
+    number: 2,
+    title: "Lleva tu cedula",
+    description: "El documento original es indispensable para votar",
+    icon: icono20,
+  },
+  {
+    number: 3,
+    title: "Recibe el tarjeton",
+    description: "Confirma que este en buen estado y sin marcas",
+    icon: icono25,
+  },
+  {
+    number: 4,
+    title: "Marca el partido",
+    description: "Ubica el logo y haz una X clara sobre el recuadro",
+    featured: true,
+    icon: icono06,
+  },
+  {
+    number: 5,
+    title: "Deposita tu voto",
+    description: "Dobla el tarjeton y entregalo en la urna",
+    icon: icono30,
+  },
+];
+---
+
+<section class="segmento px-4 pt-2 pb-0 md:pt-14 md:pb-2">
+  <div class="votar-card relative overflow-hidden rounded-3xl">
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(145deg, color-mix(in srgb, var(--cd-azul, #63b9e9) 10%, white), color-mix(in srgb, var(--cd-amarillo, #fec900) 12%, white));"
+    >
+    </div>
+    <div
+      class="absolute -left-16 -top-14 w-40 md:w-56 opacity-25 rotate-[-8deg]"
+    >
+      <Image src={icono21} alt="Marca Centro Democratico" loading="lazy" />
+    </div>
+    <div class="absolute -right-12 -top-10 w-36 md:w-56 opacity-25 rotate-3">
+      <Image src={icono10} alt="Marca Estefania Colmenares" loading="lazy" />
+    </div>
+
+    <div class="relative space-y-10 p-6 md:p-10 lg:p-12">
+      <div
+        class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"
+      >
+        <div class="space-y-3">
+          <span class="header-pill">Gu&iacute;a r&aacute;pida</span>
+          <h2
+            class="text-3xl md:text-4xl font-black text-[color:var(--cd-oscuro)]"
+          >
+            &iquest;C&oacute;mo votar?
+          </h2>
+          <p class="intro-text">
+            Sigue estos pasos para que tu voto por el Centro Democr&aacute;tico
+            quede bien marcado. Revisa tu puesto, lleva tu c&eacute;dula y ubica
+            el logo en el tarjet&oacute;n.
+          </p>
+          <div class="actions">
+            <a
+              href={steps[0].link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-primary"
+            >
+              Consultar mi puesto
+              <span aria-hidden="true">&nearr;</span>
+            </a>
+            <span class="time-chip">Jornada 8:00 AM - 4:00 PM</span>
+          </div>
+        </div>
+
+        <div class="callout-card">
+          <span class="text-3xl" aria-hidden="true">&#128499;</span>
+          <div class="space-y-1">
+            <p class="callout-kicker">Paso clave</p>
+            <p class="callout-title">
+              Marca el logo del partido con una X clara
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_0.95fr] relative">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {
+            steps.map((step) => (
+              <article
+                class={`step-card ${step.featured ? "step-card-featured" : ""}`}
+              >
+                <div class="flex items-start gap-3">
+                  <span class="step-number">0{step.number}</span>
+                  <div class="flex-1 space-y-1">
+                    <h3 class="step-title">{step.title}</h3>
+                    <p class="step-desc">{step.description}</p>
+                  </div>
+                </div>
+
+                {step.link && (
+                  <a
+                    href={step.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="step-link"
+                  >
+                    Ver detalle del puesto
+                  </a>
+                )}
+
+                <div class="step-icon hidden md:block" aria-hidden="true">
+                  <Image src={step.icon} alt="" />
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="tarjeton-card">
+          <div class="tarjeton-header">
+            <p class="tarjeton-kicker">Ejemplo del tarjet&oacute;n</p>
+            <span class="tarjeton-pill">Paso 4</span>
+          </div>
+          <div class="tarjeton-body">
+            <Image
+              src={tarjetonImage}
+              alt="Tarjeton - marca el logo del partido"
+              class="w-full rounded-xl shadow-lg"
+              loading="lazy"
+            />
+          </div>
+          <div class="tarjeton-footer">
+            <span class="text-xl" aria-hidden="true">&#10003;</span>
+            <p
+              class="text-sm md:text-base font-semibold text-[color:var(--cd-oscuro)]"
+            >
+              Marca el recuadro del logo con una X grande y clara.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .votar-card {
+    border: 1px solid
+      color-mix(in srgb, var(--cd-oscuro, #253e6b) 10%, transparent);
+    box-shadow: 0 35px 65px -45px rgb(0 0 0 / 0.45);
+    background: white;
+  }
+
+  .header-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--cd-azul, #63b9e9) 12%, white);
+    color: var(--cd-oscuro, #253e6b);
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .intro-text {
+    max-width: 40rem;
+    color: color-mix(in srgb, var(--cd-oscuro, #253e6b) 75%, white);
+    line-height: 1.6;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    background: var(--cd-oscuro, #253e6b);
+    color: white;
+    font-weight: 800;
+    box-shadow: 0 16px 30px -18px rgb(0 0 0 / 0.4);
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    background: var(--cd-azul, #63b9e9);
+  }
+
+  .time-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    border: 1px solid
+      color-mix(in srgb, var(--cd-amarillo, #fec900) 50%, transparent);
+    background: color-mix(in srgb, var(--cd-amarillo, #fec900) 12%, white);
+    color: var(--cd-oscuro, #253e6b);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .callout-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 1.1rem;
+    background: var(--cd-oscuro, #253e6b);
+    color: white;
+    box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.6);
+  }
+
+  .callout-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .callout-title {
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .step-card {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid
+      color-mix(in srgb, var(--cd-oscuro, #253e6b) 12%, transparent);
+    box-shadow: 0 16px 34px -24px rgb(0 0 0 / 0.4);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px -28px rgb(0 0 0 / 0.35);
+    border-color: color-mix(in srgb, var(--cd-azul, #63b9e9) 45%, transparent);
+  }
+
+  .step-card-featured {
+    border-color: var(--cd-amarillo, #fec900);
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--cd-amarillo, #fec900) 18%, white),
+      white
+    );
+    box-shadow: 0 26px 56px -28px
+      color-mix(in srgb, var(--cd-amarillo, #fec900) 55%, transparent);
+  }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 0.9rem;
+    background: color-mix(in srgb, var(--cd-azul, #63b9e9) 22%, white);
+    color: var(--cd-oscuro, #253e6b);
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .step-title {
+    font-weight: 800;
+    color: var(--cd-oscuro, #253e6b);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .step-desc {
+    color: color-mix(in srgb, var(--cd-oscuro, #253e6b) 75%, white);
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .step-link {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+    color: var(--cd-azul, #63b9e9);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .step-link:hover {
+    color: var(--cd-oscuro, #253e6b);
+  }
+
+  .step-icon {
+    position: absolute;
+    right: -0.6rem;
+    bottom: -0.4rem;
+    width: 140px;
+    opacity: 0.35;
+    transform: rotate(-18deg);
+  }
+
+  .step-icon img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.08));
+  }
+
+  .tarjeton-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--cd-azul, #63b9e9) 10%, white),
+      color-mix(in srgb, var(--cd-amarillo, #fec900) 10%, white)
+    );
+    border: 1px solid
+      color-mix(in srgb, var(--cd-oscuro, #253e6b) 12%, transparent);
+    box-shadow: 0 28px 52px -32px rgb(0 0 0 / 0.35);
+    backdrop-filter: blur(4px);
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .tarjeton-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 20% 15%,
+      color-mix(in srgb, var(--cd-azul, #63b9e9) 14%, transparent),
+      transparent 40%
+    );
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .tarjeton-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .tarjeton-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem 0.25rem;
+    gap: 1rem;
+  }
+
+  .tarjeton-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: color-mix(in srgb, var(--cd-oscuro, #253e6b) 75%, white);
+    margin: 0;
+  }
+
+  .tarjeton-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: var(--cd-amarillo, #fec900);
+    color: var(--cd-oscuro, #253e6b);
+    font-weight: 800;
+    font-size: 0.78rem;
+  }
+
+  .tarjeton-body {
+    padding: 0 1rem 0.25rem;
+  }
+
+  .tarjeton-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 1.25rem 1.25rem;
+    background: color-mix(in srgb, var(--cd-amarillo, #fec900) 12%, white);
+    border-top: 1px solid
+      color-mix(in srgb, var(--cd-amarillo, #fec900) 35%, transparent);
+  }
+
+  @media (max-width: 768px) {
+    .step-card {
+      padding: 0.95rem;
+    }
+
+    .step-number {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+</style>
