@@ -8,7 +8,9 @@ const noticias = [...noticiasRaw].sort(
 );
 ---
 
-<section class="segmento p-5 max-md:mx-2! shadow-md relative mt-10! rounded-xl">
+<section
+    class="segmento p-1 md:p-5 max-md:mx-2! shadow-md relative mt-10! rounded-xl"
+>
     <div
         class="absolute overflow-hidden -z-50 left-0 top-0 w-full h-full rounded-xl"
     >
@@ -31,8 +33,9 @@ const noticias = [...noticiasRaw].sort(
     >
         Enterate de lo que hacemos
     </h1>
+
     <div
-        class="w-full py-5 px-1 md:px-20 flex gap-2 overflow-y-visible items-center z-50"
+        class="w-full py-5 px-1 md:px-20 flex gap-2 overflow-y-visible items-center z-50 relative"
     >
         <button
             id="scroll-left"
@@ -40,7 +43,8 @@ const noticias = [...noticiasRaw].sort(
                 "hidden invisible md:block cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl",
                 "hover:bg-gray-100 hover:scale-110 transition-all duration-300 ease-in-out",
             ]}
-            ><span
+        >
+            <span
                 ><svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -54,8 +58,9 @@ const noticias = [...noticiasRaw].sort(
                 </svg>
             </span></button
         >
+
         <div
-            class="noticias grid grid-flow-col w-full h-full gap-5 overflow-x-auto scroll-smooth overflow-y-visible pb-2 px-1 z-20"
+            class="noticias grid grid-flow-col w-full h-full gap-5 overflow-x-auto scroll-smooth overflow-y-visible pb-2 px-1"
         >
             {
                 noticias.map((noticia) => (
