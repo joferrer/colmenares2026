@@ -1,17 +1,38 @@
 ---
 import { noticias as noticiasRaw } from "../../helpers/noticias";
+import iconoNoticas from "../../assets/iconos/ICONO_NOTICIAS.png";
+import { Image } from "astro:assets";
 
 const noticias = [...noticiasRaw].sort(
     (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
 );
 ---
 
-<section class="segmento">
-    <h1 class="text-4xl font-bold text-center text-(--cd-azul) mt-10">
+<section class="segmento p-5 max-md:mx-2! shadow-md relative mt-10! rounded-xl">
+    <div
+        class="absolute overflow-hidden -z-50 left-0 top-0 w-full h-full rounded-xl"
+    >
+        <div
+            class="absolute -z-10 bg-(--cd-amarillo) w-50 h-50 rounded-full -top-3 -left-20 blur-2xl opacity-10"
+        >
+        </div>
+        <div
+            class="absolute -z-50 bg-(--cd-rojo) w-20 h-20 rounded-full -bottom-1 -right-5 blur-2xl opacity-20"
+        >
+        </div>
+        <Image
+            src={iconoNoticas}
+            alt="Icono noticias"
+            class={"-translate-x-7 -translate-y-10 opacity-25 right-0 w-50 h-50 md:w-60 md:h-60"}
+        />
+    </div>
+    <h1
+        class="text-4xl lg:text-5xl font-extrabold text-center text-(--cd-oscuro) mt-10 z-20 mb-3"
+    >
         Enterate de lo que hacemos
     </h1>
     <div
-        class="w-full py-5 px-1 md:px-20 flex gap-2 overflow-y-visible items-center"
+        class="w-full py-5 px-1 md:px-20 flex gap-2 overflow-y-visible items-center z-50"
     >
         <button
             id="scroll-left"
@@ -19,17 +40,17 @@ const noticias = [...noticiasRaw].sort(
             ><span>{"<"} </span></button
         >
         <div
-            class="noticias grid grid-flow-col w-full h-full gap-5 overflow-x-auto scroll-smooth overflow-y-visible pb-2 px-1"
+            class="noticias grid grid-flow-col w-full h-full gap-5 overflow-x-auto scroll-smooth overflow-y-visible pb-2 px-1 z-20"
         >
             {
                 noticias.map((noticia) => (
-                    <article class="flex flex-col min-w-80 max-w-80 cursor-pointer shadow-md rounded-lg ">
+                    <article class="flex flex-col min-w-80 max-w-80 cursor-pointer shadow-md rounded-lg z-20 bg-white">
                         <img
                             src={noticia.imagen}
                             alt={noticia.titulo}
                             class="w-full h-60 object-cover object-top rounded-t-lg"
                         />
-                        <div class="flex flex-col p-3">
+                        <div class="flex flex-col p-3 ">
                             <h2 class="font-semibold text-lg">
                                 {noticia.titulo}
                             </h2>
