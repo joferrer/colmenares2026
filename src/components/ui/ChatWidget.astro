@@ -1,0 +1,368 @@
+---
+// ChatWidget.astro
+---
+
+<div
+  class="flex flex-col items-end gap-3 pointer-events-none"
+  aria-live="polite"
+  data-cd-chat-root
+>
+  <div
+    id="cd-chat-overlay"
+    class="hidden fixed inset-0 z-50 flex items-center justify-center px-4 md:px-8 bg-black/50 backdrop-blur-md pointer-events-auto"
+  >
+    <div
+      id="cd-chat-panel"
+      class="w-[min(520px,94vw)] md:w-[640px] bg-(--cd-oscuro) border-2 border-(--cd-amarillo)/30 text-white shadow-2xl rounded-3xl overflow-hidden"
+      data-endpoint="/api/chat"
+      role="dialog"
+      aria-modal="true"
+    >
+      <!-- Header con gradiente -->
+      <div
+        class="relative bg-gradient-to-br from-(--cd-amarillo)/20 via-(--cd-amarillo)/10 to-transparent border-b border-(--cd-amarillo)/20 p-5 md:p-6 overflow-hidden"
+      >
+        <!-- Glow effect -->
+        <div
+          class="cd-chat-glow absolute -top-1/2 -right-1/5 w-[200px] h-[200px] bg-gradient-radial from-(--cd-amarillo)/15 via-(--cd-amarillo)/5 to-transparent rounded-full pointer-events-none"
+        >
+        </div>
+
+        <div class="relative flex items-start justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <!-- Avatar -->
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-br from-(--cd-amarillo)/20 to-(--cd-amarillo)/10 border-2 border-(--cd-amarillo)/30 flex items-center justify-center shadow-lg"
+            >
+              <span class="text-2xl">🤖</span>
+            </div>
+            <div>
+              <p
+                class="text-xl md:text-2xl font-extrabold text-(--cd-amarillo) drop-shadow-lg"
+              >
+                EstefanIA
+              </p>
+              <p class="text-xs md:text-sm text-white/70 mt-1">
+                💬 Pregunta por propuestas, eventos y noticias
+              </p>
+            </div>
+          </div>
+
+          <!-- Close button -->
+          <button
+            id="cd-chat-close"
+            class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-(--cd-amarillo)/50 hover:rotate-90 transition-all duration-200 cursor-pointer"
+            type="button"
+            aria-label="Cerrar chat"
+          >
+            <span class="text-xl">✕</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat log -->
+      <div class="p-4 md:p-6">
+        <div
+          id="cd-chat-log"
+          class="h-[50vh] max-h-[520px] bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-3 md:p-4 overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-yellow-500/30 scrollbar-track-white/5"
+        >
+          <!-- Welcome message -->
+          <div class="cd-chat-welcome text-center py-8">
+            <div class="inline-block text-5xl mb-4 animate-bounce">👋</div>
+            <p class="text-white/90 font-semibold mb-2">¡Hola! Soy EstefanIA</p>
+            <p class="text-white/60 text-sm">
+              Estoy aquí para ayudarte con información del equipo
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="px-4 md:px-6 pb-5 md:pb-6">
+        <form id="cd-chat-form" class="space-y-3">
+          <div class="relative">
+            <textarea
+              id="cd-chat-input"
+              class="w-full rounded-xl border-2 border-white/15 bg-white/[0.07] p-4 text-sm md:text-base text-white placeholder:text-white/40 focus:border-(--cd-amarillo)/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-(--cd-amarillo)/20 transition-all resize-none"
+              rows="3"
+              placeholder="Escribe tu mensaje aquí..."></textarea>
+          </div>
+
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2 text-xs text-white/50">
+              <span>✨</span>
+              <span class="hidden sm:inline">Presiona Enter para enviar</span>
+            </div>
+            <button
+              type="submit"
+              class="group relative px-6 py-3 rounded-xl bg-gradient-to-r from-(--cd-amarillo) to-amber-400 text-(--cd-oscuro) font-bold shadow-lg shadow-(--cd-amarillo)/30 hover:shadow-xl hover:shadow-(--cd-amarillo)/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer overflow-hidden"
+            >
+              <span class="relative z-10 flex items-center gap-2">
+                <span>Enviar</span>
+                <span
+                  class="group-hover:translate-x-1 transition-transform duration-200"
+                  >➤</span
+                >
+              </span>
+              <!-- Shine effect -->
+              <div
+                class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              >
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toggle button -->
+  <button
+    id="cd-chat-toggle"
+    class="cd-chat-toggle cursor-pointer flex items-center gap-3 md:px-5 md:py-3 p-3 rounded-full bg-gradient-to-r from-(--cd-amarillo) via-amber-300 to-(--cd-amarillo) text-(--cd-oscuro) font-extrabold shadow-[0_10px_30px_rgba(0,0,0,0.35)] hover:shadow-[0_14px_36px_rgba(0,0,0,0.45)] hover:scale-[1.04] active:scale-[0.99] ring-2 ring-white/60 transition-all duration-200 pointer-events-auto relative overflow-visible"
+    type="button"
+    aria-expanded="false"
+    aria-controls="cd-chat-overlay"
+  >
+    <span class="cd-chat-pulse"></span>
+    <span class="cd-chat-pulse cd-chat-pulse--delay"></span>
+    <span class="text-2xl drop-shadow">💬</span>
+    <div class="hidden md:flex flex-col leading-tight text-left">
+      <span
+        class="text-[11px] uppercase tracking-[0.14em] text-(--cd-oscuro)/80"
+        >Habla con</span
+      >
+      <span class="text-lg">EstefanIA</span>
+    </div>
+    <span class="cd-chat-arrow hidden md:inline" aria-hidden="true">➤</span>
+  </button>
+</div>
+
+<script>
+  function initChatWidget() {
+    const root = document.querySelector("[data-cd-chat-root]");
+    if (!root) return;
+
+    const toggleButton = root.querySelector("#cd-chat-toggle");
+    const overlay = root.querySelector("#cd-chat-overlay");
+    const panel = root.querySelector("#cd-chat-panel");
+    const closeButton = root.querySelector("#cd-chat-close");
+    const form = root.querySelector("#cd-chat-form");
+    const input = root.querySelector("#cd-chat-input");
+    const log = root.querySelector("#cd-chat-log");
+
+    if (!toggleButton || !overlay || !panel) return;
+
+    const endpoint = panel.dataset.endpoint || "/api/chat";
+
+    const togglePanel = (forceOpen) => {
+      const shouldOpen =
+        typeof forceOpen === "boolean"
+          ? forceOpen
+          : overlay.classList.contains("hidden");
+
+      overlay.classList.toggle("hidden", !shouldOpen);
+      overlay.classList.toggle("open", shouldOpen);
+      toggleButton.setAttribute("aria-expanded", String(shouldOpen));
+      if (shouldOpen && input) {
+        setTimeout(() => input.focus(), 100);
+      }
+    };
+
+    const appendMessage = (role, text) => {
+      if (!log) return;
+
+      // Remover mensaje de bienvenida
+      const welcome = log.querySelector(".cd-chat-welcome");
+      if (welcome) welcome.remove();
+
+      const wrapper = document.createElement("div");
+      const isUser = role === "user";
+
+      wrapper.className = `flex gap-3 opacity-0 translate-y-2 transition-all duration-300 ${isUser ? "flex-row-reverse" : ""}`;
+
+      // Avatar
+      const avatar = document.createElement("div");
+      avatar.className = `w-9 h-9 rounded-full flex items-center justify-center text-lg flex-shrink-0 ${
+        isUser
+          ? "bg-gradient-to-br from-white/15 to-white/5 border-2 border-white/20"
+          : "bg-gradient-to-br from-(--cd-amarillo)/15 to-(--cd-amarillo)/5 border-2 border-(--cd-amarillo)/20"
+      }`;
+      avatar.textContent = isUser ? "👤" : "🤖";
+
+      // Content
+      const contentWrapper = document.createElement("div");
+      contentWrapper.className = "flex-1 min-w-0";
+
+      const label = document.createElement("span");
+      label.className = `block text-[11px] uppercase tracking-wider font-bold mb-1.5 ${
+        isUser ? "text-right text-white/70" : "text-(--cd-amarillo)/90"
+      }`;
+      label.textContent = isUser ? "Tú" : "EstefanIA";
+
+      const content = document.createElement("p");
+      content.className = `rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+        isUser
+          ? "bg-gradient-to-br from-(--cd-amarillo)/15 to-(--cd-amarillo)/8 border border-(--cd-amarillo)/20 text-white/95"
+          : "bg-white/8 border border-white/10 text-white/95"
+      }`;
+      content.textContent = text;
+
+      contentWrapper.append(label, content);
+      wrapper.append(avatar, contentWrapper);
+      log.appendChild(wrapper);
+
+      // Trigger animation
+      setTimeout(() => {
+        wrapper.classList.remove("opacity-0", "translate-y-2");
+      }, 10);
+
+      log.scrollTop = log.scrollHeight;
+    };
+
+    toggleButton.addEventListener("click", () => togglePanel());
+    closeButton?.addEventListener("click", () => togglePanel(false));
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) togglePanel(false);
+    });
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const message = input?.value?.trim();
+      if (!message) return;
+      appendMessage("user", message);
+      if (input) input.value = "";
+
+      panel.dispatchEvent(
+        new CustomEvent("cdchat:send", {
+          detail: {
+            endpoint,
+            message,
+          },
+        })
+      );
+    });
+
+    // Enter para enviar (Shift+Enter para nueva línea)
+    input?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        form?.dispatchEvent(new Event("submit"));
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initChatWidget);
+  } else {
+    initChatWidget();
+  }
+</script>
+
+<style>
+  /* Pulse animation for toggle button */
+  .cd-chat-pulse {
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    border: 2px solid rgba(254, 201, 0, 0.8);
+    opacity: 0.9;
+    animation: cd-chat-pulse 2.2s ease-out infinite;
+    pointer-events: none;
+  }
+
+  .cd-chat-pulse--delay {
+    animation-delay: 0.8s;
+    opacity: 0.6;
+  }
+
+  @keyframes cd-chat-pulse {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  /* Arrow bounce animation */
+  .cd-chat-arrow {
+    position: absolute;
+    left: -28px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(254, 201, 0, 0.9);
+    font-weight: 900;
+    animation: cd-chat-bounce 1.4s ease-in-out infinite;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  @keyframes cd-chat-bounce {
+    0%,
+    100% {
+      transform: translate(-2px, -50%);
+    }
+    50% {
+      transform: translate(4px, -50%);
+    }
+  }
+
+  /* Modal entrance animation */
+  #cd-chat-overlay.open #cd-chat-panel {
+    animation: cd-chat-modal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes cd-chat-modal {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Glow floating animation */
+  .cd-chat-glow {
+    animation: cd-chat-glow-float 6s ease-in-out infinite;
+  }
+
+  @keyframes cd-chat-glow-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-20px, 20px) scale(1.1);
+    }
+  }
+
+  /* Custom scrollbar for browsers that support it */
+  @supports (scrollbar-width: thin) {
+    #cd-chat-log {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(254, 201, 0, 0.3) rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  #cd-chat-log::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #cd-chat-log::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  #cd-chat-log::-webkit-scrollbar-thumb {
+    background: rgba(254, 201, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  #cd-chat-log::-webkit-scrollbar-thumb:hover {
+    background: rgba(254, 201, 0, 0.5);
+  }
+</style>

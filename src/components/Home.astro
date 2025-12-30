@@ -7,55 +7,56 @@ import Footer from "./ui/Footer.astro";
 import Ideales from "./sections/Ideales.astro";
 import NoticiasCarrucel from "./sections/NoticiasCarrucel.astro";
 import ComoVotar from "./sections/ComoVotar.astro";
+import Propuestas from "./sections/Propuestas.astro";
 ---
 
 <div>
-    <SocialNetworks />
-    <Intro />
-
-    <Ideales />
-    <NoticiasCarrucel />
-    <Voluntariado />
-    <ComoVotar />
-    <Footer />
+  <SocialNetworks />
+  <Intro />
+  <Ideales />
+  <NoticiasCarrucel />
+  <Voluntariado />
+  <Propuestas />
+  <ComoVotar />
+  <Footer />
 </div>
 
 <style is:global>
-    :root {
-        --cd-amarillo: #fec900;
-        --cd-azul: #63b9e9;
-        --cd-rojo: #d81a10;
-        --cd-oscuro: #253e6b;
-    }
+  :root {
+    --cd-amarillo: #fec900;
+    --cd-azul: #63b9e9;
+    --cd-rojo: #d81a10;
+    --cd-oscuro: #253e6b;
+  }
 
-    .segmento {
-        position: relative;
-        max-width: 80rem;
-        margin: 0 auto;
+  .segmento {
+    position: relative;
+    max-width: 80rem;
+    margin: 0 auto;
 
-        animation: reveal linear both;
-        animation-timeline: view();
-        animation-range: entry 20% cover 30%;
-        z-index: 1;
-    }
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 30%;
+    z-index: 1;
+  }
 
-    @keyframes reveal {
-        from {
-            opacity: 0;
-            scale: 0.5;
-        }
-        to {
-            opacity: 1;
-            scale: 1;
-        }
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      scale: 0.5;
     }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
 
-    @font-face {
-        font-family: "Homey Feeling";
-        src: url("/font/HomeyFeeling.otf") format("opentype");
-        font-display: swap;
-    }
-    .homey-title {
-        font-family: "Homey Feeling";
-    }
+  @font-face {
+    font-family: "Homey Feeling";
+    src: url("/font/HomeyFeeling.otf") format("opentype");
+    font-display: swap;
+  }
+  .homey-title {
+    font-family: "Homey Feeling";
+  }
 </style>
