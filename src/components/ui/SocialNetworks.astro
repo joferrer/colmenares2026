@@ -24,9 +24,9 @@ const iconMap: Record<string, string> = {
 };
 ---
 
-<aside class="fixed right-3 bottom-4 md:top-1/3 md:bottom-auto z-50">
-  <div class="flex flex-col items-end gap-4 md:gap-5">
-    <ul class="flex flex-col items-end gap-3 md:gap-4">
+<aside class="fixed right-3 bottom-4 md:bottom-6 lg:bottom-8 z-50 pointer-events-none">
+  <div class="flex flex-col items-end gap-4 md:gap-5 pointer-events-auto">
+    <ul class="flex flex-col items-end gap-3 md:gap-4 pointer-events-auto">
       {
         socials.map((social) => (
           <li>
@@ -51,7 +51,9 @@ const iconMap: Record<string, string> = {
         ))
       }
     </ul>
-    <ChatWidget />
+    <div class="pointer-events-auto">
+      <ChatWidget />
+    </div>
   </div>
 </aside>
 
