@@ -1,4 +1,6 @@
 ---
+import ChatWidget from "./ChatWidget.astro";
+
 const socials = [
   { name: "Facebook", href: "https://www.facebook.com", icon: "facebook" },
   {
@@ -23,31 +25,34 @@ const iconMap: Record<string, string> = {
 ---
 
 <aside class="fixed right-3 bottom-4 md:top-1/3 md:bottom-auto z-50">
-  <ul class="flex flex-col items-end gap-3 md:gap-4">
-    {
-      socials.map((social) => (
-        <li>
-          <a
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class:list={[
-              "group relative flex items-center gap-2 rounded-full transition",
-              "md:hover:-translate-y-0.5",
-            ]}
-          >
-            <span
-              class="flex h-12 w-12 items-center justify-center rounded-full bg-(--cd-oscuro) text-white shadow-xl ring-2 ring-white/40 transition-transform duration-300 md:hover:scale-110 md:hover:rotate-3 animate-float"
-              set:html={iconMap[social.icon] ?? ""}
-            />
-            <span class="pointer-events-none absolute right-full mr-2 origin-right scale-0 rounded-full bg-(--cd-oscuro) px-3 py-1 text-xs font-semibold text-white opacity-0 shadow-lg transition duration-200 group-hover:scale-100 group-hover:opacity-100 md:bg-white md:text-(--cd-oscuro)">
-              {social.name}
-            </span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="flex flex-col items-end gap-4 md:gap-5">
+    <ul class="flex flex-col items-end gap-3 md:gap-4">
+      {
+        socials.map((social) => (
+          <li>
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class:list={[
+                "group relative flex items-center gap-2 rounded-full transition",
+                "md:hover:-translate-y-0.5",
+              ]}
+            >
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-full bg-(--cd-oscuro) text-white shadow-xl ring-2 ring-white/40 transition-transform duration-300 md:hover:scale-110 md:hover:rotate-3 animate-float"
+                set:html={iconMap[social.icon] ?? ""}
+              />
+              <span class="pointer-events-none absolute right-full mr-2 origin-right scale-0 rounded-full bg-(--cd-oscuro) px-3 py-1 text-xs font-semibold text-white opacity-0 shadow-lg transition duration-200 group-hover:scale-100 group-hover:opacity-100 md:bg-white md:text-(--cd-oscuro)">
+                {social.name}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ChatWidget />
+  </div>
 </aside>
 
 <style>
