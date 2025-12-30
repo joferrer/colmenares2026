@@ -64,9 +64,27 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.webp";
     alt="Foto de Estefania Colmenares"
   />
   <div class="relative z-20 flex items-center justify-center">
-    <button class="absolute bottom-5 bg-(--cd-oscuro) text-white p-3 rounded-sm"
-      >BOTON</button
+    <a
+      href="#noticias"
+      class="scroll-cue absolute bottom-5 flex items-center gap-2 rounded-full bg-(--cd-oscuro) text-white px-4 py-3 shadow-lg transition-transform duration-300 hover:translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--cd-amarillo)"
     >
+      <span
+        class="arrow-badge grid h-6 w-6 place-items-center rounded-full bg-white/15"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-4 w-4"
+        >
+          <polyline points="6 10 12 16 18 10"></polyline>
+        </svg>
+      </span>
+    </a>
   </div>
 
   <style>
@@ -78,6 +96,27 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.webp";
     .estefania-shift {
       display: inline-block;
       transform: rotate(-2deg);
+    }
+    .scroll-cue {
+      animation:
+        pulseDown 2.6s ease-in-out infinite,
+        glowPulse 3s ease-in-out infinite;
+      letter-spacing: 0.04em;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+    }
+    .scroll-cue .arrow-badge {
+      animation: bob 1.2s ease-in-out infinite;
+      transition: transform 0.2s ease;
+    }
+    .scroll-cue:hover {
+      box-shadow: 0 12px 40px rgba(37, 62, 107, 0.35);
+      background-color: color-mix(in srgb, var(--cd-oscuro) 90%, white 10%);
+    }
+    .scroll-cue:hover .arrow-badge {
+      transform: translateY(2px);
     }
     @media screen and (min-width: 768px) and (max-width: 840px) {
       .estefania-shift {
@@ -108,6 +147,33 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.webp";
         transform: scale(1);
       }
     }
+    @keyframes pulseDown {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(6px);
+      }
+    }
+    @keyframes bob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(3px);
+      }
+    }
+    @keyframes glowPulse {
+      0%,
+      100% {
+        box-shadow: 0 8px 24px rgba(37, 62, 107, 0.25);
+      }
+      50% {
+        box-shadow: 0 12px 40px rgba(37, 62, 107, 0.45);
+      }
+    }
   </style>
 
   <!-- 
@@ -126,4 +192,45 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.webp";
         </div>
     </div>         
 -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollButton = document.querySelector('.scroll-cue');
+    
+    scrollButton?.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const targetSection = document.querySelector('#noticias');
+      if (!targetSection) return;
+      
+      const targetPosition = targetSection.offsetTop;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const duration = 1500; // Duración en milisegundos (1.5 segundos)
+      let start = null;
+      
+      // Función de easing para un movimiento más suave (ease-in-out)
+      const easeInOutCubic = (t) => {
+        return t < 0.5 
+          ? 4 * t * t * t 
+          : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      };
+      
+      const animation = (currentTime) => {
+        if (start === null) start = currentTime;
+        const timeElapsed = currentTime - start;
+        const progress = Math.min(timeElapsed / duration, 1);
+        const ease = easeInOutCubic(progress);
+        
+        window.scrollTo(0, startPosition + distance * ease);
+        
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        }
+      };
+      
+      requestAnimationFrame(animation);
+    });
+  });
+</script>
+
 </section>
