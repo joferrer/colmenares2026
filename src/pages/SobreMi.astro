@@ -1,0 +1,175 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FotoIntroEstefania from "../assets/fotos/COLMENARES_BLANCA.webp";
+import { Image } from "astro:assets";
+import { socials } from "../helpers/redes";
+---
+
+<Layout>
+    <!-- INTRO -->
+    <section class="px-5 pt-5 lg:mt-20">
+        <div
+            class:list={[
+                "max-w-2xl mx-auto text-center relative pb-5",
+                "md:flex shadow-2xl rounded-2xl md:pb-0",
+            ]}
+        >
+            <div
+                class="w-full min-w-62 h-full flex justify-center items-center md:bg-(--cd-azul) md:min-w-70 md:h-full md:px-5 md:py-10 rounded-l-2xl"
+            >
+                <Image
+                    src={FotoIntroEstefania}
+                    alt="Estefania Colmenares"
+                    class="w-62 h-62 rounded-full object-cover object-top bg-white"
+                    style="view-transition-name: foto-colmenares"
+                />;
+            </div>
+
+            <div class="px-2 pt-6 rounded-2xl md:w-4xl">
+                <h1 class="homey-title text-5xl text-(--cd-azul)">
+                    Estefania Colmenares
+                </h1>
+
+                <p
+                    class="uppercase tracking-widest text-sm text-gray-500 mt-1 mb-2"
+                >
+                    Aspirante al Senado · Colombia 2026
+                </p>
+
+                <p class="text-gray-700 leading-relaxed">
+                    Creo en una política que escucha, que explica y que
+                    construye desde la dignidad de las personas. Mi compromiso
+                    es representar a quienes durante años no han tenido voz en
+                    el Congreso.
+                </p>
+
+                <div class="flex justify-center gap-6 pt-4">
+                    {
+                        socials.map(({ name, href, icon }) => (
+                            <a
+                                href={href}
+                                aria-label={name}
+                                class="text-gray-600 text-4xl w- hover:text-(--cd-oscuro) transition-colors"
+                            >
+                                <Fragment set:html={icon} />
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section class="segmento px-5 py-28 texto-lento">
+        <div class="max-w-xl mx-auto space-y-6">
+            <h2 class="text-3xl font-semibold text-(--cd-oscuro)">
+                Mi historia
+            </h2>
+
+            <p class="text-gray-700 leading-relaxed">
+                Nací en una familia trabajadora y crecí entendiendo que la
+                política no es un privilegio, sino una responsabilidad. Estudié
+                Ciencia Política con la convicción de que la democracia solo
+                funciona cuando las instituciones responden a la ciudadanía.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+                He acompañado procesos comunitarios, espacios de formación
+                ciudadana y ejercicios de control social en distintos
+                territorios del país, escuchando más de lo que hablo.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONVICCIONES -->
+    <section class="segmento px-5 py-28 texto-lento bg-gray-50">
+        <div class="max-w-xl mx-auto space-y-6">
+            <h2 class="text-3xl font-semibold text-(--cd-oscuro)">
+                Mis convicciones
+            </h2>
+
+            <ul class="space-y-4 text-gray-700">
+                <li>Democracia con instituciones fuertes y transparentes.</li>
+                <li>Educación pública como base de la igualdad.</li>
+                <li>Estado presente en los territorios.</li>
+                <li>Política sin corrupción ni clientelismo.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- VISIÓN -->
+    <section class="segmento px-5 py-28 texto-lento">
+        <div class="max-w-xl mx-auto space-y-6">
+            <h2 class="text-3xl font-semibold text-(--cd-oscuro)">
+                Mirando al 2026
+            </h2>
+
+            <p class="text-gray-700 leading-relaxed">
+                Aspiro al Senado de la República para aportar una mirada seria,
+                responsable y profundamente democrática. No prometo soluciones
+                fáciles, sino trabajo constante, diálogo y coherencia.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+                Colombia necesita una política que no grite, que no divida, y
+                que se tome el tiempo de hacer bien las cosas.
+            </p>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    :root {
+        --cd-amarillo: #fec900;
+        --cd-azul: #63b9e9;
+        --cd-rojo: #d81a10;
+        --cd-oscuro: #253e6b;
+    }
+
+    @font-face {
+        font-family: "Homey Feeling";
+        src: url("/font/HomeyFeeling.otf") format("opentype");
+        font-display: swap;
+    }
+
+    .homey-title {
+        font-family: "Homey Feeling";
+    }
+
+    /* FOTO: empieza MUY TARDE */
+    .foto-lenta {
+        animation: fadeInSlow linear both;
+        animation-timeline: view();
+        animation-range: entry 60% cover 85%;
+    }
+
+    @keyframes fadeInSlow {
+        from {
+            opacity: 0;
+            scale: 0.92;
+        }
+        to {
+            opacity: 1;
+            scale: 1;
+        }
+    }
+
+    /* TEXTO: casi imperceptible */
+    .texto-lento {
+        animation: textReveal linear both;
+        animation-timeline: view();
+        animation-range: entry 20% cover 50%;
+    }
+
+    @keyframes textReveal {
+        from {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

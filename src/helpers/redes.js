@@ -1,0 +1,21 @@
+
+const facebookIcon = `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M22 12.06C22 6.48 17.52 2 11.94 2 6.36 2 2 6.48 2 12.06 2 17.08 5.66 21.21 10.44 22v-7.02H7.9v-2.92h2.54v-2.2c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.27c-1.26 0-1.65.79-1.65 1.6v1.93h2.8l-.45 2.92h-2.35V22C18.34 21.2 22 17.08 22 12.06Z" /></svg>`
+const instagramIcon = `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2ZM4.5 7.75v8.5A3.26 3.26 0 0 0 7.75 19.5h8.5A3.26 3.26 0 0 0 19.5 16.25v-8.5A3.26 3.26 0 0 0 16.25 4.5h-8.5A3.26 3.26 0 0 0 4.5 7.75Zm13.25-1.42a1.09 1.09 0 1 1-2.18 0 1.09 1.09 0 0 1 2.18 0ZM12 8.25A3.75 3.75 0 1 1 8.25 12 3.75 3.75 0 0 1 12 8.25Zm0 2.5A1.25 1.25 0 1 0 13.25 12 1.25 1.25 0 0 0 12 10.75Z" /></svg>`;
+const twitterIcon = `<svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" class="h-5 w-5"><path d="M12.6 0.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867 -5.07 -4.425 5.07H0.316l5.733 -6.57L0 0.75h5.063l3.495 4.633L12.601 0.75Zm-0.86 13.028h1.36L4.323 2.145H2.865z" /></svg>`;
+const tiktokIcon = `<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M15.58 2a5.7 5.7 0 0 0 .12 1.2c.26 1.22 1.04 2.28 2.4 2.91.51.24 1.07.4 1.66.47v2.85c-.96-.06-1.88-.3-2.74-.71-.43-.2-.85-.44-1.24-.7l-.02 7.15c0 2.72-2.2 5.08-5.09 5.35-3.01.28-5.55-2.13-5.55-5.06 0-2.84 2.31-5.1 5.15-5.1.27 0 .54.03.8.08v2.92c-.26-.08-.54-.12-.83-.12-1.24 0-2.23 1-2.23 2.23 0 1.28 1.06 2.32 2.36 2.23 1.12-.07 1.99-.99 1.99-2.12l.02-12h2.7Zm0 0" /></svg>`;
+
+export const socials = [
+    { name: "Facebook", href: "https://www.facebook.com", icon: facebookIcon },
+    {
+        name: "Instagram",
+        href: "https://www.instagram.com/estefanianortecd?igsh=ZW9meThjMXRmcW02",
+        icon: instagramIcon,
+    },
+    { name: "X", href: "https://www.x.com/estcol", icon: twitterIcon },
+    {
+        name: "TikTok",
+        href: "https://www.tiktok.com/@estefanianortecd?_r=1&_t=ZS-92TSiuXL1NN",
+        icon: tiktokIcon,
+    },
+];
+
