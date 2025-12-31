@@ -52,18 +52,20 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.webp";
     >
     </div>
   </div>
+  <a class="-z-10 cursor-pointer" href="/SobreMi">
+    <Image
+      fetchpriority="high"
+      src={fotoColmenares}
+      class:list={[
+        "foto-colmenares object-cover w-52 h-60 -z-10",
+        "md:w-96 md:h-10/12",
+        "cursor-pointer",
+      ]}
+      style={"view-transition-name: foto-colmenares"}
+      alt="Foto de Estefania Colmenares"
+    />
+  </a>
 
-  <Image
-    fetchpriority="high"
-    src={fotoColmenares}
-    class:list={[
-      "foto-colmenares object-cover w-52 h-60 -z-10",
-      "md:w-96 md:h-10/12",
-      "cursor-pointer",
-    ]}
-    style={"view-transition-name: foto-colmenares"}
-    alt="Foto de Estefania Colmenares"
-  />
   <div class="relative z-20 flex items-center justify-center">
     <a
       href="#noticias"
@@ -193,45 +195,42 @@ import fotoColmenares from "../../assets/fotos/COLMENARES.webp";
         </div>
     </div>         
 -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const scrollButton = document.querySelector('.scroll-cue');
-    
-    scrollButton?.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      const targetSection = document.querySelector('#noticias');
-      if (!targetSection) return;
-      
-      const targetPosition = targetSection.offsetTop;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      const duration = 1500; // Duración en milisegundos (1.5 segundos)
-      let start = null;
-      
-      // Función de easing para un movimiento más suave (ease-in-out)
-      const easeInOutCubic = (t) => {
-        return t < 0.5 
-          ? 4 * t * t * t 
-          : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      };
-      
-      const animation = (currentTime) => {
-        if (start === null) start = currentTime;
-        const timeElapsed = currentTime - start;
-        const progress = Math.min(timeElapsed / duration, 1);
-        const ease = easeInOutCubic(progress);
-        
-        window.scrollTo(0, startPosition + distance * ease);
-        
-        if (timeElapsed < duration) {
-          requestAnimationFrame(animation);
-        }
-      };
-      
-      requestAnimationFrame(animation);
-    });
-  });
-</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const scrollButton = document.querySelector(".scroll-cue");
 
+      scrollButton?.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const targetSection = document.querySelector("#noticias");
+        if (!targetSection) return;
+
+        const targetPosition = targetSection.offsetTop;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        const duration = 1500; // Duración en milisegundos (1.5 segundos)
+        let start = null;
+
+        // Función de easing para un movimiento más suave (ease-in-out)
+        const easeInOutCubic = (t) => {
+          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        };
+
+        const animation = (currentTime) => {
+          if (start === null) start = currentTime;
+          const timeElapsed = currentTime - start;
+          const progress = Math.min(timeElapsed / duration, 1);
+          const ease = easeInOutCubic(progress);
+
+          window.scrollTo(0, startPosition + distance * ease);
+
+          if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+          }
+        };
+
+        requestAnimationFrame(animation);
+      });
+    });
+  </script>
 </section>
