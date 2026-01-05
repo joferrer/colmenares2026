@@ -1,0 +1,70 @@
+---
+interface Props {
+    id: string;
+    open?: boolean;
+    titulo?: string;
+}
+
+const { id, titulo, open = false } = Astro.props;
+---
+
+<dialog
+    id={id}
+    open={open}
+    closedby="any"
+    class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center m-auto shadow-2xl rounded-2xl"
+>
+    <div class="max-w-xl max-h-xl flex flex-col p-5">
+        <div class="flex justify-end">
+            <form method="dialog">
+                <button id={id + "-close"} class="text-2xl p-2">
+                    <span> X </span>
+                </button>
+            </form>
+        </div>
+        <div>
+            {
+                titulo && (
+                    <h2 class="text-2xl font-bold text-(--cd-azul)">
+                        {titulo}
+                    </h2>
+                )
+            }
+            <br />
+            <slot />
+        </div>
+    </div>
+</dialog>
+
+<script define:vars={{ id }}>
+    const dialog = document.getElementById(id);
+    const dialogOpenButton = document.getElementById(`${id}-open`);
+    const dialogCloseButton = document.getElementById(`${id}-close`);
+
+    dialogOpenButton?.addEventListener("click", () => {
+        dialog?.showModal();
+    });
+
+    dialogCloseButton?.addEventListener("click", () => {
+        dialog?.close();
+    });
+
+    //dialog?.showModal();
+</script>
+
+<style>
+    dialog[open] {
+        animation: fade-in 0.3s ease;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>

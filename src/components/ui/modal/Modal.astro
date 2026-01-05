@@ -1,0 +1,18 @@
+---
+import Dialog from "./Dialog.astro";
+
+interface Props {
+    id: string;
+    titulo?: string;
+    buttonText?: string;
+}
+
+const { id, titulo, buttonText = "" } = Astro.props;
+---
+
+<div>
+    <button>{buttonText}</button>
+    <Dialog id={id} titulo={titulo}>
+        <slot />
+    </Dialog>
+</div>
