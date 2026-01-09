@@ -14,7 +14,7 @@
     <div
       id="cd-chat-panel"
       class="w-[min(520px,94vw)] md:w-[640px] bg-(--cd-oscuro) border-2 border-(--cd-amarillo)/30 text-white shadow-2xl rounded-3xl overflow-hidden"
-      data-endpoint="/api/chat"
+      data-endpoint="https://colmenares2026-server-production.up.railway.app/api/chat"
       role="dialog"
       aria-modal="true"
     >
@@ -64,7 +64,7 @@
       <div class="p-4 md:p-6">
         <div
           id="cd-chat-log"
-          class="h-[50vh] max-h-[520px] bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-3 md:p-4 overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-yellow-500/30 scrollbar-track-white/5"
+          class="h-[60vh] max-h-[640px] bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-3 md:p-4 overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-yellow-500/30 scrollbar-track-white/5"
         >
           <!-- Welcome message -->
           <div class="cd-chat-welcome text-center py-8">
@@ -201,7 +201,7 @@
       label.textContent = isUser ? "Tú" : "EstefanIA";
 
       const content = document.createElement("p");
-      content.className = `rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+      content.className = `rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap break-words ${
         isUser
           ? "bg-gradient-to-br from-(--cd-amarillo)/15 to-(--cd-amarillo)/8 border border-(--cd-amarillo)/20 text-white/95"
           : "bg-white/8 border border-white/10 text-white/95"
@@ -220,6 +220,37 @@
       log.scrollTop = log.scrollHeight;
     };
 
+    const appendTypingIndicator = () => {
+      if (!log) return null;
+
+      const welcome = log.querySelector(".cd-chat-welcome");
+      if (welcome) welcome.remove();
+
+      const wrapper = document.createElement("div");
+      wrapper.className =
+        "cd-chat-typing flex gap-3 opacity-0 translate-y-2 transition-all duration-300";
+
+      const bubble = document.createElement("div");
+      bubble.className =
+        "rounded-2xl px-4 py-3 text-sm leading-relaxed bg-white/8 border border-white/10 text-white/95";
+
+      const dots = document.createElement("div");
+      dots.className = "cd-chat-typing-dots";
+      dots.innerHTML =
+        '<span class="cd-chat-dot"></span><span class="cd-chat-dot"></span><span class="cd-chat-dot"></span>';
+
+      bubble.appendChild(dots);
+      wrapper.append(bubble);
+      log.appendChild(wrapper);
+
+      setTimeout(() => {
+        wrapper.classList.remove("opacity-0", "translate-y-2");
+      }, 10);
+
+      log.scrollTop = log.scrollHeight;
+      return wrapper;
+    };
+
     toggleButton.addEventListener("click", () => togglePanel());
     closeButton?.addEventListener("click", () => togglePanel(false));
     overlay.addEventListener("click", (event) => {
@@ -232,15 +263,36 @@
       if (!message) return;
       appendMessage("user", message);
       if (input) input.value = "";
-
-      panel.dispatchEvent(
-        new CustomEvent("cdchat:send", {
-          detail: {
-            endpoint,
-            message,
+      const typingIndicator = appendTypingIndicator();
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        })
-      );
+          body: JSON.stringify({ message }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+
+        const data = await response.json();
+        const reply =
+          typeof data?.response === "string" ? data.response.trim() : "";
+        if (!reply) {
+          throw new Error("Invalid response");
+        }
+
+        typingIndicator?.remove();
+        appendMessage("assistant", reply);
+      } catch (error) {
+        typingIndicator?.remove();
+        appendMessage(
+          "assistant",
+          "Ha ocurrido un problema, intente mas tarde"
+        );
+      }
     });
 
     // Enter para enviar (Shift+Enter para nueva línea)
@@ -364,5 +416,39 @@
 
   #cd-chat-log::-webkit-scrollbar-thumb:hover {
     background: rgba(254, 201, 0, 0.5);
+  }
+
+  :global(.cd-chat-typing-dots) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  :global(.cd-chat-dot) {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.85);
+    animation: cd-chat-dot 1.2s infinite ease-in-out;
+  }
+
+  :global(.cd-chat-dot:nth-child(2)) {
+    animation-delay: 0.2s;
+  }
+
+  :global(.cd-chat-dot:nth-child(3)) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes cd-chat-dot {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(-6px);
+      opacity: 1;
+    }
   }
 </style>
