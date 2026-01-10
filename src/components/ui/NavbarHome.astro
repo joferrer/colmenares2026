@@ -2,10 +2,15 @@
 
 ---
 
-<div class:list={["", "segmento bg-(--cd-oscuro) md:rounded-md p-4"]}>
+<div
+    class:list={[
+        "",
+        "segmento bg-(--cd-oscuro) md:rounded-md p-4 shadow-2xl border border-white/10 backdrop-blur-sm",
+    ]}
+>
     <button
         class:list={[
-            "navbar-button block z-50 w-7 h-7 text-center",
+            "navbar-button block z-50 w-10 h-10 text-center rounded-full p-2 ring-1 ring-white/20 shadow-lg",
             "md:hidden",
         ]}
     >
@@ -13,15 +18,41 @@
         <span class="bar"></span>
         <span class="bar"></span>
     </button>
+    <div class="navbar-overlay"></div>
     <nav class="navbar-nav text-white text-center text-2xl hidden md:block">
         <ul
-            class="flex items-center flex-col md:flex-row gap-2 justify-between"
+            class="flex items-center flex-col md:flex-row gap-4 md:gap-6 justify-between"
         >
-            <li><a href="#">¿En que creemos?</a></li>
-            <li><a href="#">¿Quién soy?</a></li>
-            <li><a href="#">Ultimas noticias</a></li>
-            <li><a href="#">¿Como votar?</a></li>
-            <li><a href="#">¿Como puedes ayudar?</a></li>
+            <li>
+                <a
+                    class="uppercase tracking-widest text-sm md:text-base font-semibold transition-colors hover:text-(--cd-amarillo)"
+                    href="#"
+                    >隅En que creemos?</a>
+            </li>
+            <li>
+                <a
+                    class="uppercase tracking-widest text-sm md:text-base font-semibold transition-colors hover:text-(--cd-amarillo)"
+                    href="#"
+                    >隅Quiゼn soy?</a>
+            </li>
+            <li>
+                <a
+                    class="uppercase tracking-widest text-sm md:text-base font-semibold transition-colors hover:text-(--cd-amarillo)"
+                    href="#"
+                    >Ultimas noticias</a>
+            </li>
+            <li>
+                <a
+                    class="uppercase tracking-widest text-sm md:text-base font-semibold transition-colors hover:text-(--cd-amarillo)"
+                    href="#"
+                    >隅Como votar?</a>
+            </li>
+            <li>
+                <a
+                    class="uppercase tracking-widest text-sm md:text-base font-semibold transition-colors hover:text-(--cd-amarillo)"
+                    href="#"
+                    >隅Como puedes ayudar?</a>
+            </li>
         </ul>
     </nav>
 </div>
@@ -29,10 +60,15 @@
 <style>
     .bar {
         display: block;
-        width: 100%;
-        height: 3px;
+        width: 24px;
+        height: 2px;
         background-color: #fff;
-        margin: 5px 0;
+        margin: 4px auto;
+        border-radius: 9999px;
+        transform-origin: center;
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
     }
 
     .navbar-button {
@@ -44,24 +80,72 @@
     }
 
     .navbar-button.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(6px) rotate(45deg);
     }
 
     .navbar-button.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .navbar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgb(0 0 0 / 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 40;
     }
 
     .navbar-nav.active {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 45;
+        background-color: #253e6b;
+        padding: 6rem 2rem 2rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .navbar-nav.active ul {
+        width: 100%;
+    }
+
+    .navbar-nav.active li {
+        width: 100%;
+    }
+
+    .navbar-nav.active a {
         display: block;
-        width: 100dvw;
+        padding: 0.75rem 1rem;
+        border-radius: 9999px;
+        background: rgb(255 255 255 / 0.06);
+        border: 1px solid rgb(255 255 255 / 0.1);
+    }
+
+    .navbar-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
     }
 </style>
 
 <script>
     const button = document.querySelector(".navbar-button");
-    const nav = document.querySelector("nav");
-    button?.addEventListener("click", () => {
-        button.classList.toggle("active");
+    const nav = document.querySelector(".navbar-nav");
+    const overlay = document.querySelector(".navbar-overlay");
+    const links = nav?.querySelectorAll("a");
+
+    const toggleMenu = () => {
+        button?.classList.toggle("active");
         nav?.classList.toggle("active");
-    });
+        nav?.classList.toggle("hidden");
+        overlay?.classList.toggle("active");
+    };
+
+    button?.addEventListener("click", toggleMenu);
+    overlay?.addEventListener("click", toggleMenu);
+    links?.forEach((link) => link.addEventListener("click", toggleMenu));
 </script>

@@ -13,9 +13,9 @@ import Dialog from "../components/ui/modal/Dialog.astro";
 <Layout>
     <!-- INTRO -->
     <section class="px-2 pt-5 lg:mt-20 mx-auto max-w-4xl">
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div
-                class="col-span-2 md:col-span-1 rounded-2xl md:shadow-md w-full max-md:rounded-full max-h-80 flex justify-center items-center"
+                class="md:col-span-1 rounded-2xl md:shadow-md w-full max-md:rounded-full max-h-80 flex justify-center items-center"
             >
                 <Image
                     src={FotoIntroEstefania}
@@ -26,9 +26,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 />
             </div>
 
-            <div
-                class="col-span-2 max-sm:py-5 flex flex-col justify-center px-2 rounded-2xl text-center shadow-md"
-            >
+            <div class="md:col-span-2 max-sm:py-5 flex flex-col justify-center px-2 rounded-2xl text-center shadow-md">
                 <h1 class="homey-title text-6xl text-(--cd-oscuro)">
                     Estefania Colmenares
                 </h1>
@@ -36,17 +34,17 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 <p
                     class="uppercase tracking-widest text-sm text-gray-500 mt-1 mb-2"
                 >
-                    Aspirante al Senado · Colombia 2026
+                    Aspirante al Senado Colombia 2026
                 </p>
 
                 <p class="text-gray-700 leading-relaxed">
-                    Creo en una política que escucha, que explica y que
+                    Creo en una politica que escucha, que explica y que
                     construye desde la dignidad de las personas. Mi compromiso
-                    es representar a quienes durante años no han tenido voz en
+                    es representar a quienes durante anos no han tenido voz en
                     el Congreso.
                 </p>
 
-                <div class="flex justify-center gap-6 pt-4">
+                <div class="flex justify-center gap-6 pt-4 pb-2">
                     {
                         socials.map(({ name, href, icon }) => (
                             <a
@@ -60,28 +58,57 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                     }
                 </div>
             </div>
+        </div>
+    </section>
 
+    <!-- MANIFIESTO -->
+    <section class="px-2 py-8 lg:py-12 texto-lento">
+        <div class="max-w-3xl mx-auto text-center space-y-2">
+            <p class="uppercase tracking-widest text-xs text-gray-500">
+                Manifiesto personal
+            </p>
+            <h2 class="homey-title text-4xl text-(--cd-oscuro)">
+                Creo en
+            </h2>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                Cada conviccion nace de una historia, una decision y una
+                forma de mirar a Norte de Santander y a Colombia.
+            </p>
+        </div>
+
+        <div class="max-w-5xl mx-auto mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[220px]">
             <div
-                id="modal-academica-open"
-                class="col-span-1 rounded-2xl shadow-md p-5 relative cursor-pointer"
+                id="creo-verdad-open"
+                class="rounded-2xl shadow-md p-4 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
-                <Dialog id="modal-academica" titulo="Academica">
-                    <div>
-                        <h3>Texto de prueba</h3>
+                <Dialog
+                    id="creo-verdad"
+                    titulo="Creo en la verdad, incluso cuando incomoda"
+                >
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Unde temporibus voluptate odit cupiditate at
-                            ipsam laborum, aliquam distinctio. Itaque fugiat
-                            unde fugit placeat at aliquid, recusandae fuga!
-                            Ratione, sit fugit!
+                            Mi nombre es Estefania Colmenares Hernandez. Soy
+                            periodista desde hace mas de 15 anos y dirigi La
+                            Opinion entre 2019 y 2024.
                         </p>
+                        <p>
+                            Durante ese tiempo entendi algo esencial: la verdad
+                            no siempre trae aplausos, pero si transforma.
+                        </p>
+                        <p>
+                            Investigar, publicar y sostener lo publicado, aun
+                            con presiones, amenazas o soledad, me enseno que una
+                            sociedad sin verdad se acostumbra al abuso, a la
+                            injusticia y al silencio.
+                        </p>
+                        <p>Y yo no creo en el silencio comodo.</p>
                     </div>
                 </Dialog>
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
                     <div
-                        class="absolute col-span-2 md:col-span-3 text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
+                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
                     >
                         Creo en
                     </div>
@@ -91,67 +118,417 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-50 md:-top-8 md:-left-5"
                     />
                 </div>
-                <div
-                    class="text-center min-h-30 flex items-center justify-center"
-                >
+                <div class="text-center h-full flex flex-col items-center justify-center gap-2">
                     <span
-                        class="font-extralight text-(--cd-oscuro) italic homey-title text-7xl"
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-5xl md:text-6xl"
                     >
                         La Verdad
                     </span>
+                    <p class="text-gray-500 text-xs">
+                        La verdad transforma, incluso cuando incomoda.
+                    </p>
+                    <span
+                        class="uppercase tracking-widest text-[10px] text-(--cd-azul)"
+                    >
+                        Leer historia
+                    </span>
                 </div>
             </div>
+
             <div
-                class="col-span-1 rounded-2xl shadow-md p-5 relative cursor-pointer"
+                id="creo-atajos-open"
+                class="rounded-2xl shadow-md p-4 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
+                <Dialog id="creo-atajos" titulo="Creo en el trabajo sin atajos">
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>
+                            Vengo de una familia donde la palabra valia mas que
+                            cualquier cosa.
+                        </p>
+                        <p>
+                            Mi abuelo Eustorgio Colmenares Baptista marco de
+                            forma temprana mi forma de ver el mundo: trabajo
+                            duro, honestidad radical y cero atajos.
+                        </p>
+                        <p>
+                            Mis padres, Jose Eustorgio Colmenares y Martha
+                            Hernandez, me ensenaron con el ejemplo lo que
+                            significa el compromiso, la constancia y la
+                            importancia de la gentileza, incluso en los
+                            momentos mas dificiles.
+                        </p>
+                        <p>
+                            De ellos aprendi tambien la fuerza del perdon en
+                            uno de los momentos mas duros que marco mi infancia
+                            y mi vida.
+                        </p>
+                        <p>
+                            Esa etica y esos valores me acompanian desde
+                            siempre. Por eso nunca he creido que "todo el mundo
+                            tenga un precio". No lo tiene.
+                        </p>
+                    </div>
+                </Dialog>
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
+                    <div
+                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
+                    >
+                        Creo en
+                    </div>
                     <Image
                         src={IconoLibro}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-50 md:-top-8 md:-left-5"
                     />
                 </div>
-                <div
-                    class="text-center min-h-30 flex items-center justify-center"
-                >
-                    <span class="text-2xl font-bold text-(--cd-oscuro)"
-                        >Profesional</span
+                <div class="text-center h-full flex flex-col items-center justify-center gap-2">
+                    <span
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-4xl md:text-5xl"
                     >
+                        Trabajo sin atajos
+                    </span>
+                    <p class="text-gray-500 text-xs">
+                        Honestidad radical y cero atajos.
+                    </p>
+                    <span
+                        class="uppercase tracking-widest text-[10px] text-(--cd-azul)"
+                    >
+                        Leer historia
+                    </span>
                 </div>
             </div>
+
             <div
-                class="col-span-2 md:col-span-1 rounded-2xl shadow-md p-5 relative cursor-pointer"
+                id="creo-puentes-open"
+                class="rounded-2xl shadow-md p-4 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
+                <Dialog
+                    id="creo-puentes"
+                    titulo="Creo en construir puentes, no trincheras"
+                >
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>No creo en gritar mas fuerte.</p>
+                        <p>
+                            Creo en articular, en conectar, en poner a
+                            conversar lo que otros prefieren enfrentar.
+                        </p>
+                        <p>
+                            El periodismo me formo como puente: entre el poder
+                            y la ciudadania, entre lo que pasa y lo que se
+                            oculta, entre los hechos y las decisiones.
+                        </p>
+                        <p>
+                            Y por eso estoy dando el paso a la politica, para
+                            transformar las duras realidades que he tenido que
+                            informar.
+                        </p>
+                    </div>
+                </Dialog>
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
+                    <div
+                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
+                    >
+                        Creo en
+                    </div>
                     <Image
                         src={IconoLibro}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-50 md:-top-8 md:-left-5"
                     />
                 </div>
-                <div
-                    class="text-center min-h-30 flex items-center justify-center"
-                >
-                    <span class="text-2xl font-bold text-(--cd-oscuro)"
-                        >Comprometida</span
+                <div class="text-center h-full flex flex-col items-center justify-center gap-2">
+                    <span
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-4xl md:text-5xl"
                     >
+                        Construir puentes
+                    </span>
+                    <p class="text-gray-500 text-xs">
+                        Conectar para transformar.
+                    </p>
+                    <span
+                        class="uppercase tracking-widest text-[10px] text-(--cd-azul)"
+                    >
+                        Leer historia
+                    </span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CONVICCIONES -->
+    <section class="px-2 pb-10 lg:pb-16 texto-lento">
+        <div class="max-w-5xl mx-auto grid gap-3 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[220px]">
+            <div class="rounded-2xl shadow-md overflow-hidden h-full relative sm:col-span-2 lg:col-span-2 lg:row-span-2">
+                <Image
+                    src={FotoEstefaniaNegro}
+                    alt="Estefania Colmenares"
+                    class="w-full h-full object-cover object-top"
+                />
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="absolute bottom-0 left-0 p-4 text-white">
+                    <p class="uppercase tracking-widest text-[10px]">
+                        Convicciones
+                    </p>
+                    <h3 class="homey-title text-4xl">
+                        Mirar de frente
+                    </h3>
+                </div>
+            </div>
+
+            <div
+                id="creo-norte-open"
+                class="relative rounded-2xl shadow-md p-4 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+            >
+                <Dialog id="creo-norte" titulo="Creo en Norte de Santander">
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>
+                            Naci y creci aqui en 1983. Caminar por
+                            Cucuta me huele a casa, a pesar de todo.
+                        </p>
+                        <p>
+                            Creo en un Norte persistente, que no se
+                            rinde, aunque todo cueste mas.
+                        </p>
+                        <p>
+                            Creo en la frontera como potencia, no como
+                            condena.
+                        </p>
+                        <p>
+                            Y creo que normalizar la violencia, la
+                            informalidad y la resignacion no puede ser
+                            nuestro destino.
+                        </p>
+                        <p>
+                            Si algo me mueve, es no aceptar como
+                            normal lo que nos duele.
+                        </p>
+                    </div>
+                </Dialog>
+                <div
+                    class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
+                >
+                    <div
+                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
+                    >
+                        Creo en
+                    </div>
+                    <Image
+                        src={IconoLibro}
+                        alt=""
+                        class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-30 md:-top-8 md:-left-5"
+                    />
+                </div>
+                <div class="text-center h-full flex flex-col items-center justify-center gap-2">
+                    <span
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-4xl md:text-5xl"
+                    >
+                        Norte de Santander
+                    </span>
+                    <p class="text-gray-500 text-xs">
+                        Naci aqui y creo en una frontera potencia.
+                    </p>
+                    <span
+                        class="uppercase tracking-widest text-[10px] text-(--cd-azul)"
+                    >
+                        Leer historia
+                    </span>
+                </div>
+            </div>
+
+            <div
+                id="creo-justicia-open"
+                class="relative rounded-2xl shadow-md p-4 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+            >
+                <Dialog
+                    id="creo-justicia"
+                    titulo="Creo en la justicia, la decencia y la solidaridad"
+                >
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>No son palabras bonitas. Son decisiones dificiles.</p>
+                        <p>
+                            Las he puesto en practica cuando a mi puerta
+                            tocaron sobornos, presiones y amenazas.
+                        </p>
+                        <p>
+                            Y tambien cuando toco escuchar, acompanar y
+                            servir, especialmente a jovenes y
+                            poblaciones vulnerables, desde espacios de
+                            voluntariado y liderazgo social.
+                        </p>
+                        <p>
+                            La justicia no es venganza. La decencia no
+                            es ingenuidad.
+                        </p>
+                    </div>
+                </Dialog>
+                <div
+                    class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
+                >
+                    <div
+                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
+                    >
+                        Creo en
+                    </div>
+                    <Image
+                        src={IconoLibro}
+                        alt=""
+                        class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-30 md:-top-8 md:-left-5"
+                    />
+                </div>
+                <div class="text-center h-full flex flex-col items-center justify-center gap-2">
+                    <span
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-3xl md:text-4xl"
+                    >
+                        Justicia y solidaridad
+                    </span>
+                    <p class="text-gray-500 text-xs">
+                        Decisiones dificiles, no palabras bonitas.
+                    </p>
+                    <span
+                        class="uppercase tracking-widest text-[10px] text-(--cd-azul)"
+                    >
+                        Leer historia
+                    </span>
+                </div>
+            </div>
+
+            <div
+                id="creo-representacion-open"
+                class="relative rounded-2xl shadow-md p-4 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+            >
+                <Dialog
+                    id="creo-representacion"
+                    titulo="Creo en la politica como representacion, no como espectaculo"
+                >
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>
+                            Durante anos el periodismo fue mi voz. Hoy
+                            creo que tambien debe ser representacion.
+                        </p>
+                        <p>
+                            No porque tenga todas las respuestas, sino
+                            porque no quiero seguir mirando con
+                            resignacion verdades que se pueden cambiar:
+                            la corrupcion, la inseguridad, la pobreza,
+                            la falta de oportunidades, el exilio
+                            silencioso de quienes ya no ven futuro aqui.
+                        </p>
+                        <p>
+                            Entrar en politica no fue un plan; fue una
+                            decision incomoda frente a una realidad que
+                            ya no podia seguir narrando desde la
+                            distancia.
+                        </p>
+                    </div>
+                </Dialog>
+                <div
+                    class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
+                >
+                    <div
+                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
+                    >
+                        Creo en
+                    </div>
+                    <Image
+                        src={IconoLibro}
+                        alt=""
+                        class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-30 md:-top-8 md:-left-5"
+                    />
+                </div>
+                <div class="text-center h-full flex flex-col items-center justify-center gap-2">
+                    <span
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-3xl md:text-4xl"
+                    >
+                        Representar, no exhibir
+                    </span>
+                    <p class="text-gray-500 text-xs">
+                        La politica como puente, no como espectaculo.
+                    </p>
+                    <span
+                        class="uppercase tracking-widest text-[10px] text-(--cd-azul)"
+                    >
+                        Leer historia
+                    </span>
+                </div>
+            </div>
+
+            <div
+                id="creo-futuro-open"
+                class="relative rounded-2xl shadow-md p-4 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+            >
+                <Dialog
+                    id="creo-futuro"
+                    titulo="Creo en un futuro donde quedarse valga la pena"
+                >
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>Soy mama de Esther y Elena.</p>
+                        <p>
+                            Y como muchas mujeres, me hago una pregunta
+                            simple y profunda: en que entorno estan
+                            creciendo nuestros hijos.
+                        </p>
+                        <p>
+                            Parte de la decision de hacer este ejercicio
+                            politico por primera vez tiene que ver con
+                            la motivacion de generar cambios para que
+                            nuestros hijos tengan una mejor sociedad que
+                            los acompane e impulse a crecer con mas
+                            oportunidades.
+                        </p>
+                        <p>
+                            Creo que todavia hay gente que quiere hacer
+                            las cosas bien.
+                        </p>
+                        <p>
+                            Y que rendirse, volverse indiferente o
+                            pensar que "todos son iguales" es el mayor
+                            triunfo de quienes se han apropiado del
+                            poder.
+                        </p>
+                        <p>
+                            No todo esta perdido. Pero no se cambia nada
+                            mirando para otro lado.
+                        </p>
+                    </div>
+                </Dialog>
+                <div
+                    class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
+                >
+                    <div
+                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
+                    >
+                        Creo en
+                    </div>
+                    <Image
+                        src={IconoLibro}
+                        alt=""
+                        class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-30 md:-top-8 md:-left-5"
+                    />
+                </div>
+                <div class="text-center h-full flex flex-col items-center justify-center gap-2">
+                    <span
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-3xl md:text-4xl"
+                    >
+                        Un futuro para quedarse
+                    </span>
+                    <p class="text-gray-500 text-xs">
+                        Un pais donde crecer valga la pena.
+                    </p>
+                    <span
+                        class="uppercase tracking-widest text-[10px] text-(--cd-azul)"
+                    >
+                        Leer historia
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
     <Footer />
 </Layout>
-
-<script>
-    const modalAcademica = document.getElementById("modal-academica");
-    const modalProfecional = document.getElementById("modal-profecional");
-    const modalComprometida = document.getElementById("modal-comprometida");
-</script>
 
 <style>
     :root {
