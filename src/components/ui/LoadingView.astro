@@ -234,11 +234,26 @@
 <script>
   const preloader = document.getElementById("page-preloader");
 
+  const scrollToHash = () => {
+    const { hash } = window.location;
+    if (!hash) return;
+    if (typeof window.__scrollToHash === "function") {
+      window.__scrollToHash(hash);
+      return;
+    }
+    const target = document.querySelector(hash);
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const hidePreloader = () => {
     if (!preloader) return;
     preloader.classList.remove("active");
     preloader.style.opacity = "0";
-    setTimeout(() => preloader.remove(), 500);
+    setTimeout(() => {
+      preloader.remove();
+      scrollToHash();
+    }, 500);
   };
 
   const startTransition = () => {
