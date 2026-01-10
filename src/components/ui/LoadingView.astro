@@ -46,11 +46,11 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease;
-    /* AGREGAR ESTAS LÍNEAS */
     width: 100vw;
     height: 100vh;
     overflow: hidden;
   }
+
   .preloader.active {
     opacity: 1;
     pointer-events: auto;
@@ -234,25 +234,12 @@
 <script>
   const preloader = document.getElementById("page-preloader");
 
-  const scrollToHash = () => {
-    const { hash } = window.location;
-    if (!hash) return;
-    if (typeof window.__scrollToHash === "function") {
-      window.__scrollToHash(hash);
-      return;
-    }
-    const target = document.querySelector(hash);
-    if (!target) return;
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   const hidePreloader = () => {
     if (!preloader) return;
     preloader.classList.remove("active");
     preloader.style.opacity = "0";
     setTimeout(() => {
       preloader.remove();
-      scrollToHash();
     }, 500);
   };
 

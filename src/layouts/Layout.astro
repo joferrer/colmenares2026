@@ -6,96 +6,123 @@ import "../styles/global.css";
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Press+Start+2P&display=swap"
-			rel="stylesheet"
-		/>
-		<title>Estefania Colmenares</title>
-	</head>
-	<body class="max-w-[3000px]">
-		<LoadingView />
-		<NavbarSuperior />
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <title>Estefania Colmenares</title>
+  </head>
+  <body class="max-w-[3000px]">
+    <LoadingView />
+    <NavbarSuperior />
+    <slot />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-		font-family: "Montserrat", sans-serif;
-	}
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    scroll-behavior: smooth;
+  }
 </style>
 
-<script>
-	const SCROLL_DURATION = 4500;
-	const prefersReducedMotion = window.matchMedia(
-		"(prefers-reduced-motion: reduce)"
-	).matches;
+<script is:inline>
+  // Configuración del scroll
+  const SCROLL_DURATION = 2500; // Más lento: 2.5 segundos
 
-	const easeInOutCubic = (t) =>
-		t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  // Función de easing más suave
+  function easeInOutQuart(t) {
+    return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+  }
 
-	const smoothScrollTo = (target, duration = SCROLL_DURATION) => {
-		const startY = window.pageYOffset;
-		const targetY = startY + target.getBoundingClientRect().top;
+  // Función principal de smooth scroll
+  function smoothScrollTo(element) {
+    if (!element) return;
 
-		if (prefersReducedMotion || duration <= 0) {
-			window.scrollTo(0, targetY);
-			return;
-		}
+    const targetPosition =
+      element.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const startTime = performance.now();
 
-		const startTime = performance.now();
-		const tick = (now) => {
-			const elapsed = now - startTime;
-			const t = Math.min(elapsed / duration, 1);
-			const eased = easeInOutCubic(t);
-			window.scrollTo(0, startY + (targetY - startY) * eased);
-			if (t < 1) requestAnimationFrame(tick);
-		};
-		requestAnimationFrame(tick);
-	};
+    function animation(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / SCROLL_DURATION, 1);
+      const ease = easeInOutQuart(progress);
 
-	const scrollToHash = (hash, duration = SCROLL_DURATION) => {
-		if (!hash) return;
-		const target = document.querySelector(hash);
-		if (!target) return;
-		smoothScrollTo(target, duration);
-	};
+      window.scrollTo(0, startPosition + distance * ease);
 
-	window.__smoothScrollTo = smoothScrollTo;
-	window.__scrollToHash = scrollToHash;
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      }
+    }
 
-	document.addEventListener("click", (event) => {
-		const link = event.target.closest("a");
-		if (!link) return;
-		const href = link.getAttribute("href");
-		if (!href || href === "#") return;
+    requestAnimationFrame(animation);
+  }
 
-		if (href.startsWith("#")) {
-			event.preventDefault();
-			history.pushState(null, "", href);
-			scrollToHash(href);
-			return;
-		}
+  // Manejar clicks en todos los links
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a");
+    if (!link) return;
 
-		try {
-			const url = new URL(href, window.location.origin);
-			const samePath = url.pathname === window.location.pathname;
-			if (url.origin === window.location.origin && url.hash && samePath) {
-				event.preventDefault();
-				history.pushState(null, "", url.hash);
-				scrollToHash(url.hash);
-			}
-		} catch {
-			// Ignore invalid URLs.
-		}
-	});
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    // Si es un anchor local
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        smoothScrollTo(targetElement);
+        history.pushState(null, "", href);
+      }
+    }
+  });
+
+  // Scroll inicial si hay hash en la URL
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      const hash = window.location.hash;
+      if (hash) {
+        const targetId = hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          window.scrollTo(0, 0); // Reset primero
+          setTimeout(function () {
+            smoothScrollTo(targetElement);
+          }, 100);
+        }
+      }
+    }, 600); // Esperar a que el preloader termine
+  });
+
+  // Manejar navegación con botones atrás/adelante
+  window.addEventListener("popstate", function () {
+    const hash = window.location.hash;
+    if (hash) {
+      const targetId = hash.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        smoothScrollTo(targetElement);
+      }
+    }
+  });
 </script>
