@@ -65,6 +65,7 @@ const noticias = [...noticiasRaw].sort(
         >
             {
                 noticias.map((noticia) => (
+                    <a href={noticia.link} target="_blank" rel="noopener noreferrer">
                     <article class="flex flex-col min-w-80 max-w-80 cursor-pointer shadow-md rounded-lg z-20 bg-white">
                         <img
                             src={noticia.imagen}
@@ -87,6 +88,7 @@ const noticias = [...noticiasRaw].sort(
                             </p>
                         </div>
                     </article>
+                    </a>
                 ))
             }
         </div>

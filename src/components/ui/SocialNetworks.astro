@@ -2,7 +2,11 @@
 import ChatWidget from "./ChatWidget.astro";
 
 const socials = [
-  { name: "Facebook", href: "https://www.facebook.com", icon: "facebook" },
+  {
+    name: "Facebook",
+    href: "https://web.facebook.com/estefanianortecd",
+    icon: "facebook",
+  },
   {
     name: "Instagram",
     href: "https://www.instagram.com/estefanianortecd?igsh=ZW9meThjMXRmcW02",
@@ -24,7 +28,9 @@ const iconMap: Record<string, string> = {
 };
 ---
 
-<aside class="fixed right-3 bottom-4 md:bottom-6 lg:bottom-8 z-50 pointer-events-none">
+<aside
+  class="fixed right-3 bottom-4 md:bottom-6 lg:bottom-8 z-50 pointer-events-none"
+>
   <div class="flex flex-col items-end gap-4 md:gap-5 pointer-events-auto">
     <ul class="flex flex-col items-end gap-3 md:gap-4 pointer-events-auto">
       {
