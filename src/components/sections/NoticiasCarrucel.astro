@@ -65,29 +65,33 @@ const noticias = [...noticiasRaw].sort(
         >
             {
                 noticias.map((noticia) => (
-                    <a href={noticia.link} target="_blank" rel="noopener noreferrer">
-                    <article class="flex flex-col min-w-80 max-w-80 cursor-pointer shadow-md rounded-lg z-20 bg-white">
-                        <img
-                            src={noticia.imagen}
-                            alt={noticia.titulo}
-                            class="w-full h-60 object-cover object-top rounded-t-lg"
-                        />
-                        <div class="flex flex-col p-3 ">
-                            <h2 class="font-semibold text-lg">
-                                {noticia.titulo}
-                            </h2>
-                            <p class="text-sm text-gray-500">
-                                {new Date(noticia.fecha).toLocaleDateString(
-                                    "es-CO",
-                                    {
-                                        year: "numeric",
-                                        month: "long",
-                                        day: "numeric",
-                                    },
-                                )}
-                            </p>
-                        </div>
-                    </article>
+                    <a
+                        href={noticia.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <article class="flex flex-col min-w-80 max-w-80 cursor-pointer shadow-md rounded-lg z-20 bg-white">
+                            <Image
+                                src={noticia.imagen}
+                                alt={noticia.titulo}
+                                class="w-full h-60 object-cover object-top rounded-t-lg"
+                            />
+                            <div class="flex flex-col p-3 ">
+                                <h2 class="font-semibold text-lg">
+                                    {noticia.titulo}
+                                </h2>
+                                <p class="text-sm text-gray-500">
+                                    {new Date(noticia.fecha).toLocaleDateString(
+                                        "es-CO",
+                                        {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        },
+                                    )}
+                                </p>
+                            </div>
+                        </article>
                     </a>
                 ))
             }
