@@ -2,17 +2,19 @@
 import Image from "astro/components/Image.astro";
 import CD_LOGO_H from "../../assets/logos/CD_LOGO-H.png";
 
+//TODO: Agregar "Lo que defiendo" en tercera posición ya que son las propuestas de campaña.
 const navItems = [
-    {
-        name: "¿En que creemos?",
-        url: "/#introduccion",
-        label: "",
-    },
     {
         name: "¿Quién soy?",
         url: "/SobreMi",
         label: "",
     },
+    {
+        name: "Lo que creo",
+        url: "/#introduccion",
+        label: "",
+    },
+
     {
         name: "Últimas noticias",
         url: "/#noticias",
@@ -48,20 +50,33 @@ const navItems = [
             ]}
         >
             <span class="menu-icon menu-icon--open" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <path d="M3 6h18M3 12h18M3 18h18" />
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                >
+                    <path d="M3 6h18M3 12h18M3 18h18"></path>
                 </svg>
             </span>
             <span class="menu-icon menu-icon--close" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <path d="M6 6l12 12M18 6l-12 12" />
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                >
+                    <path d="M6 6l12 12M18 6l-12 12"></path>
                 </svg>
             </span>
         </button>
         <div
             id="nav-overlay"
             class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden z-40"
-        ></div>
+        >
+        </div>
         <nav
             id="nav-bar"
             class="fixed top-0 right-0 h-screen w-72 translate-x-0 max-lg:translate-x-full bg-(--cd-oscuro) text-white transition-transform duration-300 ease-out flex flex-col gap-3 px-6 pt-24 lg:static lg:h-auto lg:w-auto lg:flex-row lg:items-center lg:gap-2 lg:px-4 lg:py-2 lg:rounded-full lg:bg-white/80 lg:backdrop-blur-md lg:shadow-md lg:text-(--cd-oscuro)"
@@ -162,8 +177,7 @@ const navItems = [
     const navOverlay = document.querySelector("#nav-overlay");
     const navLinks = Array.from(navBar?.querySelectorAll("a") ?? []);
 
-    const isMobile = () =>
-        window.matchMedia("(max-width: 1023px)").matches;
+    const isMobile = () => window.matchMedia("(max-width: 1023px)").matches;
 
     const openMenu = () => {
         navBar?.classList.remove("max-lg:translate-x-full");
