@@ -4,215 +4,215 @@ import CD_LOGO_H from "../../assets/logos/CD_LOGO-H.png";
 
 //TODO: Agregar "Lo que defiendo" en tercera posición ya que son las propuestas de campaña.
 const navItems = [
-    {
-        name: "¿Quién soy?",
-        url: "/SobreMi",
-        label: "",
-    },
-    {
-        name: "Lo que creo",
-        url: "/#introduccion",
-        label: "",
-    },
+  {
+    name: "¿Quién soy?",
+    url: "/SobreMi",
+    label: "",
+  },
+  {
+    name: "Lo que creo",
+    url: "/#introduccion",
+    label: "",
+  },
 
-    {
-        name: "Últimas noticias",
-        url: "/#noticias",
-        label: "",
-    },
-    {
-        name: "¿Cómo votar?",
-        url: "/#como-votar",
-        label: "",
-    },
-    {
-        name: "¿Cómo puedes ayudar?",
-        url: "/#voluntariado",
-        label: "",
-    },
+  {
+    name: "Últimas noticias",
+    url: "/#noticias",
+    label: "",
+  },
+  {
+    name: "¿Cómo votar?",
+    url: "/#como-votar",
+    label: "",
+  },
+  {
+    name: "¿Cómo puedes ayudar?",
+    url: "/#voluntariado",
+    label: "",
+  },
 ];
 ---
 
 <div class="h-20 w-full mb-5">
-    <li class="flex items-center justify-center lg:justify-start lg:px-6">
-        <Image src={CD_LOGO_H} alt="Logo" height={100} />
-    </li>
-    <header
-        class="fixed top-0 left-0 flex w-full justify-center lg:mt-20 mx-auto max-sm:mt-0 z-50 px-3"
+  <li class="flex items-center justify-center lg:justify-start lg:px-6">
+    <Image src={CD_LOGO_H} alt="Logo" height={100} />
+  </li>
+  <header
+    class="fixed top-0 left-0 flex w-full justify-center lg:mt-20 mx-auto max-sm:mt-0 z-50 px-3"
+  >
+    <button
+      aria-label="Open Menu"
+      aria-expanded="false"
+      aria-controls="menu-items"
+      class:list={[
+        "hamburger-menu focus-outline bg-(--cd-oscuro) cursor-pointer",
+        "fixed top-0 right-0 mt-2 mr-2 w-14 h-14 p-1 flex flex-col justify-center lg:hidden rounded-full z-50 ring-1 ring-white/20 shadow-lg backdrop-blur",
+      ]}
     >
-        <button
-            aria-label="Open Menu"
-            aria-expanded="false"
-            aria-controls="menu-items"
+      <span class="menu-icon menu-icon--open" aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M3 6h18M3 12h18M3 18h18"></path>
+        </svg>
+      </span>
+      <span class="menu-icon menu-icon--close" aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M6 6l12 12M18 6l-12 12"></path>
+        </svg>
+      </span>
+    </button>
+    <div
+      id="nav-overlay"
+      class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden z-40"
+    >
+    </div>
+    <nav
+      id="nav-bar"
+      class="fixed top-0 right-0 h-screen w-72 translate-x-0 max-lg:translate-x-full bg-(--cd-oscuro) text-white transition-transform duration-300 ease-out flex flex-col gap-3 px-6 pt-24 lg:static lg:h-auto lg:w-auto lg:flex-row lg:items-center lg:gap-2 lg:px-4 lg:py-2 lg:rounded-full lg:bg-white/80 lg:backdrop-blur-md lg:shadow-md lg:text-(--cd-oscuro)"
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.url}
             class:list={[
-                "hamburger-menu focus-outline bg-(--cd-oscuro)",
-                "fixed top-0 right-0 mt-2 mr-2 w-14 h-14 p-1 flex flex-col justify-center lg:hidden rounded-full z-50 ring-1 ring-white/20 shadow-lg backdrop-blur",
+              "nav-link px-4 py-2 rounded-full text-lg lg:text-sm uppercase tracking-widest font-semibold transition-colors",
+              "max-lg:border-b max-lg:border-white/10 max-lg:text-white max-lg:pb-3",
             ]}
-        >
-            <span class="menu-icon menu-icon--open" aria-hidden="true">
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                >
-                    <path d="M3 6h18M3 12h18M3 18h18"></path>
-                </svg>
-            </span>
-            <span class="menu-icon menu-icon--close" aria-hidden="true">
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                >
-                    <path d="M6 6l12 12M18 6l-12 12"></path>
-                </svg>
-            </span>
-        </button>
-        <div
-            id="nav-overlay"
-            class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden z-40"
-        >
-        </div>
-        <nav
-            id="nav-bar"
-            class="fixed top-0 right-0 h-screen w-72 translate-x-0 max-lg:translate-x-full bg-(--cd-oscuro) text-white transition-transform duration-300 ease-out flex flex-col gap-3 px-6 pt-24 lg:static lg:h-auto lg:w-auto lg:flex-row lg:items-center lg:gap-2 lg:px-4 lg:py-2 lg:rounded-full lg:bg-white/80 lg:backdrop-blur-md lg:shadow-md lg:text-(--cd-oscuro)"
-        >
-            {
-                navItems.map((item) => (
-                    <a
-                        href={item.url}
-                        class:list={[
-                            "nav-link px-4 py-2 rounded-full text-lg lg:text-sm uppercase tracking-widest font-semibold transition-colors",
-                            "max-lg:border-b max-lg:border-white/10 max-lg:text-white max-lg:pb-3",
-                        ]}
-                    >
-                        {item.name}
-                    </a>
-                ))
-            }
-        </nav>
-    </header>
+          >
+            {item.name}
+          </a>
+        ))
+      }
+    </nav>
+  </header>
 </div>
 
 <style>
-    @reference "tailwindcss";
+  @reference "tailwindcss";
 
-    .hamburger-menu {
-        z-index: 999;
-        color: #fff;
+  .hamburger-menu {
+    z-index: 999;
+    color: #fff;
+  }
+
+  .nav-link {
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--cd-oscuro);
+    background: var(--cd-amarillo);
+    box-shadow: 0 12px 24px -18px rgb(0 0 0 / 0.45);
+  }
+
+  .menu-icon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .menu-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  .menu-icon--close {
+    display: none;
+  }
+  .hamburger-menu.active .menu-icon--open {
+    display: none;
+  }
+  .hamburger-menu.active .menu-icon--close {
+    display: grid;
+  }
+
+  @media (min-width: 1024px) {
+    nav {
+      animation: nav-shadown 1s linear both;
+      animation-timeline: scroll();
+      animation-range: 0 100px;
     }
 
-    .nav-link {
-        transition:
-            color 0.2s ease,
-            background-color 0.2s ease,
-            box-shadow 0.2s ease;
+    @keyframes nav-shadown {
+      to {
+        box-shadow:
+          0 10px 15px -3px rgb(0 0 0 / 0.1),
+          0 4px 6px -4px rgb(0 0 0 / 0.1);
+        backdrop-filter: blur(10px);
+        background-color: rgba(37, 62, 107, 0.416);
+        border-radius: 9999px;
+        box-sizing: border-box;
+        outline: 1px solid rgb(255 255 255 / 0.1);
+        color: white;
+      }
     }
-
-    .nav-link:hover {
-        color: var(--cd-oscuro);
-        background: var(--cd-amarillo);
-        box-shadow: 0 12px 24px -18px rgb(0 0 0 / 0.45);
+  }
+  @media (max-width: 1023px) {
+    #nav-bar {
+      z-index: 998;
     }
-
-    .menu-icon {
-        position: absolute;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-    }
-    .menu-icon svg {
-        width: 24px;
-        height: 24px;
-    }
-    .menu-icon--close {
-        display: none;
-    }
-    .hamburger-menu.active .menu-icon--open {
-        display: none;
-    }
-    .hamburger-menu.active .menu-icon--close {
-        display: grid;
-    }
-
-    @media (min-width: 1024px) {
-        nav {
-            animation: nav-shadown 1s linear both;
-            animation-timeline: scroll();
-            animation-range: 0 100px;
-        }
-
-        @keyframes nav-shadown {
-            to {
-                box-shadow:
-                    0 10px 15px -3px rgb(0 0 0 / 0.1),
-                    0 4px 6px -4px rgb(0 0 0 / 0.1);
-                backdrop-filter: blur(10px);
-                background-color: rgba(37, 62, 107, 0.416);
-                border-radius: 9999px;
-                box-sizing: border-box;
-                outline: 1px solid rgb(255 255 255 / 0.1);
-                color: white;
-            }
-        }
-    }
-    @media (max-width: 1023px) {
-        #nav-bar {
-            z-index: 998;
-        }
-    }
+  }
 </style>
 
 <script>
-    const menuBtn = document.querySelector(".hamburger-menu");
-    const navBar = document.querySelector("#nav-bar");
-    const navOverlay = document.querySelector("#nav-overlay");
-    const navLinks = Array.from(navBar?.querySelectorAll("a") ?? []);
+  const menuBtn = document.querySelector(".hamburger-menu");
+  const navBar = document.querySelector("#nav-bar");
+  const navOverlay = document.querySelector("#nav-overlay");
+  const navLinks = Array.from(navBar?.querySelectorAll("a") ?? []);
 
-    const isMobile = () => window.matchMedia("(max-width: 1023px)").matches;
+  const isMobile = () => window.matchMedia("(max-width: 1023px)").matches;
 
-    const openMenu = () => {
-        navBar?.classList.remove("max-lg:translate-x-full");
-        navOverlay?.classList.remove("opacity-0", "pointer-events-none");
-        navOverlay?.classList.add("opacity-100", "pointer-events-auto");
-        menuBtn?.classList.add("active");
-        menuBtn?.setAttribute("aria-expanded", "true");
-        menuBtn?.setAttribute("aria-label", "Close Menu");
-    };
+  const openMenu = () => {
+    navBar?.classList.remove("max-lg:translate-x-full");
+    navOverlay?.classList.remove("opacity-0", "pointer-events-none");
+    navOverlay?.classList.add("opacity-100", "pointer-events-auto");
+    menuBtn?.classList.add("active");
+    menuBtn?.setAttribute("aria-expanded", "true");
+    menuBtn?.setAttribute("aria-label", "Close Menu");
+  };
 
-    const closeMenu = () => {
-        navBar?.classList.add("max-lg:translate-x-full");
-        navOverlay?.classList.add("opacity-0", "pointer-events-none");
-        navOverlay?.classList.remove("opacity-100", "pointer-events-auto");
-        menuBtn?.classList.remove("active");
-        menuBtn?.setAttribute("aria-expanded", "false");
-        menuBtn?.setAttribute("aria-label", "Open Menu");
-    };
+  const closeMenu = () => {
+    navBar?.classList.add("max-lg:translate-x-full");
+    navOverlay?.classList.add("opacity-0", "pointer-events-none");
+    navOverlay?.classList.remove("opacity-100", "pointer-events-auto");
+    menuBtn?.classList.remove("active");
+    menuBtn?.setAttribute("aria-expanded", "false");
+    menuBtn?.setAttribute("aria-label", "Open Menu");
+  };
 
-    const toggleMenu = () => {
-        if (!isMobile()) return;
-        if (navBar?.classList.contains("max-lg:translate-x-full")) {
-            openMenu();
-            return;
-        }
-        closeMenu();
-    };
+  const toggleMenu = () => {
+    if (!isMobile()) return;
+    if (navBar?.classList.contains("max-lg:translate-x-full")) {
+      openMenu();
+      return;
+    }
+    closeMenu();
+  };
 
-    menuBtn?.addEventListener("click", toggleMenu);
-    navOverlay?.addEventListener("click", toggleMenu);
-    navLinks.forEach((link) => link.addEventListener("click", closeMenu));
+  menuBtn?.addEventListener("click", toggleMenu);
+  navOverlay?.addEventListener("click", toggleMenu);
+  navLinks.forEach((link) => link.addEventListener("click", closeMenu));
 
-    window.addEventListener("resize", () => {
-        if (!isMobile()) {
-            closeMenu();
-        }
-    });
+  window.addEventListener("resize", () => {
+    if (!isMobile()) {
+      closeMenu();
+    }
+  });
 </script>

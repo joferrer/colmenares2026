@@ -74,6 +74,7 @@ const fields = [
   >
     <span class="blur-blob blob-1"></span>
     <span class="blur-blob blob-2"></span>
+
     <img
       src={iconos.src}
       alt=""
@@ -90,7 +91,6 @@ const fields = [
     <div class="relative px-6 py-10 md:px-12 md:py-16 lg:px-20">
       <div class="mb-10 space-y-6">
         <span class="pill">Participa</span>
-
         <h2 class="heading">Sumate como voluntario o donante</h2>
 
         <p class="lede">
@@ -118,14 +118,6 @@ const fields = [
       </div>
 
       <div class="relative" data-forms-panel data-mode={defaultMode}>
-        <div
-          class="toast-stack"
-          data-toast-stack
-          role="status"
-          aria-live="polite"
-        >
-        </div>
-
         <div class="forms-wrapper">
           {
             modes.map((mode, index) => (
@@ -136,7 +128,9 @@ const fields = [
                 hidden={index === 0 ? undefined : true}
               >
                 <div class="form-header">
-                  <span class={`form-icon ${mode.iconClass}`}>{mode.badge}</span>
+                  <span class={`form-icon ${mode.iconClass}`}>
+                    {mode.badge}
+                  </span>
                   <div>
                     <p class="form-subtitle">{mode.subtitle}</p>
                     <h3 class="form-title">{mode.title}</h3>
@@ -144,26 +138,25 @@ const fields = [
                 </div>
 
                 <div class="form-fields">
-                  {
-                    fields.map((field) => (
-                      <label class="field-label" for={`${field.id}-${mode.id}`}>
-                        {field.label}
-                        <input
-                          id={`${field.id}-${mode.id}`}
-                          name={field.id}
-                          type={field.type}
-                          placeholder={field.placeholder}
-                          class={`field-input ${mode.inputClass}`}
-                          required
-                          aria-required="true"
-                        />
-                      </label>
-                    ))
-                  }
+                  {fields.map((field) => (
+                    <label class="field-label" for={`${field.id}-${mode.id}`}>
+                      {field.label}
+                      <input
+                        id={`${field.id}-${mode.id}`}
+                        name={field.id}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        class={`field-input ${mode.inputClass}`}
+                        required
+                        aria-required="true"
+                      />
+                    </label>
+                  ))}
                 </div>
 
                 <button type="submit" class={`submit-btn ${mode.submitClass}`}>
-                  {mode.submitText}
+                  <span class="submit-text">{mode.submitText}</span>
+                  <span class="submit-loader" aria-hidden="true" />
                 </button>
               </form>
             ))
@@ -287,14 +280,9 @@ const fields = [
     cursor: pointer;
     transition: color 0.25s ease;
   }
-  
+
   .mode-btn.is-active {
     color: var(--oscuro);
-  }
-
-  .mode-btn:focus-visible {
-    outline: 2px solid var(--azul);
-    outline-offset: 2px;
   }
 
   .badge {
@@ -341,7 +329,6 @@ const fields = [
   .form-vol {
     background: color-mix(in srgb, var(--azul) 5%, white);
   }
-
   .form-don {
     background: color-mix(in srgb, var(--amarillo) 12%, white);
   }
@@ -368,7 +355,6 @@ const fields = [
   .form-icon-vol {
     background: var(--azul);
   }
-
   .form-icon-don {
     background: var(--amarillo);
     color: var(--oscuro);
@@ -440,6 +426,10 @@ const fields = [
     width: 100%;
     padding: 1rem 1.25rem;
     border-radius: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
     font-weight: 800;
     font-size: 0.95rem;
     color: white;
@@ -449,10 +439,33 @@ const fields = [
     transition: all 0.25s ease;
   }
 
+  .submit-btn.is-loading {
+    cursor: wait;
+  }
+  .submit-btn:disabled {
+    opacity: 0.85;
+  }
+
+  .submit-loader {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 999px;
+    border: 2px solid color-mix(in srgb, currentColor 35%, transparent);
+    border-top-color: currentColor;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.2s ease;
+  }
+
+  .submit-btn.is-loading .submit-loader {
+    opacity: 1;
+    transform: scale(1);
+    animation: spin 0.8s linear infinite;
+  }
+
   .submit-btn:hover {
     transform: translateY(-2px);
   }
-
   .submit-btn:active {
     transform: translateY(0);
   }
@@ -460,7 +473,6 @@ const fields = [
   .submit-vol {
     background: var(--oscuro);
   }
-
   .submit-vol:hover {
     background: var(--azul);
   }
@@ -468,51 +480,80 @@ const fields = [
   .submit-don {
     background: var(--oscuro);
   }
-
   .submit-don:hover {
     background: var(--amarillo);
     color: var(--oscuro);
   }
 
-  .toast-stack {
+  /* ✅ Toast GLOBAL: como lo creamos en body, lo estilizamos global */
+  :global(.toast-stack) {
     position: fixed;
     top: 1rem;
     right: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    max-width: min(360px, calc(100vw - 2rem));
-    z-index: 50;
+    width: min(360px, calc(100vw - 2rem));
+    z-index: 2147483647;
+    pointer-events: none;
   }
 
-  .toast {
+  :global(.toast) {
+    --toast-accent: var(--azul);
+    --toast-bg: white;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     padding: 1rem 1.25rem;
     border-radius: 1rem;
-    background: white;
-    border: 1px solid color-mix(in srgb, var(--azul) 35%, transparent);
+    background: var(--toast-bg);
+    border: 1px solid color-mix(in srgb, var(--toast-accent) 35%, transparent);
+    border-left: 6px solid var(--toast-accent);
     box-shadow: 0 20px 40px -15px rgb(0 0 0 / 0.25);
     animation: toast-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: auto;
   }
 
-  .toast.toast-out {
+  :global(.toast.is-success) {
+    --toast-accent: #16a34a;
+    --toast-bg: #16a34a;
+  }
+  :global(.toast.is-error) {
+    --toast-accent: #dc2626;
+    --toast-bg: #dc2626;
+  }
+
+  :global(.toast.is-success .toast-title),
+  :global(.toast.is-success .toast-message),
+  :global(.toast.is-error .toast-title),
+  :global(.toast.is-error .toast-message) {
+    color: white;
+  }
+
+  :global(.toast.toast-out) {
     animation: toast-out 0.3s ease forwards;
   }
 
-  .toast-title {
+  :global(.toast-title) {
     font-weight: 800;
     font-size: 0.95rem;
-    color: var(--oscuro);
+    color: color-mix(in srgb, var(--toast-accent) 85%, black);
     letter-spacing: 0.01em;
   }
 
-  .toast-message {
+  :global(.toast-message) {
     font-size: 0.88rem;
-    color: color-mix(in srgb, var(--oscuro) 75%, white);
+    color: color-mix(in srgb, var(--oscuro) 70%, white);
   }
 
+  @keyframes spin {
+    from {
+      transform: scale(1) rotate(0deg);
+    }
+    to {
+      transform: scale(1) rotate(360deg);
+    }
+  }
   @keyframes toast-in {
     from {
       opacity: 0;
@@ -523,7 +564,6 @@ const fields = [
       transform: translateX(0) scale(1);
     }
   }
-
   @keyframes toast-out {
     to {
       opacity: 0;
@@ -532,68 +572,9 @@ const fields = [
   }
 
   @media (max-width: 768px) {
-    .mode-switch {
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    .mode-btn {
-      flex: 1;
-      justify-content: center;
-      padding: 0.65rem 1rem;
-      font-size: 0.78rem;
-    }
-
-    .badge {
-      height: 1.5rem;
-      width: 1.5rem;
-      font-size: 0.78rem;
-    }
-
-    .form-card {
-      padding: 1.6rem;
-    }
-
-    .form-title {
-      font-size: 1.25rem;
-    }
-
-    .field-input,
-    .submit-btn {
-      padding: 0.8rem 1rem;
-      font-size: 0.9rem;
-    }
-
-    .toast-stack {
+    :global(.toast-stack) {
       top: 0.75rem;
       right: 0.75rem;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .mode-btn {
-      margin-right: 25px;
-    }
-  }
-
-  @media (max-width: 520px) {
-    .mode-btn {
-      padding: 0.6rem 0.75rem;
-      gap: 0.35rem;
-      font-size: 0.75rem;
-    }
-
-    .mode-text {
-      font-size: 0.78rem;
-      white-space: nowrap;
-    }
-
-    .badge {
-      display: none;
-    }
-
-    .form-card {
-      padding: 1.25rem;
     }
   }
 </style>
@@ -603,34 +584,128 @@ const fields = [
     const panel = document.querySelector("[data-forms-panel]");
     const buttons = document.querySelectorAll("[data-mode-btn]");
     const switcher = document.querySelector("[data-mode-switch]");
-    const toastStack = document.querySelector("[data-toast-stack]");
     const forms = document.querySelectorAll("form[data-form]");
 
     if (!panel || !buttons.length) return;
 
-    const showToast = (title, message, type = "info") => {
-      if (!toastStack) return;
+    // ✅ Creamos/reusamos un toast stack GLOBAL en body (fuera de .segmento con transform)
+    const getGlobalToastStack = () => {
+      let stack = document.querySelector("#global-toast-stack");
+      if (!stack) {
+        stack = document.createElement("div");
+        stack.id = "global-toast-stack";
+        stack.className = "toast-stack";
+        stack.setAttribute("role", "status");
+        stack.setAttribute("aria-live", "polite");
+        document.body.appendChild(stack);
+      }
+      return stack;
+    };
 
+    const toastStack = getGlobalToastStack();
+
+    let audioContext = null;
+
+    const playSuccessSound = () => {
+      const AudioContextRef = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextRef) return;
+
+      if (!audioContext) audioContext = new AudioContextRef();
+      if (audioContext.state === "suspended") audioContext.resume();
+
+      const now = audioContext.currentTime;
+
+      // Primera nota (Do alto)
+      const oscillator1 = audioContext.createOscillator();
+      const gain1 = audioContext.createGain();
+      oscillator1.type = "sine";
+      oscillator1.frequency.value = 523.25; // C5
+      gain1.gain.value = 0.0001;
+      oscillator1.connect(gain1);
+      gain1.connect(audioContext.destination);
+      gain1.gain.exponentialRampToValueAtTime(0.15, now + 0.02);
+      gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+      oscillator1.start(now);
+      oscillator1.stop(now + 0.2);
+
+      // Segunda nota (Mi - E5)
+      const oscillator2 = audioContext.createOscillator();
+      const gain2 = audioContext.createGain();
+      oscillator2.type = "triangle";
+      oscillator2.frequency.value = 659.25;
+      gain2.gain.value = 0.0001;
+      oscillator2.connect(gain2);
+      gain2.connect(audioContext.destination);
+      gain2.gain.exponentialRampToValueAtTime(0.12, now + 0.12);
+      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+      oscillator2.start(now + 0.1);
+      oscillator2.stop(now + 0.4);
+    };
+
+    // ✅ 2s exactos, y se elimina al terminar la animación
+    const showToast = (title, message, type = "info") => {
       const toast = document.createElement("div");
-      toast.className = "toast";
+      toast.className = `toast${type ? ` is-${type}` : ""}`;
       toast.innerHTML = `
         <div class="toast-title">${title}</div>
         <div class="toast-message">${message}</div>
       `;
 
-      if (type === "success") {
-        toast.style.borderColor =
-          "color-mix(in srgb, var(--cd-azul, #1f6fb7) 65%, transparent)";
-      } else if (type === "error") {
-        toast.style.borderColor = "rgb(239 68 68 / 0.5)";
-      }
-
       toastStack.appendChild(toast);
+
+      const VISIBLE_MS = 2500;
+      const OUT_MS = 300;
+
+      const removeToast = () => {
+        if (!toast.isConnected) return;
+        toast.remove();
+      };
 
       setTimeout(() => {
         toast.classList.add("toast-out");
-        toast.addEventListener("animationend", () => toast.remove());
-      }, 3000);
+        toast.addEventListener("animationend", removeToast, { once: true });
+        setTimeout(removeToast, OUT_MS + 50);
+      }, VISIBLE_MS);
+    };
+
+    const setButtonLoading = (button, isLoading) => {
+      if (!button) return;
+      const textEl = button.querySelector(".submit-text");
+
+      if (isLoading) {
+        button.classList.add("is-loading");
+        button.setAttribute("aria-busy", "true");
+        button.disabled = true;
+        if (textEl) {
+          button.dataset.originalText = textEl.textContent || "";
+          textEl.textContent = "Enviando...";
+        }
+      } else {
+        button.classList.remove("is-loading");
+        button.removeAttribute("aria-busy");
+        button.disabled = false;
+        if (textEl && button.dataset.originalText !== undefined) {
+          textEl.textContent = button.dataset.originalText;
+          delete button.dataset.originalText;
+        }
+      }
+    };
+
+    const submitForm = async (form) => {
+      const endpoint = form.getAttribute("action");
+      const payload = new FormData(form);
+
+      if (endpoint) {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: payload,
+          headers: { Accept: "application/json" },
+        });
+        return response.ok;
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+      return true;
     };
 
     const setMode = (mode) => {
@@ -658,7 +733,7 @@ const fields = [
     });
 
     forms.forEach((form) => {
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const inputs = form.querySelectorAll("input");
@@ -682,18 +757,42 @@ const fields = [
           return;
         }
 
-        showToast(
-          "Enviado con exito",
-          "Gracias por inscribirte. Te contactaremos pronto",
-          "success"
-        );
-        form.reset();
+        const submitButton = form.querySelector("button[type='submit']");
+        setButtonLoading(submitButton, true);
+
+        try {
+          const ok = await submitForm(form);
+
+          if (ok) {
+            showToast(
+              "Registro exitoso",
+              "Gracias por sumarte. Te contactaremos pronto.",
+              "success"
+            );
+            playSuccessSound();
+            form.reset();
+          } else {
+            showToast(
+              "Ocurrio un error",
+              "Intenta de nuevo en unos minutos.",
+              "error"
+            );
+          }
+        } catch (error) {
+          showToast(
+            "Ocurrio un error",
+            "Intenta de nuevo en unos minutos.",
+            "error"
+          );
+        } finally {
+          setButtonLoading(submitButton, false);
+        }
       });
 
       form.querySelectorAll("input").forEach((input) => {
-        input.addEventListener("input", () => {
-          input.classList.remove("input-error");
-        });
+        input.addEventListener("input", () =>
+          input.classList.remove("input-error")
+        );
       });
     });
 
