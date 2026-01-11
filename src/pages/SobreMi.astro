@@ -1,7 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import FotoIntroEstefania from "../assets/fotos/COLMENARES_BLANCA.webp";
-import IconoLibro from "../assets/iconos/ICONOS_INDIVIDUALES-19.png";
+import IconoVerdad from "../assets/iconos/ICONOS_INDIVIDUALES_Mesa de trabajo 1.png";
+import IconoAtajos from "../assets/iconos/ICONOS_INDIVIDUALES-18.png";
+import IconoPuentes from "../assets/iconos/ICONOS_INDIVIDUALES-12.png";
+import IconoNorte from "../assets/iconos/ICONOS_INDIVIDUALES-22.png";
+import IconoJusticia from "../assets/iconos/ICONOS_INDIVIDUALES-16.png";
+import IconoRepresentar from "../assets/iconos/ICONOS_INDIVIDUALES-08.png";
+import IconoFuturo from "../assets/iconos/ICONOS_INDIVIDUALES-17.png";
+import FotoEstefaniaHorizontal from "../assets/fotos/COLMENARES_HORIZONTAL_NEGRO.webp";
 import FotoEstefaniaNegro from "../assets/fotos/COLMENARES_NEGRO.webp";
 
 import { Image } from "astro:assets";
@@ -70,7 +77,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
     </section>
 
     <!-- MANIFIESTO -->
-    <section class="px-2 py-8 lg:py-12 texto-lento">
+    <section class="px-2 py-8 lg:py-12">
         <div class="max-w-3xl mx-auto text-center space-y-2">
             <p class="uppercase tracking-widest text-xs text-gray-500">
                 Manifiesto personal
@@ -83,11 +90,11 @@ import Dialog from "../components/ui/modal/Dialog.astro";
         </div>
 
         <div
-            class="max-w-5xl mx-auto mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[220px]"
+            class="max-w-5xl mx-auto mt-5 grid gap-3 sm:grid-cols-3 auto-rows-[220px]"
         >
             <div
                 id="creo-verdad-open"
-                class="rounded-2xl shadow-md p-4 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+                class="rounded-2xl shadow-md p-3 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
                 <Dialog
                     id="creo-verdad"
@@ -115,13 +122,10 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
-                    <div
-                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
-                    >
-                        Creo en
-                    </div>
                     <Image
-                        src={IconoLibro}
+                        src={IconoVerdad}
+                        width={256}
+                        height={256}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-50 md:-top-8 md:-left-5"
                     />
@@ -130,7 +134,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                     class="text-center h-full flex flex-col items-center justify-center gap-2"
                 >
                     <span
-                        class="font-extralight text-(--cd-oscuro) italic homey-title text-5xl md:text-6xl"
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-5xl md:text-5xl"
                     >
                         La Verdad
                     </span>
@@ -147,7 +151,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
 
             <div
                 id="creo-atajos-open"
-                class="rounded-2xl shadow-md p-4 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+                class="rounded-2xl shadow-md p-3 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
                 <Dialog id="creo-atajos" titulo="Creo en el trabajo sin atajos">
                     <div class="space-y-4 text-gray-700 leading-relaxed">
@@ -182,13 +186,10 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
-                    <div
-                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
-                    >
-                        Creo en
-                    </div>
                     <Image
-                        src={IconoLibro}
+                        src={IconoAtajos}
+                        width={256}
+                        height={256}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-50 md:-top-8 md:-left-5"
                     />
@@ -214,7 +215,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
 
             <div
                 id="creo-puentes-open"
-                class="rounded-2xl shadow-md p-4 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+                class="rounded-2xl shadow-md p-3 relative cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
                 <Dialog
                     id="creo-puentes"
@@ -241,13 +242,10 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
-                    <div
-                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
-                    >
-                        Creo en
-                    </div>
                     <Image
-                        src={IconoLibro}
+                        src={IconoPuentes}
+                        width={256}
+                        height={256}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-50 md:-top-8 md:-left-5"
                     />
@@ -274,7 +272,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
     </section>
 
     <!-- CONVICCIONES -->
-    <section class="px-2 pb-10 lg:pb-16 texto-lento">
+    <section class="px-2 pb-10 lg:pb-16">
         <div
             class="max-w-5xl mx-auto grid gap-3 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[220px]"
         >
@@ -282,9 +280,14 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 class="rounded-2xl shadow-md overflow-hidden h-full relative sm:col-span-2 lg:col-span-2 lg:row-span-2"
             >
                 <Image
+                    src={FotoEstefaniaHorizontal}
+                    alt="Estefania Colmenares"
+                    class="foto-horizontal w-full h-full object-cover object-top"
+                />
+                <Image
                     src={FotoEstefaniaNegro}
                     alt="Estefania Colmenares"
-                    class="w-full h-full object-cover object-top"
+                    class="foto-vertical w-full h-full object-cover object-top"
                 />
                 <div class="absolute inset-0 bg-black/40"></div>
                 <div class="absolute bottom-0 left-0 p-4 text-white">
@@ -297,7 +300,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
 
             <div
                 id="creo-norte-open"
-                class="relative rounded-2xl shadow-md p-4 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+                class="relative rounded-2xl shadow-md p-3 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
                 <Dialog id="creo-norte" titulo="Creo en Norte de Santander">
                     <div class="space-y-4 text-gray-700 leading-relaxed">
@@ -325,13 +328,10 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
-                    <div
-                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
-                    >
-                        Creo en
-                    </div>
                     <Image
-                        src={IconoLibro}
+                        src={IconoNorte}
+                        width={256}
+                        height={256}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-30 md:-top-8 md:-left-5"
                     />
@@ -340,7 +340,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                     class="text-center h-full flex flex-col items-center justify-center gap-2"
                 >
                     <span
-                        class="font-extralight text-(--cd-oscuro) italic homey-title text-4xl md:text-5xl"
+                        class="font-extralight text-(--cd-oscuro) italic homey-title text-4xl md:text-4xl"
                     >
                         Norte de Santander
                     </span>
@@ -357,7 +357,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
 
             <div
                 id="creo-justicia-open"
-                class="relative rounded-2xl shadow-md p-4 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+                class="relative rounded-2xl shadow-md p-3 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
                 <Dialog
                     id="creo-justicia"
@@ -385,13 +385,10 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
-                    <div
-                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
-                    >
-                        Creo en
-                    </div>
                     <Image
-                        src={IconoLibro}
+                        src={IconoJusticia}
+                        width={256}
+                        height={256}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-30 md:-top-8 md:-left-5"
                     />
@@ -417,7 +414,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
 
             <div
                 id="creo-representacion-open"
-                class="relative rounded-2xl shadow-md p-4 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+                class="relative rounded-2xl shadow-md p-3 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
                 <Dialog
                     id="creo-representacion"
@@ -445,13 +442,10 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
-                    <div
-                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
-                    >
-                        Creo en
-                    </div>
                     <Image
-                        src={IconoLibro}
+                        src={IconoRepresentar}
+                        width={256}
+                        height={256}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-30 md:-top-8 md:-left-5"
                     />
@@ -477,7 +471,7 @@ import Dialog from "../components/ui/modal/Dialog.astro";
 
             <div
                 id="creo-futuro-open"
-                class="relative rounded-2xl shadow-md p-4 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
+                class="relative rounded-2xl shadow-md p-3 overflow-hidden cursor-pointer group transition hover:-translate-y-1 hover:shadow-lg h-full"
             >
                 <Dialog
                     id="creo-futuro"
@@ -515,13 +509,10 @@ import Dialog from "../components/ui/modal/Dialog.astro";
                 <div
                     class="absolute top-0 left-0 w-full h-full -z-20 overflow-hidden"
                 >
-                    <div
-                        class="absolute text-5xl md:text-4xl text-(--cd-oscuro) font-extralight homey-title italic -rotate-30 left-0 top-2"
-                    >
-                        Creo en
-                    </div>
                     <Image
-                        src={IconoLibro}
+                        src={IconoFuturo}
+                        width={256}
+                        height={256}
                         alt=""
                         class="w-full h-full md:w-34 md:h-34 absolute object-cover opacity-10 md:opacity-30 md:-top-8 md:-left-5"
                     />
@@ -567,39 +558,28 @@ import Dialog from "../components/ui/modal/Dialog.astro";
         font-family: "Homey Feeling";
     }
 
-    /* FOTO: empieza MUY TARDE */
-    .foto-lenta {
-        animation: fadeInSlow linear both;
-        animation-timeline: view();
-        animation-range: entry 60% cover 85%;
+    .foto-horizontal {
+        object-position: center top;
     }
 
-    @keyframes fadeInSlow {
-        from {
-            opacity: 0;
-            scale: 0.92;
-        }
-        to {
-            opacity: 1;
-            scale: 1;
+    .foto-vertical {
+        display: none;
+    }
+
+    @media (min-width: 770px) {
+        .foto-horizontal {
+            object-position: center 20%;
         }
     }
 
-    /* TEXTO: casi imperceptible */
-    .texto-lento {
-        animation: textReveal linear both;
-        animation-timeline: view();
-        animation-range: entry 20% cover 50%;
+    @media (min-width: 1024px) {
+        .foto-horizontal {
+            display: none;
+        }
+
+        .foto-vertical {
+            display: block;
+        }
     }
 
-    @keyframes textReveal {
-        from {
-            opacity: 0;
-            transform: translateY(24px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 </style>

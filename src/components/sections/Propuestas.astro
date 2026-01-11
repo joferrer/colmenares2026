@@ -1,257 +1,1080 @@
----
+﻿---
 import { Image } from "astro:assets";
 import iconPropuestas from "../../assets/iconos/ICONOS_INDIVIDUALES-19.png";
 
-const propuestas = [
+const ejes = [
   {
-    title: "Seguridad y convivencia",
-    desc: "Refuerzo inteligente con tecnología, más presencia comunitaria y justicia rápida en barrios críticos.",
-    tag: "Confianza",
+    title: "Seguridad",
+    lead: "El Norte no se rinde.",
+    problem:
+      "Por eso no acepta que la violencia y el crimen sigan mandando en la frontera.",
+    solution:
+      "Desde el Congreso vamos a recuperar el control territorial y a golpear la fábrica de drogas.",
   },
   {
-    title: "Empleo y emprendimiento",
-    desc: "Créditos blandos y formación exprés para jóvenes y mujeres; compras públicas que impulsen pymes locales.",
-    tag: "Impulso",
+    title: "Frontera",
+    lead: "El Norte no se rinde.",
+    problem:
+      "Por eso no acepta que la frontera sea sinónimo de ilegalidad y abandono.",
+    solution: "Propongo reglas claras para que vuelva a producir.",
   },
   {
-    title: "Salud cercana",
-    desc: "Rutas móviles de atención, telemedicina rural y priorización de salud mental en colegios y barrios.",
-    tag: "Cuidado",
+    title: "Tranquilidad económica",
+    lead: "El Norte no se rinde.",
+    problem: "Por eso no acepta que el trabajo solo alcance para sobrevivir.",
+    solution:
+      "Propongo cambiar cómo se invierte la plata pública para generar empleo que sí saque adelante.",
+  },
+];
+
+const batallas = [
+  {
+    verb: "Defender",
+    title: "Seguridad",
+    color: "red",
+    items: [
+      {
+        title: "Desmontar la Zona de Integración Criminal Fronteriza",
+        desc: "Retomar la iniciativa frente al crimen y desconfigurar la gobernanza del ELN en la línea fronteriza.",
+      },
+      {
+        title: "Seguridad sin legitimación criminal",
+        desc: "No más reconocimiento político a organizaciones netamente criminales.",
+      },
+      {
+        title: "Golpear la fábrica de drogas, no solo el camión",
+        desc: "Reducir la producción con aspersión con glifosato, sustitución de cultivos y vías rurales que hagan viable la economía legal.",
+      },
+    ],
   },
   {
-    title: "Educación del futuro",
-    desc: "Dobles jornadas con énfasis en STEM y bilingüismo, aulas digitales y alianzas universidad-empresa.",
-    tag: "Futuro",
+    verb: "Frenar",
+    title: "Déficit y carga tributaria",
+    color: "yellow",
+    items: [
+      {
+        title: "Déficit cero",
+        desc: "Prohibición de endeudamiento corriente y reorganización de la rama ejecutiva para eliminar entidades redundantes.",
+      },
+      {
+        title: "Presupuesto desde cero",
+        desc: "Construir el PGN justificando cada gasto, no sumando porcentajes al del año anterior.",
+      },
+      {
+        title: "EGO/RIGOR",
+        desc: "Revisión del impacto del gasto para evitar leyes sin costo a 10 años ni fuente de financiación clara.",
+      },
+      {
+        title: "Eliminar el 4x1000",
+        desc: "Castiga la formalización y a las pymes, y penaliza usar el sistema bancario.",
+      },
+    ],
   },
   {
-    title: "Campo productivo",
-    desc: "Vías terciarias, tecnificación y cadenas cortas de comercialización para aumentar ingresos rurales.",
-    tag: "Territorio",
+    verb: "Empujar",
+    title: "Economía de los colombianos",
+    color: "blue",
+    items: [
+      {
+        title: "Del rebusque a la tranquilidad",
+        desc: "Eficiencia del gasto público e inversión en infraestructura, seguridad, justicia y capital humano.",
+      },
+      {
+        title: "Incentivos para empresas",
+        desc: "Que contraten madres de niños menores de seis años.",
+      },
+      {
+        title: "Infraestructura",
+        desc: "Retomar 5G, terminar Bucaramanga-Pamplona y acelerar placa huella para conectar la zona rural.",
+      },
+      {
+        title: "Minería",
+        desc: "Ventanilla única, reforma técnica al Código Minero y estabilidad jurídica para atraer inversión.",
+      },
+    ],
   },
 ];
 ---
 
-<section class="segmento container mx-auto max-w-7xl px-4 md:px-6 lg:px-8 pt-12 md:pt-16">
-  <div class="propuestas-card">
+<section
+  class="segmento container mx-auto max-w-7xl px-4 md:px-6 lg:px-8 py-16 md:py-24"
+>
+  <div class="propuestas-card relative overflow-hidden rounded-3xl">
+    <div class="propuestas-bg" aria-hidden="true"></div>
     <Image
       src={iconPropuestas}
-      alt="Marca de propuestas"
-      class="watermark-icon"
+      alt=""
+      class="propuestas-icon"
       loading="lazy"
     />
-    <div class="propuestas-header">
-      <div class="titles">
-        <span class="pill">Propuestas</span>
-        <h2 class="prop-heading">Lo que vamos a lograr juntos</h2>
-        <p class="prop-lede">
-          Cinco frentes claros para transformar el territorio con soluciones
-          medibles y cercanas a la gente.
-        </p>
-      </div>
-    </div>
+    <div class="relative px-6 py-10 md:px-12 md:py-16 lg:px-20">
+  <!-- Header -->
+  <div class="header-section mb-12 md:mb-16">
+    <span class="pill">Propuestas</span>
+    <h2 class="main-title">
+      Las tres batallas de Estefanía<br />en el Congreso
+    </h2>
+    <p class="main-subtitle">
+      Lo que Estefanía va a <strong>defender</strong>, <strong>frenar</strong> y <strong>empujar</strong> desde el Congreso.
+    </p>
+  </div>
 
-    <div class="grid">
-      {propuestas.map((p) => (
-        <article class="prop-card">
-          <div class="prop-top">
-            <span class="tag">{p.tag}</span>
-            <h3>{p.title}</h3>
-          </div>
-          <p>{p.desc}</p>
-          <div class="bar" aria-hidden="true"></div>
-        </article>
-      ))}
+  <!-- Tres Ejes -->
+  <div class="ejes-section mb-16 md:mb-20">
+    <h3 class="section-heading">Tres ejes fundamentales</h3>
+    <div class="ejes-grid">
+      {
+        ejes.map((eje, index) => (
+          <article class="eje-card">
+            <div class="eje-number">0{index + 1}</div>
+            <div class="eje-body">
+              <p class="eje-lead">{eje.lead}</p>
+              <h4 class="eje-title">{eje.title}</h4>
+              <p class="eje-problem">{eje.problem}</p>
+              <p class="eje-solution">{eje.solution}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Batallas - Preview Cards -->
+  <div class="batallas-section">
+    <h3 class="section-heading">Iniciativas desde el Congreso</h3>
+
+    <div class="batallas-grid">
+      {
+        batallas.map((batalla, index) => (
+          <article
+            class={`batalla-card batalla-${batalla.color} cursor-pointer`}
+            data-batalla-index={index}
+          >
+            <div class="batalla-header">
+              <span class="batalla-verb">{batalla.verb}</span>
+              <h4 class="batalla-title">{batalla.title}</h4>
+            </div>
+
+            <div class="batalla-preview">
+              <p class="preview-text">{batalla.items.length} iniciativas</p>
+              <button class="view-more-btn">Ver detalles →</button>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
     </div>
   </div>
 </section>
 
+<!-- Modal -->
+<div
+  id="propuestas-modal"
+  class="modal-overlay hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-labelledby="modal-title"
+  aria-describedby="modal-desc"
+>
+  <div class="modal-container" role="document" tabindex="-1">
+    <button
+      class="modal-close"
+      id="modal-close"
+      type="button"
+      aria-label="Cerrar"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Navigation Arrows -->
+    <button
+      class="modal-nav modal-nav-prev"
+      id="modal-prev"
+      type="button"
+      aria-label="Anterior"
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button
+      class="modal-nav modal-nav-next"
+      id="modal-next"
+      type="button"
+      aria-label="Siguiente"
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <!-- Modal Content -->
+    <div id="modal-content" class="modal-content" aria-live="polite">
+      <!-- Content will be injected by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ batallas }}>
+  let currentIndex = 0;
+  const modal = document.getElementById("propuestas-modal");
+  const modalContent = document.getElementById("modal-content");
+  const closeButton = document.getElementById("modal-close");
+  let lastActiveElement = null;
+  let closeTimer = null;
+  const HIDDEN_CLASS = "hidden";
+  const OPEN_CLASS = "is-open";
+  const CLOSE_DELAY = 200;
+
+  function openModal(index) {
+    currentIndex = index;
+    renderModalContent();
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    lastActiveElement = document.activeElement;
+    modal.classList.remove(HIDDEN_CLASS);
+    requestAnimationFrame(() => modal.classList.add(OPEN_CLASS));
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    if (closeButton) closeButton.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove(OPEN_CLASS);
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    closeTimer = window.setTimeout(() => {
+      modal.classList.add(HIDDEN_CLASS);
+    }, CLOSE_DELAY);
+    if (lastActiveElement && typeof lastActiveElement.focus === "function") {
+      lastActiveElement.focus();
+    }
+  }
+
+  function goToNext() {
+    currentIndex = (currentIndex + 1) % batallas.length;
+    renderModalContent();
+  }
+
+  function goToPrev() {
+    currentIndex = (currentIndex - 1 + batallas.length) % batallas.length;
+    renderModalContent();
+  }
+
+  function goToIndex(index) {
+    currentIndex = index;
+    renderModalContent();
+  }
+
+  function renderModalContent() {
+    const batalla = batallas[currentIndex];
+
+    const itemsHTML = batalla.items
+      .map(
+        (item) => `
+      <div class="batalla-item">
+        <h5 class="item-title">${item.title}</h5>
+        <p class="item-desc">${item.desc}</p>
+      </div>
+    `
+      )
+      .join("");
+
+    const dotsHTML = batallas
+      .map(
+        (item, idx) => `
+      <button
+        type="button"
+        class="dot ${idx === currentIndex ? "dot-active" : ""}"
+        data-dot-index="${idx}"
+        aria-label="Ver ${item.verb} ${item.title}"
+        ${idx === currentIndex ? 'aria-current="true"' : ""}
+      ></button>
+    `
+      )
+      .join("");
+
+    modalContent.className = `modal-content batalla-${batalla.color}`;
+    modalContent.innerHTML = `
+      <article class="batalla-card batalla-${batalla.color} modal-batalla-card">
+        <div class="batalla-header">
+          <span class="batalla-verb">${batalla.verb}</span>
+          <h3 id="modal-title" class="batalla-title">${batalla.title}</h3>
+          <p id="modal-desc" class="modal-summary">${batalla.items.length} iniciativas</p>
+        </div>
+
+        <div class="batalla-items">
+          ${itemsHTML}
+        </div>
+      </article>
+
+      <div class="modal-dots" aria-label="Cambiar batalla">
+        ${dotsHTML}
+      </div>
+    `;
+    modalContent.scrollTop = 0;
+
+    // Add event listeners to dots
+    document.querySelectorAll(".dot").forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const index = parseInt(dot.dataset.dotIndex);
+        goToIndex(index);
+      });
+    });
+  }
+
+  // Event listeners
+  document.querySelectorAll(".batalla-card").forEach((card) => {
+    const index = parseInt(card.dataset.batallaIndex);
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("aria-haspopup", "dialog");
+    card.addEventListener("click", () => {
+      openModal(index);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openModal(index);
+      }
+    });
+  });
+
+  document.getElementById("modal-close").addEventListener("click", closeModal);
+  document.getElementById("modal-prev").addEventListener("click", goToPrev);
+  document.getElementById("modal-next").addEventListener("click", goToNext);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target.id === "propuestas-modal") {
+      closeModal();
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains(HIDDEN_CLASS)) {
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowLeft") goToPrev();
+      if (e.key === "ArrowRight") goToNext();
+    }
+  });
+</script>
+
 <style>
+  :root {
+    --cd-oscuro: #253e6b;
+    --cd-azul: #63b9e9;
+    --cd-amarillo: #fec900;
+    --cd-rojo: #e63946;
+  }
+
   .propuestas-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1.75rem;
     background: white;
-    border: 1px solid color-mix(in srgb, var(--cd-oscuro, #253e6b) 8%, white);
-    box-shadow: 0 24px 60px -30px rgb(0 0 0 / 0.35);
-    padding: clamp(1.5rem, 2vw, 2.5rem);
-    ring: 1px solid color-mix(in srgb, var(--cd-azul, #63b9e9) 18%, transparent);
+    border: 1px solid
+      color-mix(in srgb, var(--cd-oscuro) 10%, transparent);
+    box-shadow: 0 35px 65px -45px rgb(0 0 0 / 0.45);
   }
 
-  .propuestas-card::before {
-    content: "";
+  .propuestas-bg {
     position: absolute;
-    border-radius: 999px;
-    filter: blur(50px);
-    opacity: 0.35;
-    z-index: 0;
-    width: 18rem;
-    height: 18rem;
-    background: color-mix(in srgb, var(--cd-azul, #63b9e9) 60%, transparent);
-    top: -5rem;
-    right: -6rem;
-  }
-
-  .watermark-icon {
-    position: absolute;
-    top: -3rem;
-    right: -2rem;
-    width: 220px;
-    opacity: 0.08;
-    transform: rotate(10deg);
+    inset: 0;
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--cd-azul) 8%, white),
+      color-mix(in srgb, var(--cd-amarillo) 10%, white)
+    );
     pointer-events: none;
-    filter: drop-shadow(0 10px 22px rgb(0 0 0 / 0.2));
-    z-index: 0;
   }
 
-  .propuestas-header {
-    position: relative;
-    display: grid;
-    gap: 1rem;
-    align-items: center;
-    z-index: 1;
-    margin-bottom: 1.5rem;
+  .propuestas-icon {
+    position: absolute;
+    right: -2rem;
+    top: -2rem;
+    width: 220px;
+    opacity: 0.12;
+    transform: rotate(8deg);
+    pointer-events: none;
   }
 
-  .titles {
-    display: grid;
-    gap: 0.5rem;
+  /* Header */
+  .header-section {
+    text-align: left;
   }
 
   .pill {
     display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.3rem 0.9rem;
+    padding: 0.5rem 1.25rem;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--cd-amarillo, #fec900) 18%, white);
-    color: var(--cd-oscuro, #253e6b);
-    font-size: 0.78rem;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--cd-amarillo) 25%, white),
+      color-mix(in srgb, var(--cd-amarillo) 15%, white)
+    );
+    color: var(--cd-oscuro);
+    font-size: 0.875rem;
     font-weight: 800;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    width: fit-content;
+    margin-bottom: 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--cd-amarillo) 40%, transparent);
   }
 
-  .prop-heading {
-    margin: 0;
-    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
-    line-height: 1.05;
+  .main-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 900;
-    letter-spacing: -0.01em;
-    color: var(--cd-oscuro, #253e6b);
+    color: var(--cd-oscuro);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
   }
 
-  .prop-lede {
+  .main-subtitle {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    color: color-mix(in srgb, var(--cd-oscuro) 70%, white);
+    max-width: 600px;
     margin: 0;
-    color: color-mix(in srgb, var(--cd-oscuro, #253e6b) 75%, white);
-    font-size: 1.08rem;
-    line-height: 1.65;
-    max-width: 44rem;
+    line-height: 1.6;
   }
 
-  .grid {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+  /* Section Headings */
+  .section-heading {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 800;
+    color: var(--cd-oscuro);
+    margin: 0 0 2rem;
+    text-align: left;
   }
 
-  .prop-card {
-    position: relative;
+  /* Ejes Section */
+  .ejes-grid {
     display: grid;
-    gap: 0.65rem;
-    padding: 1.2rem 1.2rem 1.1rem;
-    border-radius: 1rem;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .eje-card {
+    position: relative;
     background: white;
-    border: 1px solid color-mix(in srgb, var(--cd-oscuro, #253e6b) 8%, white);
-    box-shadow: 0 14px 30px -18px rgb(0 0 0 / 0.25);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    border: 2px solid color-mix(in srgb, var(--cd-azul) 20%, white);
+    box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    overflow: hidden;
   }
 
-  .prop-card:hover {
-    transform: translateY(-6px);
-    border-color: color-mix(in srgb, var(--cd-amarillo, #fec900) 50%, transparent);
-    box-shadow: 0 20px 36px -16px rgb(0 0 0 / 0.28);
+  .eje-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cd-azul), var(--cd-amarillo));
   }
 
-  .prop-top {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
+  .eje-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.25);
+    border-color: var(--cd-azul);
   }
 
-  .tag {
-    padding: 0.35rem 0.75rem;
-    border-radius: 999px;
-    font-weight: 800;
-    font-size: 0.78rem;
-    color: var(--cd-oscuro, #253e6b);
-    background: color-mix(in srgb, var(--cd-amarillo, #fec900) 28%, white);
-    border: 1px solid color-mix(in srgb, var(--cd-amarillo, #fec900) 45%, transparent);
-    align-self: flex-end;
+  .eje-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    background: linear-gradient(
+      135deg,
+      var(--cd-azul),
+      color-mix(in srgb, var(--cd-azul) 80%, white)
+    );
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 12px rgba(99, 185, 233, 0.3);
   }
 
-  h3 {
+  .eje-body {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .eje-lead {
     margin: 0;
-    font-size: 1.14rem;
-    color: var(--cd-oscuro, #253e6b);
-    flex: 1;
-    font-weight: 800;
-    letter-spacing: -0.01em;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: color-mix(in srgb, var(--cd-oscuro) 60%, white);
   }
 
-  .prop-card p {
+  .eje-title {
     margin: 0;
-    color: color-mix(in srgb, var(--cd-oscuro, #253e6b) 70%, white);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--cd-oscuro);
+    line-height: 1.2;
+  }
+
+  .eje-problem {
+    margin: 0;
+    color: color-mix(in srgb, var(--cd-oscuro) 70%, white);
     line-height: 1.6;
     font-size: 1rem;
-    font-weight: 500;
   }
 
-  .bar {
-    height: 4px;
-    width: 44%;
+  .eje-solution {
+    margin: 0;
+    color: var(--cd-oscuro);
+    font-weight: 600;
+    line-height: 1.6;
+    font-size: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--cd-azul) 15%, white);
+  }
+
+  /* Batallas Section */
+  .batallas-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  :global(.batalla-card) {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border: 2px solid;
+    box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  :global(.batalla-red) {
+    border-color: color-mix(in srgb, var(--cd-rojo) 30%, white);
     background: linear-gradient(
-      90deg,
-      var(--cd-amarillo, #fec900),
-      color-mix(in srgb, var(--cd-azul, #63b9e9) 70%, white)
+      to bottom right,
+      white 0%,
+      color-mix(in srgb, var(--cd-rojo) 3%, white) 100%
     );
+  }
+
+  :global(.batalla-yellow) {
+    border-color: color-mix(in srgb, var(--cd-amarillo) 40%, white);
+    background: linear-gradient(
+      to bottom right,
+      white 0%,
+      color-mix(in srgb, var(--cd-amarillo) 5%, white) 100%
+    );
+  }
+
+  :global(.batalla-blue) {
+    border-color: color-mix(in srgb, var(--cd-azul) 30%, white);
+    background: linear-gradient(
+      to bottom right,
+      white 0%,
+      color-mix(in srgb, var(--cd-azul) 5%, white) 100%
+    );
+  }
+
+  :global(.batalla-card:hover) {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.25);
+  }
+
+  :global(.batalla-red:hover) {
+    border-color: var(--cd-rojo);
+  }
+  :global(.batalla-yellow:hover) {
+    border-color: var(--cd-amarillo);
+  }
+  :global(.batalla-blue:hover) {
+    border-color: var(--cd-azul);
+  }
+
+  :global(.batalla-header) {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid color-mix(in srgb, var(--cd-oscuro) 10%, white);
+  }
+
+  :global(.batalla-verb) {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
     border-radius: 999px;
-    margin-top: 0.35rem;
+    font-weight: 800;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    border: 2px solid;
   }
 
-  @keyframes pulse {
-    0% {
-      transform: scale(0.92);
-      opacity: 0.9;
-    }
-    100% {
-      transform: scale(1.4);
-      opacity: 0;
+  :global(.batalla-red .batalla-verb) {
+    background: color-mix(in srgb, var(--cd-rojo) 15%, white);
+    color: var(--cd-rojo);
+    border-color: color-mix(in srgb, var(--cd-rojo) 30%, transparent);
+  }
+
+  :global(.batalla-yellow .batalla-verb) {
+    background: color-mix(in srgb, var(--cd-amarillo) 20%, white);
+    color: color-mix(in srgb, var(--cd-amarillo) 30%, var(--cd-oscuro));
+    border-color: color-mix(in srgb, var(--cd-amarillo) 40%, transparent);
+  }
+
+  :global(.batalla-blue .batalla-verb) {
+    background: color-mix(in srgb, var(--cd-azul) 15%, white);
+    color: var(--cd-azul);
+    border-color: color-mix(in srgb, var(--cd-azul) 30%, transparent);
+  }
+
+  :global(.batalla-title) {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--cd-oscuro);
+    line-height: 1.2;
+  }
+
+  :global(.batalla-items) {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  :global(.batalla-item) {
+    padding: 1.25rem;
+    border-radius: 0.875rem;
+    background: white;
+    border-left: 4px solid;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+  }
+
+  :global(.batalla-red .batalla-item) {
+    border-color: var(--cd-rojo);
+  }
+
+  :global(.batalla-yellow .batalla-item) {
+    border-color: var(--cd-amarillo);
+  }
+
+  :global(.batalla-blue .batalla-item) {
+    border-color: var(--cd-azul);
+  }
+
+  :global(.batalla-item:hover) {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  :global(.item-title) {
+    margin: 0 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--cd-oscuro);
+    line-height: 1.3;
+  }
+
+  :global(.item-desc) {
+    margin: 0;
+    color: color-mix(in srgb, var(--cd-oscuro) 70%, white);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+  }
+
+  :global(.modal-batalla-card) {
+    cursor: default;
+    margin: 0;
+  }
+
+  :global(.modal-batalla-card:hover) {
+    transform: none;
+    box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.15);
+  }
+
+  .batalla-preview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .preview-text {
+    margin: 0;
+    color: color-mix(in srgb, var(--cd-oscuro) 60%, white);
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  .view-more-btn {
+    background: none;
+    border: none;
+    color: var(--cd-oscuro);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+  }
+
+  .view-more-btn:hover {
+    background: color-mix(in srgb, var(--cd-oscuro) 5%, white);
+  }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 18, 36, 0.86),
+      rgba(10, 18, 36, 0.66)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.25s ease,
+      visibility 0s linear 0.25s;
+  }
+
+  .modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.25s ease;
+  }
+
+  .modal-overlay.hidden {
+    display: none;
+  }
+
+  .modal-container {
+    position: relative;
+    width: min(900px, 100%);
+    max-height: 90vh;
+    overflow: visible;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    background: white;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .modal-close:hover {
+    transform: scale(1.1);
+    background: color-mix(in srgb, var(--cd-rojo) 10%, white);
+  }
+
+  .modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 2px solid color-mix(in srgb, var(--cd-oscuro) 15%, white);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .modal-nav:hover {
+    transform: translateY(-50%) scale(1.1);
+    border-color: var(--cd-azul);
+    background: color-mix(in srgb, var(--cd-azul) 5%, white);
+  }
+
+  .modal-nav-prev {
+    left: -4rem;
+  }
+
+  .modal-nav-next {
+    right: -4rem;
+  }
+
+  .modal-content {
+    --modal-accent: var(--cd-azul);
+    --modal-accent-ink: white;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--modal-accent) 12%, white),
+      white 38%
+    );
+    border-radius: 1.6rem;
+    padding: 2.5rem;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    border: 2px solid var(--modal-accent);
+    max-height: 85vh;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
+  }
+
+  .modal-overlay.is-open .modal-content {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-content.batalla-red {
+    --modal-accent: var(--cd-rojo);
+  }
+
+  .modal-content.batalla-yellow {
+    --modal-accent: var(--cd-amarillo);
+    --modal-accent-ink: var(--cd-oscuro);
+  }
+
+  .modal-content.batalla-blue {
+    --modal-accent: var(--cd-azul);
+  }
+
+  .modal-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--modal-accent) 25%, transparent);
+  }
+
+  .modal-verb {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    border: 2px solid color-mix(in srgb, var(--modal-accent) 35%, transparent);
+    background: color-mix(in srgb, var(--modal-accent) 16%, white);
+    color: color-mix(in srgb, var(--modal-accent) 70%, var(--cd-oscuro));
+  }
+
+  .modal-title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--cd-oscuro);
+    line-height: 1.2;
+  }
+
+  :global(.modal-summary) {
+    margin: 0.5rem 0 0;
+    color: color-mix(in srgb, var(--cd-oscuro) 70%, white);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .modal-items {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .modal-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--cd-oscuro) 2%, white);
+    border-left: 4px solid
+      color-mix(in srgb, var(--modal-accent) 80%, transparent);
+    transition: all 0.2s ease;
+  }
+
+  .modal-item:hover {
+    background: color-mix(in srgb, var(--cd-oscuro) 4%, white);
+    transform: translateX(4px);
+  }
+
+  .modal-item-number {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--modal-accent-ink);
+    flex-shrink: 0;
+    background: var(--modal-accent);
+  }
+
+  .modal-item-content {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .modal-item-title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--cd-oscuro);
+    line-height: 1.3;
+  }
+
+  .modal-item-desc {
+    margin: 0;
+    color: color-mix(in srgb, var(--cd-oscuro) 70%, white);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+  }
+
+  /* Dots Indicator */
+  :global(.modal-dots) {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  :global(.dot) {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--cd-oscuro) 20%, white);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+  }
+
+  :global(.dot:hover) {
+    background: color-mix(in srgb, var(--cd-oscuro) 40%, white);
+  }
+
+  :global(.dot-active) {
+    background: var(--modal-accent);
+    width: 1.5rem;
+    border-radius: 999px;
+  }
+
+  /* Responsive */
+  @media (min-width: 1024px) {
+    .ejes-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  @media (max-width: 768px) {
-    .propuestas-header {
-      grid-template-columns: 1fr;
-      justify-items: start;
-    }
-    .icon-wrap {
-      width: 78px;
-      height: 78px;
-    }
-    .icon {
-      width: 62px;
-      height: 62px;
+  @media (max-width: 1024px) {
+    .modal-nav {
+      display: none;
     }
   }
 
   @media (max-width: 640px) {
-    .tag {
-      align-self: flex-end;
+    .ejes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .eje-card,
+    .batalla-card {
+      padding: 1.5rem;
+    }
+
+    .propuestas-icon {
+      width: 160px;
+      right: -1rem;
+      top: -1rem;
+      opacity: 0.1;
+    }
+
+    .modal-content {
+      padding: 1.5rem;
+      max-height: 82vh;
+    }
+
+    .modal-close {
+      top: -2.5rem;
+    }
+
+    .modal-item {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .modal-overlay,
+    .modal-content,
+    .modal-item,
+    .modal-nav,
+    .modal-close {
+      transition: none;
+    }
+
+    .modal-item:hover {
+      transform: none;
     }
   }
 </style>
