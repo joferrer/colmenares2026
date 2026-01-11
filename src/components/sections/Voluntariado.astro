@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import logoAzul from "../../assets/logos/LOGO_BASE_ESTAFANIA-02.png";
 import iconos from "../../assets/iconos/ICONOS_INDIVIDUALES-02.png";
 
@@ -75,8 +76,10 @@ const fields = [
     <span class="blur-blob blob-1"></span>
     <span class="blur-blob blob-2"></span>
 
-    <img
-      src={iconos.src}
+    <Image
+      src={iconos}
+      width={256}
+      height={256}
       alt=""
       class="iconos-vol pointer-events-none absolute -top-10 -left-14 w-48 rotate-6 opacity-25 md:w-60 lg:w-72"
       loading="lazy"
