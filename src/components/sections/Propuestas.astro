@@ -1,4 +1,4 @@
-﻿---
+---
 import { Image } from "astro:assets";
 import iconPropuestas from "../../assets/iconos/ICONOS_INDIVIDUALES-19.png";
 
@@ -111,62 +111,66 @@ const batallas = [
       loading="lazy"
     />
     <div class="relative px-6 py-10 md:px-12 md:py-16 lg:px-20">
-  <!-- Header -->
-  <div class="header-section mb-12 md:mb-16">
-    <span class="pill">Propuestas</span>
-    <h2 class="main-title">
-      Las tres batallas de Estefanía<br />en el Congreso
-    </h2>
-    <p class="main-subtitle">
-      Lo que Estefanía va a <strong>defender</strong>, <strong>frenar</strong> y <strong>empujar</strong> desde el Congreso.
-    </p>
-  </div>
+      <!-- Header -->
+      <div class="header-section mb-12 md:mb-16">
+        <span class="pill">Propuestas</span>
+        <h2 class="main-title">
+          Las tres batallas de Estefanía<br />en el Congreso
+        </h2>
+        <p class="main-subtitle">
+          Lo que Estefanía va a <strong>defender</strong>, <strong
+            >frenar</strong
+          > y <strong>empujar</strong> desde el Congreso.
+        </p>
+      </div>
 
-  <!-- Tres Ejes -->
-  <div class="ejes-section mb-16 md:mb-20">
-    <h3 class="section-heading">Tres ejes fundamentales</h3>
-    <div class="ejes-grid">
-      {
-        ejes.map((eje, index) => (
-          <article class="eje-card">
-            <div class="eje-number">0{index + 1}</div>
-            <div class="eje-body">
-              <p class="eje-lead">{eje.lead}</p>
-              <h4 class="eje-title">{eje.title}</h4>
-              <p class="eje-problem">{eje.problem}</p>
-              <p class="eje-solution">{eje.solution}</p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </div>
+      <!-- Tres Ejes -->
+      <div class="ejes-section mb-16 md:mb-20">
+        <h3 class="section-heading">Tres ejes fundamentales</h3>
+        <div class="ejes-grid">
+          {
+            ejes.map((eje, index) => (
+              <article class="eje-card">
+                <div class="eje-number">0{index + 1}</div>
+                <div class="eje-body">
+                  <p class="eje-lead">{eje.lead}</p>
+                  <h4 class="eje-title">{eje.title}</h4>
+                  <p class="eje-problem">{eje.problem}</p>
+                  <p class="eje-solution">{eje.solution}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
 
-  <!-- Batallas - Preview Cards -->
-  <div class="batallas-section">
-    <h3 class="section-heading">Iniciativas desde el Congreso</h3>
+      <!-- Batallas - Preview Cards -->
+      <div class="batallas-section">
+        <h3 class="section-heading">Iniciativas desde el Congreso</h3>
 
-    <div class="batallas-grid">
-      {
-        batallas.map((batalla, index) => (
-          <article
-            class={`batalla-card batalla-${batalla.color} cursor-pointer`}
-            data-batalla-index={index}
-          >
-            <div class="batalla-header">
-              <span class="batalla-verb">{batalla.verb}</span>
-              <h4 class="batalla-title">{batalla.title}</h4>
-            </div>
+        <div class="batallas-grid">
+          {
+            batallas.map((batalla, index) => (
+              <article
+                class={`batalla-card batalla-${batalla.color} cursor-pointer`}
+                data-batalla-index={index}
+              >
+                <div class="batalla-header">
+                  <span class="batalla-verb">{batalla.verb}</span>
+                  <h4 class="batalla-title">{batalla.title}</h4>
+                </div>
 
-            <div class="batalla-preview">
-              <p class="preview-text">{batalla.items.length} iniciativas</p>
-              <button class="view-more-btn">Ver detalles →</button>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </div>
+                <div class="batalla-preview">
+                  <p class="preview-text">{batalla.items.length} iniciativas</p>
+                  <button class="view-more-btn">
+                    Ver detalles →
+                  </button>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -260,10 +264,74 @@ const batallas = [
   const HIDDEN_CLASS = "hidden";
   const OPEN_CLASS = "is-open";
   const CLOSE_DELAY = 200;
+  const SWIPE_THRESHOLD = 45;
+  const SWIPE_ALLOWED_TIME = 700;
+  const SWIPE_ANIMATION_DURATION = 240;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  let swipeTimer = null;
+  function handleTouchStart(event) {
+    if (!event.touches || event.touches.length !== 1) {
+      return;
+    }
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartTime = Date.now();
+  }
 
+  function handleTouchEnd(event) {
+    if (
+      !touchStartTime ||
+      !event.changedTouches ||
+      !event.changedTouches.length
+    ) {
+      return;
+    }
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+    const elapsed = Date.now() - touchStartTime;
+    touchStartX = 0;
+    touchStartY = 0;
+    touchStartTime = 0;
+    if (elapsed > SWIPE_ALLOWED_TIME) {
+      return;
+    }
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD) {
+      return;
+    }
+    if (Math.abs(deltaX) <= Math.abs(deltaY)) {
+      return;
+    }
+    if (deltaX < 0) {
+      goToNext();
+      return;
+    }
+    goToPrev();
+  }
+  function applySwipeAnimation(direction) {
+    if (!modalContent) {
+      return;
+    }
+    const className = direction === "next" ? "swipe-left" : "swipe-right";
+    modalContent.classList.remove("swipe-left", "swipe-right");
+    void modalContent.offsetWidth;
+    modalContent.classList.add(className);
+    if (swipeTimer) {
+      clearTimeout(swipeTimer);
+    }
+    swipeTimer = window.setTimeout(() => {
+      modalContent.classList.remove("swipe-left", "swipe-right");
+    }, SWIPE_ANIMATION_DURATION);
+  }
   function openModal(index) {
     currentIndex = index;
     renderModalContent();
+    if (modalContent) {
+      modalContent.classList.remove("swipe-left", "swipe-right");
+    }
     if (closeTimer) {
       clearTimeout(closeTimer);
       closeTimer = null;
@@ -287,20 +355,24 @@ const batallas = [
       lastActiveElement.focus();
     }
   }
-
   function goToNext() {
     currentIndex = (currentIndex + 1) % batallas.length;
     renderModalContent();
+    applySwipeAnimation("next");
   }
-
   function goToPrev() {
     currentIndex = (currentIndex - 1 + batallas.length) % batallas.length;
     renderModalContent();
+    applySwipeAnimation("prev");
   }
-
   function goToIndex(index) {
+    if (index === currentIndex) {
+      return;
+    }
+    const direction = index > currentIndex ? "next" : "prev";
     currentIndex = index;
     renderModalContent();
+    applySwipeAnimation(direction);
   }
 
   function renderModalContent() {
@@ -381,6 +453,14 @@ const batallas = [
   document.getElementById("modal-prev").addEventListener("click", goToPrev);
   document.getElementById("modal-next").addEventListener("click", goToNext);
 
+  if (modalContent) {
+    modalContent.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
+    modalContent.addEventListener("touchend", handleTouchEnd, {
+      passive: true,
+    });
+  }
   modal.addEventListener("click", (e) => {
     if (e.target.id === "propuestas-modal") {
       closeModal();
@@ -407,8 +487,7 @@ const batallas = [
 
   .propuestas-card {
     background: white;
-    border: 1px solid
-      color-mix(in srgb, var(--cd-oscuro) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cd-oscuro) 10%, transparent);
     box-shadow: 0 35px 65px -45px rgb(0 0 0 / 0.45);
   }
 
@@ -882,13 +961,43 @@ const batallas = [
     border: 2px solid var(--modal-accent);
     max-height: 85vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     opacity: 0;
     transform: translateY(12px) scale(0.98);
     transition:
       transform 0.25s ease,
       opacity 0.25s ease;
   }
+  .modal-content.swipe-left {
+    animation: modal-swipe-left 0.24s ease;
+  }
 
+  .modal-content.swipe-right {
+    animation: modal-swipe-right 0.24s ease;
+  }
+
+  @keyframes modal-swipe-left {
+    from {
+      transform: translateX(18px);
+      opacity: 0.7;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes modal-swipe-right {
+    from {
+      transform: translateX(-18px);
+      opacity: 0.7;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
   .modal-overlay.is-open .modal-content {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -1081,6 +1190,10 @@ const batallas = [
     .modal-nav,
     .modal-close {
       transition: none;
+    }
+    .modal-content.swipe-left,
+    .modal-content.swipe-right {
+      animation: none;
     }
 
     .modal-item:hover {
