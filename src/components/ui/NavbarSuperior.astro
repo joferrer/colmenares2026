@@ -3,6 +3,12 @@ import Image from "astro/components/Image.astro";
 import CD_LOGO_H from "../../assets/logos/CD_LOGO-H.png";
 const navItems = [
   {
+    name: "Home",
+    url: "/",
+    label: "",
+    icon: "home",
+  },
+  {
     name: "¿Quién soy?",
     url: "/SobreMi",
     label: "",
@@ -46,7 +52,7 @@ const navItems = [
     </a>
   </li>
   <header
-    class="fixed top-0 left-0 flex w-full justify-center lg:mt-20 mx-auto max-sm:mt-0 z-50 px-3"
+    class="navbar-shell fixed top-0 left-0 flex w-full justify-center lg:mt-24 mx-auto max-sm:mt-0 z-50 px-3"
   >
     <button
       aria-label="Open Menu"
@@ -68,6 +74,7 @@ const navItems = [
           <path d="M3 6h18M3 12h18M3 18h18"></path>
         </svg>
       </span>
+
       <span class="menu-icon menu-icon--close" aria-hidden="true">
         <svg
           viewBox="0 0 24 24"
@@ -89,16 +96,57 @@ const navItems = [
       id="nav-bar"
       class="fixed top-0 right-0 h-screen w-72 translate-x-0 max-lg:translate-x-full bg-(--cd-oscuro) text-white transition-transform duration-300 ease-out flex flex-col gap-3 px-6 pt-24 lg:static lg:h-auto lg:w-auto lg:flex-row lg:items-center lg:gap-2 lg:px-4 lg:py-2 lg:rounded-full lg:bg-white/80 lg:backdrop-blur-md lg:shadow-md lg:text-(--cd-oscuro)"
     >
+      <a
+        href="/"
+        aria-label="Home"
+        class="mobile-home-duplicate h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white shadow-md ring-1 ring-white/20 backdrop-blur lg:hidden"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-5 w-5"
+        >
+          <path d="M3 11l9-7 9 7"></path>
+          <path d="M5 10v10h14V10"></path>
+          <path d="M9 20v-6h6v6"></path>
+        </svg>
+      </a>
       {
         navItems.map((item) => (
           <a
             href={item.url}
+            aria-label={item.icon === "home" ? "Home" : undefined}
             class:list={[
-              "nav-link px-4 py-2 rounded-full text-lg lg:text-sm uppercase tracking-widest font-semibold transition-colors",
+              "nav-link flex items-center gap-2 px-4 py-2 rounded-full text-lg lg:text-sm uppercase tracking-widest font-semibold transition-colors",
               "max-lg:border-b max-lg:border-white/10 max-lg:text-white max-lg:pb-3",
+              item.icon === "home" ? "max-lg:hidden" : "",
             ]}
           >
-            {item.name}
+            {item.icon === "home" && (
+              <span class="nav-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 11l9-7 9 7" />
+                  <path d="M5 10v10h14V10" />
+                  <path d="M9 20v-6h6v6" />
+                </svg>
+              </span>
+            )}
+            {item.icon === "home" ? (
+              <span class="sr-only">Home</span>
+            ) : (
+              item.name
+            )}
           </a>
         ))
       }
@@ -127,6 +175,36 @@ const navItems = [
     box-shadow: 0 12px 24px -18px rgb(0 0 0 / 0.45);
   }
 
+  .nav-icon {
+    display: inline-flex;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .nav-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mobile-home-duplicate {
+    position: fixed;
+    top: 0.5rem;
+    right: calc(0.5rem + 56px + 10px);
+    opacity: 0;
+    pointer-events: none;
+    display: inline-flex;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+    transform: translateY(-6px);
+  }
+
+  .mobile-home-duplicate.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
   .menu-icon {
     position: absolute;
     inset: 0;
@@ -152,24 +230,51 @@ const navItems = [
   }
 
   @media (min-width: 1024px) {
-    nav {
-      animation: nav-shadown 1s linear both;
-      animation-timeline: scroll();
-      animation-range: 0 100px;
+    .navbar-shell {
+      transition: transform 0.3s ease;
     }
 
-    @keyframes nav-shadown {
-      to {
-        box-shadow:
-          0 10px 15px -3px rgb(0 0 0 / 0.1),
-          0 4px 6px -4px rgb(0 0 0 / 0.1);
-        backdrop-filter: blur(10px);
-        background-color: rgba(37, 62, 107, 0.416);
-        border-radius: 9999px;
-        box-sizing: border-box;
-        outline: 1px solid rgb(255 255 255 / 0.1);
-        color: white;
-      }
+    #nav-bar {
+      transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        padding 0.3s ease,
+        outline-color 0.3s ease,
+        color 0.3s ease;
+    }
+
+    .nav-link {
+      transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        padding 0.3s ease,
+        font-size 0.3s ease,
+        letter-spacing 0.3s ease;
+    }
+
+    .navbar-shell.is-scrolled {
+      transform: translateY(-79px);
+    }
+
+    .navbar-shell.is-scrolled #nav-bar {
+      padding: 0.35rem 0.6rem;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.98),
+        rgba(255, 255, 255, 0.9)
+      );
+      box-shadow:
+        0 18px 40px -18px rgb(0 0 0 / 0.45),
+        0 6px 16px -8px rgb(37 62 107 / 0.25);
+      outline: 1px solid rgb(37 62 107 / 0.16);
+      border: 1px solid rgb(255 255 255 / 0.7);
+    }
+
+    .navbar-shell.is-scrolled .nav-link {
+      padding: 0.55rem 0.85rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
     }
   }
   @media (max-width: 1023px) {
@@ -184,6 +289,8 @@ const navItems = [
   const navBar = document.querySelector("#nav-bar");
   const navOverlay = document.querySelector("#nav-overlay");
   const navLinks = Array.from(navBar?.querySelectorAll("a") ?? []);
+  const navShell = document.querySelector(".navbar-shell");
+  const mobileHomeDuplicate = document.querySelector(".mobile-home-duplicate");
 
   const isMobile = () => window.matchMedia("(max-width: 1023px)").matches;
 
@@ -192,6 +299,7 @@ const navItems = [
     navOverlay?.classList.remove("opacity-0", "pointer-events-none");
     navOverlay?.classList.add("opacity-100", "pointer-events-auto");
     menuBtn?.classList.add("active");
+    mobileHomeDuplicate?.classList.add("active");
     menuBtn?.setAttribute("aria-expanded", "true");
     menuBtn?.setAttribute("aria-label", "Close Menu");
   };
@@ -201,6 +309,7 @@ const navItems = [
     navOverlay?.classList.add("opacity-0", "pointer-events-none");
     navOverlay?.classList.remove("opacity-100", "pointer-events-auto");
     menuBtn?.classList.remove("active");
+    mobileHomeDuplicate?.classList.remove("active");
     menuBtn?.setAttribute("aria-expanded", "false");
     menuBtn?.setAttribute("aria-label", "Open Menu");
   };
@@ -217,10 +326,19 @@ const navItems = [
   menuBtn?.addEventListener("click", toggleMenu);
   navOverlay?.addEventListener("click", toggleMenu);
   navLinks.forEach((link) => link.addEventListener("click", closeMenu));
+  mobileHomeDuplicate?.addEventListener("click", closeMenu);
 
   window.addEventListener("resize", () => {
     if (!isMobile()) {
       closeMenu();
     }
   });
+
+  const updateScrollState = () => {
+    if (!navShell) return;
+    navShell.classList.toggle("is-scrolled", window.scrollY > 20);
+  };
+
+  updateScrollState();
+  window.addEventListener("scroll", updateScrollState, { passive: true });
 </script>
