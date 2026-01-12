@@ -1,11 +1,15 @@
 ---
 // ChatWidget.astro
+import Image from "astro/components/Image.astro";
+import EstefanIA from "../../assets/iconos/EstefanIA.png";
+import chatIA from "../../assets/iconos/chatIA.png";
 ---
 
 <div
   class="flex flex-col items-end gap-3 pointer-events-none"
   aria-live="polite"
   data-cd-chat-root
+  data-assistant-avatar={chatIA.src}
 >
   <div
     id="cd-chat-overlay"
@@ -32,9 +36,15 @@
           <div class="flex items-center gap-3">
             <!-- Avatar -->
             <div
-              class="w-12 h-12 rounded-full bg-gradient-to-br from-(--cd-amarillo)/20 to-(--cd-amarillo)/10 border-2 border-(--cd-amarillo)/30 flex items-center justify-center shadow-lg"
+              class="w-16 h-16 rounded-full bg-gradient-to-br from-(--cd-amarillo)/20 to-(--cd-amarillo)/10 border-2 border-(--cd-amarillo)/30 flex items-center justify-center shadow-lg"
             >
-              <span class="text-2xl">🤖</span>
+              <Image
+                src={EstefanIA}
+                width={64}
+                height={64}
+                alt="EstefanIA"
+                class="h-full w-full object-contain p-1"
+              />
             </div>
             <div>
               <p
@@ -127,7 +137,14 @@
   >
     <span class="cd-chat-pulse"></span>
     <span class="cd-chat-pulse cd-chat-pulse--delay"></span>
-    <span class="text-2xl drop-shadow">💬</span>
+    <span class="text-2xl drop-shadow md:hidden">💬</span>
+    <Image
+      src={EstefanIA}
+      width={32}
+      height={32}
+      alt="EstefanIA"
+      class="hidden h-8 w-8 drop-shadow object-contain md:inline-block"
+    />
     <div class="hidden md:flex flex-col leading-tight text-left">
       <span
         class="text-[11px] uppercase tracking-[0.14em] text-(--cd-oscuro)/80"
@@ -151,6 +168,7 @@
     const form = root.querySelector("#cd-chat-form");
     const input = root.querySelector("#cd-chat-input");
     const log = root.querySelector("#cd-chat-log");
+    const assistantAvatar = root.dataset.assistantAvatar || "";
 
     if (!toggleButton || !overlay || !panel) return;
 
@@ -184,12 +202,20 @@
 
       // Avatar
       const avatar = document.createElement("div");
-      avatar.className = `w-9 h-9 rounded-full flex items-center justify-center text-lg flex-shrink-0 ${
+      avatar.className = `w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0 ${
         isUser
           ? "bg-gradient-to-br from-white/15 to-white/5 border-2 border-white/20"
           : "bg-gradient-to-br from-(--cd-amarillo)/15 to-(--cd-amarillo)/5 border-2 border-(--cd-amarillo)/20"
       }`;
-      avatar.textContent = isUser ? "👤" : "🤖";
+      if (!isUser && assistantAvatar) {
+        const avatarImg = document.createElement("img");
+        avatarImg.src = assistantAvatar;
+        avatarImg.alt = "EstefanIA";
+        avatarImg.className = "h-full w-full object-contain p-1";
+        avatar.appendChild(avatarImg);
+      } else {
+        avatar.textContent = isUser ? "👤" : "🤖";
+      }
 
       // Content
       const contentWrapper = document.createElement("div");
