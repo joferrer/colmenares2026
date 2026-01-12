@@ -578,6 +578,7 @@ const batallas = [
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: stretch;
   }
 
   :global(.batalla-card) {
@@ -588,6 +589,9 @@ const batallas = [
     box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   :global(.batalla-red) {
@@ -636,6 +640,10 @@ const batallas = [
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 2px solid color-mix(in srgb, var(--cd-oscuro) 10%, white);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
   }
 
   :global(.batalla-verb) {
