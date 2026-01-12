@@ -1,4 +1,5 @@
 ---
+import FaviconLogo from "../assets/logos/LOGO_BASE_ESTAFANIA-02_WHITE.png";
 import NavbarSuperior from "../components/ui/NavbarSuperior.astro";
 import LoadingView from "../components/ui/LoadingView.astro";
 import "../styles/global.css";
@@ -9,7 +10,7 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href={FaviconLogo.src} />
     <meta name="generator" content={Astro.generator} />
     <link
       href="https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Press+Start+2P&display=swap"
@@ -126,3 +127,5 @@ import "../styles/global.css";
     }
   });
 </script>
+
+
