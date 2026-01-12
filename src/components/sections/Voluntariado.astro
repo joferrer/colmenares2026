@@ -37,23 +37,23 @@ const fields = [
     id: "nombre",
     label: "Nombre completo",
     type: "text",
-    placeholder: "Ej: Maria Gomez",
+    placeholder: "Ej: María Gómez",
   },
   {
     id: "cedula",
-    label: "Cedula",
+    label: "Cédula",
     type: "text",
     placeholder: "Ej: 1.234.567.890",
   },
   {
     id: "telefono",
-    label: "Telefono",
+    label: "Teléfono",
     type: "tel",
     placeholder: "Ej: 3001234567",
   },
   {
     id: "correo",
-    label: "Correo electronico",
+    label: "Correo electrónico",
     type: "email",
     placeholder: "Ej: correo@mail.com",
   },
@@ -61,7 +61,7 @@ const fields = [
     id: "barrio",
     label: "Barrio y municipio",
     type: "text",
-    placeholder: "Ej: Barrio Las Palmas, Cucuta",
+    placeholder: "Ej: Barrio Las Palmas, Cúcuta",
   },
 ];
 ---
@@ -86,7 +86,7 @@ const fields = [
     />
     <img
       src={logoAzul.src}
-      alt="Logo Estefania Colmenares"
+      alt="Logo Estefanía Colmenares"
       class="logo-estefania pointer-events-none absolute -top-10 right-0 w-56 md:w-72 lg:w-80 opacity-20"
       loading="lazy"
     />
@@ -94,11 +94,11 @@ const fields = [
     <div class="relative px-6 py-10 md:px-12 md:py-16 lg:px-20">
       <div class="mb-10 space-y-6">
         <span class="pill">Participa</span>
-        <h2 class="heading">Sumate como voluntario o donante</h2>
+        <h2 class="heading">Súmate como voluntario o donante</h2>
 
         <p class="lede">
           Llena tus datos y cambia el selector para elegir tu rol. Al enviar,
-          nos pondremos en contacto para coordinar como puedes aportar.
+          nos pondremos en contacto para coordinar cómo puedes aportar.
         </p>
 
         <div class="mode-switch" data-mode-switch data-mode={defaultMode}>
@@ -493,7 +493,7 @@ const fields = [
     color: var(--oscuro);
   }
 
-  /* ✅ Toast GLOBAL: como lo creamos en body, lo estilizamos global */
+  /* ✅ Toast GLOBAL: cómo lo creamos en body, lo estilizamos global */
   :global(.toast-stack) {
     position: fixed;
     top: 1rem;
@@ -831,14 +831,14 @@ const fields = [
             form.reset();
           } else {
             showToast(
-              "Ocurrio un error",
+              "Ocurrió un error",
               "Intenta de nuevo en unos minutos.",
               "error"
             );
           }
         } catch (error) {
           showToast(
-            "Ocurrio un error",
+            "Ocurrió un error",
             "Intenta de nuevo en unos minutos.",
             "error"
           );

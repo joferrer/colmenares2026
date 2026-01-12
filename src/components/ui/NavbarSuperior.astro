@@ -55,7 +55,7 @@ const navItems = [
     class="navbar-shell fixed top-0 left-0 flex w-full justify-center lg:mt-24 mx-auto max-sm:mt-0 z-50 px-3"
   >
     <button
-      aria-label="Open Menu"
+      aria-label="Abrir menú"
       aria-expanded="false"
       aria-controls="menu-items"
       class:list={[
@@ -301,7 +301,7 @@ const navItems = [
     menuBtn?.classList.add("active");
     mobileHomeDuplicate?.classList.add("active");
     menuBtn?.setAttribute("aria-expanded", "true");
-    menuBtn?.setAttribute("aria-label", "Close Menu");
+    menuBtn?.setAttribute("aria-label", "Cerrar menú");
   };
 
   const closeMenu = () => {
@@ -311,7 +311,7 @@ const navItems = [
     menuBtn?.classList.remove("active");
     mobileHomeDuplicate?.classList.remove("active");
     menuBtn?.setAttribute("aria-expanded", "false");
-    menuBtn?.setAttribute("aria-label", "Open Menu");
+    menuBtn?.setAttribute("aria-label", "Abrir menú");
   };
 
   const toggleMenu = () => {
