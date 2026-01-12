@@ -1,51 +1,30 @@
-import S1 from "../assets/fotos/noticias/S1.png";
-import S2 from "../assets/fotos/noticias/S2.png";
-import S3 from "../assets/fotos/noticias/S3.png";
-import S4 from "../assets/fotos/noticias/S4.png";
-import S5 from "../assets/fotos/noticias/S5.png";
-import S6 from "../assets/fotos/noticias/S6.png";
+import n1 from "../assets/fotos/noticias/n1.webp";
+import n2 from "../assets/fotos/noticias/n2.webp";
+import n3 from "../assets/fotos/noticias/n3.png";
 
 export const noticias = [
   {
-    fecha: "2025-12-27",
-    link: "https://web.facebook.com/reel/1505387540542086/?s=single_unit",
-    titulo: "Norte de Santander necesita una voz firme que lo defienda.",
+    fecha: "2025-12-16",
+    link: "https://www.pulzo.com/nacion/quien-es-estefania-colmenares-periodista-senado-lista-con-alvaro-uribe-PP4950675",
+    titulo:
+      "Quién es la reconocida periodista que está con Uribe en lista para Senado: clave en elecciones",
     descripcion: "",
-    imagen: S1,
+    imagen: n1,
   },
   {
-    fecha: "2025-12-21",
-    link: "https://www.instagram.com/p/DSfL6ZnDmdJ/",
-    titulo: "¿Y la inversión dónde está? El país va a completar 4 años...",
+    fecha: "2025-12-10",
+    link: "https://www.bluradio.com/regiones/santanderes/es-delicado-candidata-al-senado-sobre-situacion-de-orden-publico-en-cucuta-pr30",
+    titulo:
+      "Es delicado, candidata al Senado sobre situación de orden público en Cúcuta",
     descripcion: "",
-    imagen: S2,
+    imagen: n2,
   },
   {
-    fecha: "2025-12-29",
-    titulo: "Más de 11 meses de enfrentamientos entre ELN...",
+    fecha: "2023-09-08",
+    titulo:
+      "La directora del periódico ‘La Opinión’ de Cúcuta es amenazada de muerte",
     link: "https://web.facebook.com/reel/880667747750762",
     descripcion: "",
-    imagen: S3,
-  },
-  {
-    fecha: "2025-12-22",
-    link: "https://www.instagram.com/p/DSntr4FEnvv/",
-    titulo: "El presidente Gustavo Petro ataca a la prensa...",
-    descripcion: "",
-    imagen: S4,
-  },
-  {
-    fecha: "2025-12-31",
-    link: "https://web.facebook.com/reel/1121219999929942/?s=single_unit",
-    titulo: "El salario mínimo sube, pero no todos ganan.",
-    descripcion: "",
-    imagen: S5,
-  },
-  {
-    fecha: "2026-01-05",
-    link: "https://www.instagram.com/p/DTEHWLjEkff/",
-    titulo: "Esto es lo que nos espera en Norte de Santander.",
-    descripcion: "",
-    imagen: S6,
+    imagen: n3,
   },
 ];

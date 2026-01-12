@@ -200,6 +200,7 @@ import fotoColmenares from "../../assets/fotos/COLMENARES2026.webp";
 
       scrollButton?.addEventListener("click", (e) => {
         e.preventDefault();
+        e.stopPropagation();
 
         const targetSection = document.querySelector("#noticias");
         if (!targetSection) return;

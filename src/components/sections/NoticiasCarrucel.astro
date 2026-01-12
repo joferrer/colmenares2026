@@ -10,7 +10,7 @@ const noticias = [...noticiasRaw].sort(
 
 <section
     id="noticias"
-    class="segmento p-1 md:p-5 max-md:mx-2! shadow-md relative mt-10! rounded-xl"
+    class="segmento noticias-section p-1 md:p-5 max-md:mx-2! shadow-md relative mt-10! rounded-xl"
 >
     <div
         class="absolute overflow-hidden -z-50 left-0 top-0 w-full h-full rounded-xl"
@@ -32,7 +32,7 @@ const noticias = [...noticiasRaw].sort(
         />
     </div>
     <h1
-        class="text-4xl lg:text-5xl font-extrabold text-center text-(--cd-oscuro) mt-10 z-20 mb-3"
+        class="noticias-title text-4xl lg:text-5xl font-extrabold text-center text-(--cd-oscuro) mt-10 z-20 mb-3"
     >
         Enterate de lo que hacemos
     </h1>
@@ -43,7 +43,7 @@ const noticias = [...noticiasRaw].sort(
         <button
             id="scroll-left"
             class:list={[
-                "hidden invisible md:block cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl",
+                "nav-btn hidden invisible md:block cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl",
                 "hover:bg-gray-100 hover:scale-110 transition-all duration-300 ease-in-out",
             ]}
         >
@@ -71,18 +71,19 @@ const noticias = [...noticiasRaw].sort(
                         href={noticia.link}
                         target="_blank"
                         rel="noopener noreferrer"
+                        class="noticia-link"
                     >
-                        <article class="flex flex-col min-w-80 max-w-80 cursor-pointer shadow-md rounded-lg z-20 bg-white">
+                        <article class="noticia-card flex flex-col min-w-80 max-w-80 cursor-pointer shadow-md rounded-lg z-20 bg-white">
                             <Image
                                 src={noticia.imagen}
                                 alt={noticia.titulo}
-                                class="w-full h-60 object-cover object-top rounded-t-lg"
+                                class="noticia-image w-full h-60 object-cover object-top rounded-t-lg"
                             />
-                            <div class="flex flex-col p-3 ">
-                                <h2 class="font-semibold text-lg">
+                            <div class="noticia-body flex flex-col p-3">
+                                <h2 class="noticia-title font-semibold text-lg">
                                     {noticia.titulo}
                                 </h2>
-                                <p class="text-sm text-gray-500">
+                                <p class="noticia-date text-sm text-gray-500">
                                     {new Date(noticia.fecha).toLocaleDateString(
                                         "es-CO",
                                         {
@@ -101,7 +102,7 @@ const noticias = [...noticiasRaw].sort(
         <button
             id="scroll-right"
             class:list={[
-                "hidden md:block visible cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl",
+                "nav-btn hidden md:block visible cursor-pointer px-2 rounded-full border border-gray-300 h-10 w-10 font-extrabold text-xl",
                 "hover:bg-gray-100 hover:scale-110 transition-all duration-300 ease-in-out",
             ]}
             ><span
@@ -122,6 +123,73 @@ const noticias = [...noticiasRaw].sort(
 </section>
 
 <style>
+    .noticias-section {
+        background: white;
+        border: 1px solid
+            color-mix(in srgb, var(--cd-oscuro, #253e6b) 10%, transparent);
+        box-shadow: 0 28px 56px -40px rgb(0 0 0 / 0.35);
+        overflow: hidden;
+    }
+
+    .noticias-title {
+        letter-spacing: -0.01em;
+    }
+
+    .noticia-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .noticia-card {
+        border: 1px solid
+            color-mix(in srgb, var(--cd-oscuro, #253e6b) 8%, transparent);
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            border-color 0.25s ease;
+    }
+
+    .noticia-card:hover {
+        transform: translateY(-6px);
+        border-color: color-mix(
+            in srgb,
+            var(--cd-azul, #63b9e9) 45%,
+            transparent
+        );
+        box-shadow: 0 24px 50px -32px rgb(0 0 0 / 0.4);
+    }
+
+    .noticia-image {
+        display: block;
+    }
+
+    .noticia-body {
+        gap: 0.35rem;
+        min-height: 96px;
+    }
+
+    .noticia-title {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 2.6em;
+    }
+
+    .noticia-date {
+        letter-spacing: 0.01em;
+        margin-top: auto;
+    }
+
+    .nav-btn {
+        background: white;
+        box-shadow: 0 12px 22px -16px rgb(0 0 0 / 0.4);
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background-color 0.2s ease;
+    }
+
     ::-webkit-scrollbar {
         display: none;
     }
