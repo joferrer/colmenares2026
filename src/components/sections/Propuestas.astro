@@ -1,4 +1,4 @@
-﻿---
+---
 import { Image } from "astro:assets";
 import iconPropuestas from "../../assets/iconos/ICONOS_INDIVIDUALES-19.png";
 
@@ -262,10 +262,74 @@ const batallas = [
   const HIDDEN_CLASS = "hidden";
   const OPEN_CLASS = "is-open";
   const CLOSE_DELAY = 200;
+  const SWIPE_THRESHOLD = 45;
+  const SWIPE_ALLOWED_TIME = 700;
+  const SWIPE_ANIMATION_DURATION = 240;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  let swipeTimer = null;
+  function handleTouchStart(event) {
+    if (!event.touches || event.touches.length !== 1) {
+      return;
+    }
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartTime = Date.now();
+  }
 
+  function handleTouchEnd(event) {
+    if (
+      !touchStartTime ||
+      !event.changedTouches ||
+      !event.changedTouches.length
+    ) {
+      return;
+    }
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+    const elapsed = Date.now() - touchStartTime;
+    touchStartX = 0;
+    touchStartY = 0;
+    touchStartTime = 0;
+    if (elapsed > SWIPE_ALLOWED_TIME) {
+      return;
+    }
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD) {
+      return;
+    }
+    if (Math.abs(deltaX) <= Math.abs(deltaY)) {
+      return;
+    }
+    if (deltaX < 0) {
+      goToNext();
+      return;
+    }
+    goToPrev();
+  }
+  function applySwipeAnimation(direction) {
+    if (!modalContent) {
+      return;
+    }
+    const className = direction === "next" ? "swipe-left" : "swipe-right";
+    modalContent.classList.remove("swipe-left", "swipe-right");
+    void modalContent.offsetWidth;
+    modalContent.classList.add(className);
+    if (swipeTimer) {
+      clearTimeout(swipeTimer);
+    }
+    swipeTimer = window.setTimeout(() => {
+      modalContent.classList.remove("swipe-left", "swipe-right");
+    }, SWIPE_ANIMATION_DURATION);
+  }
   function openModal(index) {
     currentIndex = index;
     renderModalContent();
+    if (modalContent) {
+      modalContent.classList.remove("swipe-left", "swipe-right");
+    }
     if (closeTimer) {
       clearTimeout(closeTimer);
       closeTimer = null;
@@ -289,20 +353,24 @@ const batallas = [
       lastActiveElement.focus();
     }
   }
-
   function goToNext() {
     currentIndex = (currentIndex + 1) % batallas.length;
     renderModalContent();
+    applySwipeAnimation("next");
   }
-
   function goToPrev() {
     currentIndex = (currentIndex - 1 + batallas.length) % batallas.length;
     renderModalContent();
+    applySwipeAnimation("prev");
   }
-
   function goToIndex(index) {
+    if (index === currentIndex) {
+      return;
+    }
+    const direction = index > currentIndex ? "next" : "prev";
     currentIndex = index;
     renderModalContent();
+    applySwipeAnimation(direction);
   }
 
   function renderModalContent() {
@@ -383,6 +451,14 @@ const batallas = [
   document.getElementById("modal-prev").addEventListener("click", goToPrev);
   document.getElementById("modal-next").addEventListener("click", goToNext);
 
+  if (modalContent) {
+    modalContent.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
+    modalContent.addEventListener("touchend", handleTouchEnd, {
+      passive: true,
+    });
+  }
   modal.addEventListener("click", (e) => {
     if (e.target.id === "propuestas-modal") {
       closeModal();
@@ -883,13 +959,43 @@ const batallas = [
     border: 2px solid var(--modal-accent);
     max-height: 85vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     opacity: 0;
     transform: translateY(12px) scale(0.98);
     transition:
       transform 0.25s ease,
       opacity 0.25s ease;
   }
+  .modal-content.swipe-left {
+    animation: modal-swipe-left 0.24s ease;
+  }
 
+  .modal-content.swipe-right {
+    animation: modal-swipe-right 0.24s ease;
+  }
+
+  @keyframes modal-swipe-left {
+    from {
+      transform: translateX(18px);
+      opacity: 0.7;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes modal-swipe-right {
+    from {
+      transform: translateX(-18px);
+      opacity: 0.7;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
   .modal-overlay.is-open .modal-content {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -1082,6 +1188,10 @@ const batallas = [
     .modal-nav,
     .modal-close {
       transition: none;
+    }
+    .modal-content.swipe-left,
+    .modal-content.swipe-right {
+      animation: none;
     }
 
     .modal-item:hover {
