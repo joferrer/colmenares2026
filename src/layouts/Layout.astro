@@ -4,6 +4,7 @@ import NavbarSuperior from "../components/ui/NavbarSuperior.astro";
 import LoadingView from "../components/ui/LoadingView.astro";
 import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 ---
 
 <!doctype html>
@@ -25,6 +26,7 @@ import Analytics from "@vercel/analytics/astro";
   </head>
   <body class="max-w-[3000px]">
     <Analytics />
+    <SpeedInsights />
     <LoadingView />
     <NavbarSuperior />
     <slot />
