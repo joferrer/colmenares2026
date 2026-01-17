@@ -1,5 +1,5 @@
 ---
-import FaviconLogo from "../assets/iconos/Centro_Demo.png";
+import FaviconLogo from "../../public/Centro_Demo.ico";
 import NavbarSuperior from "../components/ui/NavbarSuperior.astro";
 import LoadingView from "../components/ui/LoadingView.astro";
 import "../styles/global.css";
@@ -12,7 +12,7 @@ import SpeedInsights from "@vercel/speed-insights/astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href={FaviconLogo.src} />
+    <link rel="icon" type="image/x-icon" href={FaviconLogo} />
     <meta name="generator" content={Astro.generator} />
     <meta
       name="description"
