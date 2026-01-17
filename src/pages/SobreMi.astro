@@ -16,9 +16,13 @@ import { socials } from "../helpers/redes";
 import Footer from "../components/ui/Footer.astro";
 import Dialog from "../components/ui/modal/Dialog.astro";
 import SocialNetworks from "../components/ui/SocialNetworks.astro";
+
+const pageTitle = "Sobre Estefanía Colmenares | Candidata al Senado 2026";
+const pageDescription =
+  "Conoce la historia y convicciones de Estefanía Colmenares, periodista cucuteña y candidata al Senado de Colombia 2026.";
 ---
 
-<Layout>
+<Layout title={pageTitle} description={pageDescription}>
   <SocialNetworks />
   <!-- INTRO -->
   <section class="px-2 pt-5 lg:mt-20 mx-auto max-w-4xl">

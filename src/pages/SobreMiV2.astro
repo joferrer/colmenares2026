@@ -7,9 +7,13 @@ import FotoEstefaniaNegro from "../assets/fotos/COLMENARES_NEGRO.webp";
 import { Image } from "astro:assets";
 import { socials } from "../helpers/redes";
 import Footer from "../components/ui/Footer.astro";
+
+const pageTitle = "Sobre Estefanía Colmenares | Candidata al Senado 2026";
+const pageDescription =
+  "Conoce la historia y convicciones de Estefanía Colmenares, periodista cucuteña y candidata al Senado de Colombia 2026.";
 ---
 
-<Layout>
+<Layout title={pageTitle} description={pageDescription}>
     <!-- INTRO -->
     <section class="px-2 pt-5 lg:mt-20">
         <div

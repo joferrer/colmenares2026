@@ -1,28 +1,74 @@
 ---
 import FaviconLogo from "../../public/Centro_Demo.ico";
+import OgImage from "../assets/fotos/COLMENARES2026.webp";
 import NavbarSuperior from "../components/ui/NavbarSuperior.astro";
 import LoadingView from "../components/ui/LoadingView.astro";
 import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
+
+const { title, description, canonical, image } = Astro.props;
+
+const siteUrl = "https://www.estefaniacolmenares.com";
+const pageTitle = title ?? "Estefanía Colmenares | Candidata al Senado 2026";
+const pageDescription =
+  description ??
+  "Estefanía Colmenares, periodista cucuteña y candidata al Senado de Colombia 2026. Conoce su trayectoria, propuestas y cómo participar.";
+const pathname = Astro.url?.pathname ?? "/";
+const canonicalUrl = canonical ?? new URL(pathname, siteUrl).toString();
+const ogImageUrl =
+  image ?? new URL(OgImage.src ?? OgImage, siteUrl).toString();
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "PoliticalCandidate",
+  name: "Estefanía Colmenares",
+  alternateName: ["Estefania Colmenares", "Estafania Colmenares"],
+  jobTitle: "Candidata al Senado de Colombia 2026",
+  url: canonicalUrl,
+  image: ogImageUrl,
+  description: pageDescription,
+  sameAs: [
+    "https://www.instagram.com/estefanianortecd?igsh=ZW9meThjMXRmcW02",
+    "https://www.x.com/estcol",
+    "https://www.tiktok.com/@estefanianortecd?_r=1&_t=ZS-92TSiuXL1NN",
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-CO">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href={FaviconLogo} />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Soy cucuteña, periodista y por más de 15 años he investigado y expuesto los hechos más importantes de nuestra región, tanto los que nos han hecho sentir orgullo, como los que han sido una parte difícil de nuestra historia. El periodismo siempre ha sido una voz de los nortesantandereanos pero es momento de que pase a ser una representación que transforme nuestra realidad."
-    />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:site_name" content="Estefanía Colmenares" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content="Estefanía Colmenares" />
+    <meta property="og:locale" content="es_CO" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:site" content="@estcol" />
+    <meta name="twitter:creator" content="@estcol" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    ></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <title>Estefanía Colmenares</title>
   </head>
   <body class="max-w-[3000px]">
     <Analytics />
