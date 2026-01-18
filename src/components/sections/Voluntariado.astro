@@ -43,7 +43,7 @@ const fields = [
     id: "cedula",
     label: "Cédula",
     type: "text",
-    placeholder: "Ej: 1.234.567.890",
+    placeholder: "Ej: 1234.567890",
   },
   {
     id: "telefono",
@@ -129,7 +129,10 @@ const fields = [
                 data-form={mode.id}
                 aria-hidden={index === 0 ? "false" : "true"}
                 hidden={index === 0 ? undefined : true}
+                action="https://colmenares2026-server-production.up.railway.app/api/inscripcion"
+                method="post"
               >
+                <input type="hidden" name="modo" value={mode.id} />
                 <div class="form-header">
                   <span class={`form-icon ${mode.iconClass}`}>
                     {mode.badge}
@@ -663,6 +666,42 @@ const fields = [
     const toastStack = getGlobalToastStack();
 
     let audioContext = null;
+    const fieldRules = {
+      nombre: { max: 50 },
+      cedula: { max: 15, numeric: true },
+      telefono: { min: 6, max: 15, numeric: true },
+      correo: { max: 50 },
+      barrio: { max: 50 },
+    };
+
+    const applyFieldRules = (input) => {
+      const rules = fieldRules[input.name];
+      if (!rules) return;
+
+      if (rules.max) input.maxLength = rules.max;
+      if (rules.min) input.minLength = rules.min;
+      if (rules.numeric) {
+        input.inputMode = "numeric";
+        const min = rules.min ?? 1;
+        input.setAttribute("pattern", `^[0-9]{${min},${rules.max}}$`);
+      }
+    };
+
+    const sanitizeInput = (input, normalizeWhitespace = false) => {
+      const rules = fieldRules[input.name];
+      if (!rules) return input.value;
+
+      let value = input.value;
+      if (rules.numeric) {
+        value = value.replace(/[^0-9]/g, "");
+      } else if (normalizeWhitespace) {
+        value = value.replace(/\s+/g, " ").trim();
+      }
+      if (rules.max && value.length > rules.max) {
+        value = value.slice(0, rules.max);
+      }
+      return value;
+    };
 
     const playSuccessSound = () => {
       const AudioContextRef = window.AudioContext || window.webkitAudioContext;
@@ -754,10 +793,14 @@ const fields = [
       const payload = new FormData(form);
 
       if (endpoint) {
+        const body = JSON.stringify(Object.fromEntries(payload.entries()));
         const response = await fetch(endpoint, {
           method: "POST",
-          body: payload,
-          headers: { Accept: "application/json" },
+          body,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         });
         return response.ok;
       }
@@ -798,7 +841,13 @@ const fields = [
         let hasErrors = false;
 
         inputs.forEach((input) => {
-          if (!input.value.trim()) {
+          applyFieldRules(input);
+          let value = sanitizeInput(input, true);
+          if (value !== input.value) {
+            input.value = value;
+          }
+
+          if (!value || !input.checkValidity()) {
             input.classList.add("input-error");
             hasErrors = true;
           } else {
@@ -848,9 +897,15 @@ const fields = [
       });
 
       form.querySelectorAll("input").forEach((input) => {
-        input.addEventListener("input", () =>
-          input.classList.remove("input-error")
-        );
+        applyFieldRules(input);
+
+        input.addEventListener("input", () => {
+          const value = sanitizeInput(input);
+          if (value !== input.value) {
+            input.value = value;
+          }
+          input.classList.remove("input-error");
+        });
       });
     });
 
