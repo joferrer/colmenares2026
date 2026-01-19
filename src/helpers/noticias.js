@@ -23,7 +23,7 @@ export const noticias = [
     fecha: "2023-09-08",
     titulo:
       "La directora del periódico ‘La Opinión’ de Cúcuta es amenazada de muerte",
-    link: "https://web.facebook.com/reel/880667747750762",
+    link: "https://elpais.com/america-colombia/2023-09-07/la-directora-del-periodico-la-opinion-de-cucuta-es-amenazada-de-muerte.html",
     descripcion: "",
     imagen: n3,
   },
