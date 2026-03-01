@@ -2,8 +2,17 @@ import n1 from "../assets/fotos/noticias/n1.webp";
 import n2 from "../assets/fotos/noticias/n2.webp";
 import n3 from "../assets/fotos/noticias/n3.png";
 import n4 from "../assets/fotos/noticias/NoticiaNorteActivo.png";
+import n5 from "../assets/fotos/noticias/noticiaSemana.png";
 
 export const noticias = [
+  {
+    fecha: "2026-02-29",
+    link: "https://www.semana.com/politica/articulo/estefania-colmenares-candidata-al-senado-el-centro-democratico-tiene-una-lista-de-gente-nueva-que-quiere-hacer-politica-diferente/202607/",
+    titulo:
+      "Estefanía Colmenares, candidata al Senado: “El Centro Democrático tiene una lista de gente nueva que quiere hacer política diferente”",
+    descripcion: "",
+    imagen: n5,
+  },
   {
     fecha: "2025-12-16",
     link: "https://www.pulzo.com/nacion/quien-es-estefania-colmenares-periodista-senado-lista-con-alvaro-uribe-PP4950675",
