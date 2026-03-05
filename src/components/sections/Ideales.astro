@@ -1,42 +1,191 @@
----
+﻿---
 import { Image } from "astro:assets";
 import CD_VOTO_MARCADO from "../../assets/logos/CD_VOTO_MARCADO.png";
 ---
 
 <section
-    class:list={[
-        "relative flex flex-col max-w-7xl mx-auto rounded-2xl z-20 overflow-hidden p-6 md:p-8 bg-(--cd-oscuro) text-white shadow-[0_18px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/10",
-        " lg:items-center max-sm:mx-1!",
-    ]}
+  class:list={[
+    "relative flex flex-col max-w-7xl mx-auto rounded-2xl z-20 overflow-hidden p-6 md:p-8 bg-(--cd-oscuro) text-white shadow-[0_18px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/10",
+    "lg:items-center max-sm:mx-1!",
+  ]}
 >
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-        <div
-            class="absolute -top-24 -left-16 h-56 w-56 rounded-full bg-white/10 blur-3xl"
-        ></div>
-        <div
-            class="absolute inset-0 opacity-20"
-            style="background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px); background-size: 22px 22px;"
-        ></div>
-        <div
-            class="absolute inset-x-0 top-0 h-[2px] bg-linear-to-r from-transparent via-white/25 to-transparent"
-        ></div>
+  <!-- Fondo decorativo -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div
+      class="absolute inset-0 opacity-15"
+      style="background-image: radial-gradient(rgba(255,255,255,0.2) 1px, transparent 1px); background-size: 20px 20px;"
+    >
     </div>
-    <div class="relative z-10 flex flex-col lg:flex-row lg:gap-6 items-center">
-        <h1
-            class="text-3xl md:text-5xl lg:text-7xl font-extrabold text-(--cd-amarillo) text-center tracking-tight drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)]"
+    <div
+      class="absolute inset-x-0 top-0 h-[2px] bg-linear-to-r from-transparent via-white/20 to-transparent"
+    >
+    </div>
+    <div
+      class="absolute -top-20 -left-10 h-48 w-48 rounded-full bg-white/8 blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div
+    class="relative z-10 flex flex-col lg:flex-row gap-8 w-full items-center"
+  >
+    <!-- DIV 1: ¿Dónde votar? -->
+    <div class="flex-1 flex flex-col items-center text-center gap-5">
+      <div>
+        <h2
+          class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)]"
         >
-            Vota así al Senado
-        </h1>
-        <div
-            class="mt-5 bg-white rounded-md max-sm:w-56 max-md:w-60 max-w-sm lg:mt-0 p-3 shadow-[0_10px_30px_rgba(0,0,0,0.25)] ring-1 ring-black/10 transition-transform duration-300 hover:-translate-y-1"
+          ¿Dónde puedo <span class="text-(--cd-amarillo)">votar?</span>
+        </h2>
+        <p
+          class="mt-2 text-xl text-white/55 max-w-[500px] mx-auto leading-relaxed"
         >
-            <Image src={CD_VOTO_MARCADO} alt="Vota al Centro Democrático" />
+          Consulta tu puesto con tu número de cédula.
+        </p>
+      </div>
+
+      <!-- Pasos -->
+      <div class="flex items-center gap-2 text-md text-white/50">
+        <div class="flex flex-col items-center gap-1">
+          <span
+            class="flex h-16 w-16 items-center justify-center align-center rounded-full bg-white/10 text-4xl"
+            >🪪</span
+          >
+          <span>Cédula</span>
         </div>
+        <div class="h-px w-6 bg-white/20"></div>
+        <div class="flex flex-col items-center gap-1">
+          <span
+            class="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-4xl"
+            >🔍</span
+          >
+          <span>Consulta</span>
+        </div>
+        <div class="h-px w-6 bg-white/20"></div>
+        <div class="flex flex-col items-center gap-1">
+          <span
+            class="flex h-16 w-16 items-center justify-center rounded-full bg-(--cd-amarillo)/20 text-4xl"
+            >✅</span
+          >
+          <span class="text-(--cd-amarillo)">Vota</span>
+        </div>
+      </div>
+
+      <!-- CTA + horario -->
+      <div class="flex flex-col items-center gap-2">
+        <style>
+          @keyframes btn-pulse {
+            0%,
+            100% {
+              box-shadow:
+                0 0 0 0 rgba(255, 204, 0, 0.55),
+                0 6px 20px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+              box-shadow:
+                0 0 0 10px rgba(255, 204, 0, 0),
+                0 6px 20px rgba(0, 0, 0, 0.2);
+            }
+          }
+          @keyframes btn-shine {
+            0% {
+              transform: translateX(-100%) skewX(-15deg);
+            }
+            100% {
+              transform: translateX(250%) skewX(-15deg);
+            }
+          }
+          @keyframes arrow-bounce {
+            0%,
+            100% {
+              transform: translate(0, 0);
+            }
+            50% {
+              transform: translate(3px, -3px);
+            }
+          }
+          .cta-votar {
+            animation: btn-pulse 2s ease-in-out infinite;
+          }
+          .cta-votar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(
+              90deg,
+              transparent,
+              rgba(255, 255, 255, 0.45),
+              transparent
+            );
+            animation: btn-shine 2.4s ease-in-out infinite;
+            pointer-events: none;
+          }
+          .cta-votar:hover {
+            animation: none;
+            box-shadow:
+              0 0 0 4px rgba(255, 204, 0, 0.3),
+              0 12px 28px rgba(0, 0, 0, 0.3) !important;
+          }
+          .cta-votar:hover .arrow-icon {
+            animation: arrow-bounce 0.5s ease-in-out infinite;
+          }
+        </style>
+
+        <a
+          href="https://wsp.registraduria.gov.co/censo/consultar/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta-votar relative overflow-hidden inline-flex items-center gap-2 rounded-lg bg-(--cd-amarillo) px-5 py-2.5 text-3xl font-extrabold text-(--cd-oscuro) transition-all duration-200 hover:-translate-y-1 hover:brightness-105"
+        >
+          Consultar mi puesto
+          <svg
+            class="arrow-icon"
+            width="13"
+            height="13"
+            viewBox="0 0 13 13"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 11L11 2M11 2H5M11 2V8"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </a>
+        <span class="text-md text-white/40">Jornada 8:00 AM – 4:00 PM</span>
+      </div>
     </div>
 
-    <div class="relative z-10 w-full flex items-center mt-4 justify-center">
-        <span class="text-center text-base md:text-lg text-white/80 max-w-2xl"
-            >Trabajando por Colombia con responsabilidad y compromiso</span
-        >
+    <!-- Separador -->
+    <div class="hidden lg:block w-px h-40 bg-white/10"></div>
+    <div class="lg:hidden h-px w-full bg-white/10"></div>
+
+    <!-- DIV 2: Headline + tarjetón -->
+    <div class="flex-1 flex flex-col items-center gap-4">
+      <h1
+        class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-(--cd-amarillo) text-center tracking-tight drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)]"
+      >
+        Vota así al Senado
+      </h1>
+      <div
+        class="bg-white rounded-md max-sm:w-56 max-md:w-60 max-w-sm p-3 shadow-[0_10px_30px_rgba(0,0,0,0.25)] ring-1 ring-black/10 transition-transform duration-300 hover:-translate-y-1"
+      >
+        <Image src={CD_VOTO_MARCADO} alt="Vota al Centro Democrático" />
+      </div>
+      <span class="text-center text-sm text-white/55 max-w-xs">
+        Trabajando por Colombia con responsabilidad y compromiso
+      </span>
     </div>
+  </div>
+
+  <div
+    aria-hidden="true"
+    class="absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-(--cd-amarillo)/40 via-(--cd-amarillo)/15 to-transparent"
+  >
+  </div>
 </section>
