@@ -3,8 +3,17 @@ import n2 from "../assets/fotos/noticias/n2.webp";
 import n3 from "../assets/fotos/noticias/n3.png";
 import n4 from "../assets/fotos/noticias/NoticiaNorteActivo.png";
 import n5 from "../assets/fotos/noticias/noticiaSemana.png";
+import n6 from "../assets/fotos/noticias/noticiaElTiempo.png";
 
 export const noticias = [
+  {
+    fecha: "2026-03-05",
+    link: "https://www.eltiempo.com/amp/politica/elecciones-colombia-2026/la-meta-de-25-curules-es-alta-podemos-lograrla-estefania-colmenares-candidata-al-senado-del-centro-democratico-3537406",
+    titulo:
+      "‘La meta de 25 curules es alta; podemos lograrla’: Estefanía Colmenares, candidata al Senado del Centro Democrático”",
+    descripcion: "",
+    imagen: n6,
+  },
   {
     fecha: "2026-02-29",
     link: "https://www.semana.com/politica/articulo/estefania-colmenares-candidata-al-senado-el-centro-democratico-tiene-una-lista-de-gente-nueva-que-quiere-hacer-politica-diferente/202607/",
