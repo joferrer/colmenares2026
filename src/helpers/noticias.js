@@ -7,7 +7,7 @@ import n6 from "../assets/fotos/noticias/noticiaElTiempo.png";
 
 export const noticias = [
   {
-    fecha: "2026-03-05",
+    fecha: "2026-03-04",
     link: "https://www.eltiempo.com/amp/politica/elecciones-colombia-2026/la-meta-de-25-curules-es-alta-podemos-lograrla-estefania-colmenares-candidata-al-senado-del-centro-democratico-3537406",
     titulo:
       "‘La meta de 25 curules es alta; podemos lograrla’: Estefanía Colmenares, candidata al Senado del Centro Democrático”",
@@ -15,7 +15,7 @@ export const noticias = [
     imagen: n6,
   },
   {
-    fecha: "2026-02-29",
+    fecha: "2026-02-28",
     link: "https://www.semana.com/politica/articulo/estefania-colmenares-candidata-al-senado-el-centro-democratico-tiene-una-lista-de-gente-nueva-que-quiere-hacer-politica-diferente/202607/",
     titulo:
       "Estefanía Colmenares, candidata al Senado: “El Centro Democrático tiene una lista de gente nueva que quiere hacer política diferente”",
@@ -23,7 +23,7 @@ export const noticias = [
     imagen: n5,
   },
   {
-    fecha: "2025-12-16",
+    fecha: "2025-12-15",
     link: "https://www.pulzo.com/nacion/quien-es-estefania-colmenares-periodista-senado-lista-con-alvaro-uribe-PP4950675",
     titulo:
       "Quién es la reconocida periodista que está con Uribe en lista para Senado: clave en elecciones",
@@ -31,7 +31,7 @@ export const noticias = [
     imagen: n1,
   },
   {
-    fecha: "2025-12-10",
+    fecha: "2025-12-09",
     link: "https://www.bluradio.com/regiones/santanderes/es-delicado-candidata-al-senado-sobre-situacion-de-orden-publico-en-cucuta-pr30",
     titulo:
       "Es delicado, candidata al Senado sobre situación de orden público en Cúcuta",
@@ -39,7 +39,7 @@ export const noticias = [
     imagen: n2,
   },
   {
-    fecha: "2023-09-08",
+    fecha: "2023-09-07",
     titulo:
       "La directora del periódico ‘La Opinión’ de Cúcuta es amenazada de muerte",
     link: "https://elpais.com/america-colombia/2023-09-07/la-directora-del-periodico-la-opinion-de-cucuta-es-amenazada-de-muerte.html",
@@ -47,7 +47,7 @@ export const noticias = [
     imagen: n3,
   },
   {
-    fecha: "2026-01-21",
+    fecha: "2026-01-20",
     titulo:
       "La periodista Estefanía Colmenares Hernández ex directora del diario La Opinión busca llegar al senado con el Centro Democrático.",
     link: "https://web.facebook.com/share/v/1CaKrT7edq/",
